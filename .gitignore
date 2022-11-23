@@ -6,15 +6,15 @@
 # This .gitignore file should be placed at the root of your Unity project directory
 #
 # Get latest from https://github.com/github/gitignore/blob/master/Unity.gitignore
-*/[Ll]ibrary/
-*/[Tt]emp/
-*/[Oo]bj/
-*/[Bb]uild/
-*/[Bb]uilds/
-*/[Ll]ogs/
-*/[Ll]og/
-*/[Mm]emoryCaptures/
-*/[uU]serSettings/
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+[Ll]og/
+[Mm]emoryCaptures/
+[uU]serSettings/
 
 # Never ignore Asset meta data
 !/[Aa]ssets/**/*.meta
@@ -63,8 +63,9 @@ FMODStudioCache.asset
 */[Aa]ssets/[Ss]treamingAssets/aa.meta
 */[Aa]ssets/[Ss]treamingAssets/aa/*
 */[Aa]ssets/NetCodeGenerated*
-*/Assets/StreamingAssets/EntityScenes**
-*/Assets/Resources/PerformanceTestRunInfo**
+Assets/StreamingAssets/EntityScenes**
+Assets/Resources/PerformanceTestRunInfo**
 **/.idea/**
 **GlobalEntitySceneDependency*
 **/Recordings/*
+UserSettings/**
