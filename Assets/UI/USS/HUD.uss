@@ -1,0 +1,87 @@
+.volume-icon {
+    background-image: url('project://database/Assets/Art/Textures/UI/Icons/speech.png?fileID=2800000&guid=f5acdb572bac567458f623d2abd2f23b&type=3#speech');
+    -unity-background-image-tint-color: rgb(100, 46, 124);
+}
+
+.volume-mute {
+    background-image: url('project://database/Assets/Art/Textures/UI/Icons/quite.png?fileID=2800000&guid=c2f8e6a9c9601374ab40c0a6dd19d0a0&type=3#quite');
+    -unity-background-image-tint-color: rgb(100, 46, 124);
+}
+
+.left-menu-buttons {
+    flex-grow: 1;
+    justify-content: center;
+}
+
+.race-info-panel {
+    width: auto;
+    height: auto;
+    min-height: 10%;
+    max-height: 10%;
+    flex-direction: column;
+    position: absolute;
+    flex-wrap: nowrap;
+    top: 0;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.info-panel-line {
+    background-color: rgba(0, 0, 0, 0);
+    flex-direction: row;
+    align-items: center;
+    margin: 30px;
+}
+
+.info-main-label {
+    margin: 10px;
+    font-size: 50px;
+    color: rgb(255, 255, 255);
+    -unity-text-align: middle-left;
+    padding: 0;
+}
+
+.info-secondary-label {
+    font-size: 30px;
+    color: rgb(255, 255, 255);
+    -unity-text-align: middle-left;
+    padding: 0;
+}
+
+.center-panel {
+    flex-grow: 1;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.center-label {
+    font-size: 200px;
+    scale: 1 1;
+    display: none;
+    color: rgb(229, 229, 229);
+    text-shadow: 5px 5px 10px rgba(0, 0, 0, 0.8);
+    translate: 0 0;
+}
+
+.bottom-panel {
+    flex-grow: 1;
+    position: absolute;
+    bottom: 10px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    -unity-background-image-tint-color: rgba(36, 33, 38, 0.9);
+    -unity-background-scale-mode: stretch-to-fill;
+    background-image: url('project://database/Assets/Art/Textures/UI/long-panel-h.png?fileID=21300000&guid=a7eab020850493349bdaf96e72bdfcd0&type=3#long-panel-h');
+    display: none;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.bottom-message {
+    font-size: 20px;
+    color: rgb(255, 255, 255);
+}

@@ -1,0 +1,37 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/USS/InfoPanel.uss?fileID=7433441132597879392&amp;guid=a613a0546a65ed847906af1f886f63a1&amp;type=3#InfoPanel" />
+    <ui:VisualElement name="info-panel" class="container">
+        <ui:VisualElement name="info-panel-body" class="panel-body">
+            <ui:VisualElement picking-mode="Ignore" class="properties-container">
+                <ui:GroupBox name="players-item" picking-mode="Ignore" class="item">
+                    <ui:VisualElement name="icon" class="icon" />
+                    <ui:Label text="Players:" name="player" class="label-info" />
+                    <ui:Label tabindex="-1" name="players-value" class="info-value-label" />
+                </ui:GroupBox>
+                <ui:GroupBox name="ping-item" picking-mode="Ignore" class="item">
+                    <ui:VisualElement name="icon" class="icon" style="background-image: url(&apos;project://database/Assets/Art/Textures/UI/Icons/wifi.png?fileID=21300000&amp;guid=d6d4111641774e44698ec6f14ae66457&amp;type=3#wifi&apos;);" />
+                    <ui:Label text="Ping:" name="ping" class="label-info" />
+                    <ui:Label name="ping-value" class="info-value-label" />
+                </ui:GroupBox>
+                <ui:GroupBox name="fps-item" picking-mode="Ignore" class="item">
+                    <ui:VisualElement name="icon" class="icon" style="background-image: url(&apos;project://database/Assets/Art/Textures/UI/Icons/speed.png?fileID=21300000&amp;guid=b897407eda5c2a34e9118655b5d4c519&amp;type=3#speed&apos;);" />
+                    <ui:Label text="FPS:" name="fps" class="label-info" />
+                    <ui:Label name="fps-value" class="info-value-label" />
+                </ui:GroupBox>
+                <ui:GroupBox name="entities-item" picking-mode="Ignore" class="item">
+                    <ui:VisualElement name="icon" class="icon" style="background-image: url(&apos;project://database/Assets/Art/Textures/UI/Icons/token.png?fileID=21300000&amp;guid=2660cf07a1ad6924e9101aca0253845c&amp;type=3#token&apos;);" />
+                    <ui:Label text="Entities:" name="entities" class="label-info" />
+                    <ui:Label name="entities-value" class="info-value-label" />
+                </ui:GroupBox>
+                <ui:GroupBox name="systems-item" picking-mode="Ignore" class="item">
+                    <ui:VisualElement name="icon" class="icon" style="background-image: url(&apos;project://database/Assets/Art/Textures/UI/Icons/monitor.png?fileID=21300000&amp;guid=be9c8033faeb5a14a91e7101124e184e&amp;type=3#monitor&apos;);" />
+                    <ui:Label text="Systems:" name="systems" class="label-info" />
+                    <ui:Label name="systems-value" class="info-value-label" />
+                </ui:GroupBox>
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:Button tabindex="-1" name="back-button" class="back-button">
+            <ui:VisualElement name="back-icon" class="back-icon" />
+        </ui:Button>
+    </ui:VisualElement>
+</ui:UXML>

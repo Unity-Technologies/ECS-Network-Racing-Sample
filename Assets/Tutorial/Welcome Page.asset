@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0885f594ab85594caa28e1a96cbe0d8, type: 3}
+  m_Name: Welcome Page
+  m_EditorClassIdentifier: 
+  Modified:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Image: {fileID: 2800000, guid: 2692a9ff093bfdb40bf862a357de7216, type: 3}
+  m_WindowTitle:
+    m_Untranslated: Cars Sample
+  m_Title:
+    m_Untranslated: Cars Sample [How to]
+  m_Description:
+    m_Untranslated: 'This project embraces the <b>Entities</b> packages and <b>Netcode</b>,
+      this is a guide on how to create a Multiplayer game using the set of tools
+      that are supported via Editor and Packages.
+
+
+      By following these tutorials
+      the reader will learn how to:
+
+      1. Assets folder structure.
+
+      2.
+      The introduction of Playmode for this project and how it works.
+
+      3. How
+      to build this project for both server and client.
+
+
+      To access the tutorials
+      again, please go to the Main Menu > Tutorials > Show Tutorials, and then a
+      window will open.'
+  m_Buttons:
+  - Text:
+      m_Untranslated: Close
+    Tooltip:
+      m_Untranslated: 
+    OnClick:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 11400000}
+          m_TargetAssemblyTypeName: Unity.Tutorials.Core.Editor.TutorialWelcomePage,
+            Unity.Tutorials.Core.Editor
+          m_MethodName: CloseCurrentModalDialog
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: 
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 1

@@ -1,0 +1,24 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement name="main-panel" picking-mode="Ignore" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0.8); align-items: center; display: none;">
+        <ui:VisualElement name="leaderboard-panel" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); background-image: url(&apos;project://database/Assets/Art/Textures/UI/long-panel-v.png?fileID=21300000&amp;guid=2e46985ec317c184aa7b2bb6d577a5e4&amp;type=3#long-panel-v&apos;); width: 55%; margin-left: 50px; margin-right: 50px; margin-top: 50px; margin-bottom: 50px; align-items: center; -unity-background-image-tint-color: rgba(36, 33, 38, 0.9);">
+            <ui:Label tabindex="-1" text="LEADERBOARD" display-tooltip-when-elided="true" name="leaderboard-title" style="margin-left: 20px; margin-right: 20px; margin-top: 20px; margin-bottom: 20px; -unity-font-definition: url(&apos;project://database/Assets/Fonts/Phage/PhageRough%20SDF.asset?fileID=11400000&amp;guid=0f52e9e6b6aa01d4a9711306b1fdd1c0&amp;type=2#PhageRough SDF&apos;); font-size: 60px; color: rgb(255, 255, 255);" />
+            <ui:VisualElement name="leaderboard" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); width: 80%;">
+                <ui:VisualElement name="leaderboard-titles" style="background-color: rgba(0, 0, 0, 0); flex-direction: row; margin-bottom: 20px; display: flex; word-spacing: 100px;">
+                    <ui:VisualElement name="rank-title" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); width: 160px;">
+                        <ui:Label tabindex="-1" text="RANK" display-tooltip-when-elided="true" name="rank" style="-unity-font-definition: url(&apos;project://database/Assets/Fonts/Phage/PhageRegularSDF.asset?fileID=11400000&amp;guid=e8b050a8e7bdf014fa1028d5e7d13d78&amp;type=2#PhageRegularSDF&apos;); font-size: 30px; color: rgb(255, 255, 255);" />
+                    </ui:VisualElement>
+                    <ui:VisualElement name="name-title" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); width: 450px;">
+                        <ui:Label tabindex="-1" text="Name" display-tooltip-when-elided="true" name="name" style="-unity-font-definition: url(&apos;project://database/Assets/Fonts/Phage/PhageRegularSDF.asset?fileID=11400000&amp;guid=e8b050a8e7bdf014fa1028d5e7d13d78&amp;type=2#PhageRegularSDF&apos;); font-size: 30px; color: rgb(255, 255, 255);" />
+                    </ui:VisualElement>
+                    <ui:VisualElement name="time-title" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); width: 220px;">
+                        <ui:Label tabindex="-1" text="Time" display-tooltip-when-elided="true" name="time" style="-unity-font-definition: url(&apos;project://database/Assets/Fonts/Phage/PhageRegularSDF.asset?fileID=11400000&amp;guid=e8b050a8e7bdf014fa1028d5e7d13d78&amp;type=2#PhageRegularSDF&apos;); font-size: 30px; color: rgb(255, 255, 255);" />
+                    </ui:VisualElement>
+                    <ui:VisualElement name="ping-title" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); width: 150px;">
+                        <ui:Label tabindex="-1" text="PING" display-tooltip-when-elided="true" name="ping" style="-unity-font-definition: url(&apos;project://database/Assets/Fonts/Phage/PhageRegularSDF.asset?fileID=11400000&amp;guid=e8b050a8e7bdf014fa1028d5e7d13d78&amp;type=2#PhageRegularSDF&apos;); font-size: 30px; color: rgb(255, 255, 255);" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+                <ui:VisualElement name="leaderboard-container" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

@@ -1,0 +1,16 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:VisualElement name="main-content" style="background-color: rgba(0, 0, 0, 0); flex-direction: row; justify-content: flex-start; display: flex;">
+        <ui:VisualElement name="rank-container" style="background-color: rgba(0, 0, 0, 0); width: 160px;">
+            <ui:Label tabindex="-1" text="RANK" display-tooltip-when-elided="true" name="rank" style="-unity-font-definition: url(&apos;project://database/Assets/Fonts/Phage/PhageRegularSDF.asset?fileID=11400000&amp;guid=e8b050a8e7bdf014fa1028d5e7d13d78&amp;type=2#PhageRegularSDF&apos;); font-size: 30px; color: rgb(255, 255, 255);" />
+        </ui:VisualElement>
+        <ui:VisualElement name="name-container" style="background-color: rgba(0, 0, 0, 0); width: 450px;">
+            <ui:Label tabindex="-1" text="NAMENAMENAME" display-tooltip-when-elided="true" name="name" style="-unity-font-definition: url(&apos;project://database/Assets/Fonts/Phage/PhageRegularSDF.asset?fileID=11400000&amp;guid=e8b050a8e7bdf014fa1028d5e7d13d78&amp;type=2#PhageRegularSDF&apos;); font-size: 30px; color: rgb(255, 255, 255);" />
+        </ui:VisualElement>
+        <ui:VisualElement name="time-container" style="width: 220px;">
+            <ui:Label tabindex="-1" text="02:17" display-tooltip-when-elided="true" name="time" style="-unity-font-definition: url(&apos;project://database/Assets/Fonts/Phage/PhageRegularSDF.asset?fileID=11400000&amp;guid=e8b050a8e7bdf014fa1028d5e7d13d78&amp;type=2#PhageRegularSDF&apos;); font-size: 30px; color: rgb(255, 255, 255);" />
+        </ui:VisualElement>
+        <ui:VisualElement name="ping-container" style="background-color: rgba(0, 0, 0, 0); width: 150px;">
+            <ui:Label tabindex="-1" text="45 ms" display-tooltip-when-elided="true" name="ping" style="-unity-font-definition: url(&apos;project://database/Assets/Fonts/Phage/PhageRegularSDF.asset?fileID=11400000&amp;guid=e8b050a8e7bdf014fa1028d5e7d13d78&amp;type=2#PhageRegularSDF&apos;); font-size: 30px; color: rgb(255, 255, 255);" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

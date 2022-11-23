@@ -1,0 +1,51 @@
+.skin-selector {
+    width: 220px;
+    height: 120px;
+    border-radius: 5px;
+    border-width: 0;
+    background-color: rgba(255, 255, 255, 0);
+    margin: 2px;
+    padding: 0;
+    background-image: url('project://database/Assets/Art/Textures/UI/square.png?fileID=21300000&guid=ffc06daf7e82046489f2a8a8ceec4099&type=3#square');
+    -unity-background-image-tint-color: rgba(154, 154, 154, 0.78);
+    color: rgb(255, 255, 255);
+    transition-duration: 0.25s;
+    transition-timing-function: ease-out;
+    transition-property: all;
+    align-items: center;
+    justify-content: center;
+}
+
+.skin-selector:hover {
+    -unity-background-image-tint-color: rgb(255, 255, 255);
+}
+
+.skin-selector:active {
+    -unity-background-image-tint-color: rgb(255, 255, 255);
+}
+
+.skin-selector:focus {
+    -unity-background-image-tint-color: rgb(255, 255, 255);
+    border-width: 5px;
+    border-color: rgb(83, 69, 94);
+}
+
+.car-selection-horizontal-title {
+    color: rgb(255, 255, 255);
+    font-size: 50px;
+    -unity-text-align: middle-center;
+    margin: 20px;
+    rotate: -90deg;
+    position: absolute;
+    left: -200px;
+    display: flex;
+    text-shadow: 2px 2px 0 rgba(0, 0, 0, 0);
+}
+
+.skin-container {
+    background-color: rgba(0, 0, 0, 0);
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-self: center;
+    justify-content: center;
+}

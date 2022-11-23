@@ -1,0 +1,40 @@
+.main-menu-container {
+    flex-grow: 1;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.main-menu-logo {
+    background-color: rgba(0, 0, 0, 0);
+    background-image: url('project://database/Assets/Art/Textures/UI/ecs-racing-logo.png?fileID=21300000&guid=291950e14ae83b742a46ff1f04fcb799&type=3#ecs-racing-logo');
+    -unity-background-scale-mode: scale-and-crop;
+    height: 220px;
+    width: 1024px;
+    -unity-background-image-tint-color: rgba(255, 255, 255, 0.9);
+}
+
+.main-menu-login-panel {
+    align-items: center;
+    background-image: url('project://database/Assets/Art/Textures/UI/base-grunge-1.png?fileID=21300000&guid=c153b787f41b4824ab7d45f1affef909&type=3#base-grunge-1');
+    -unity-background-image-tint-color: rgba(36, 33, 38, 0.98);
+    -unity-background-scale-mode: scale-to-fit;
+    justify-content: center;
+    height: 500px;
+    width: 850px;
+}
+
+.main-menu-login-form {
+    width: 80%;
+}
+
+.main-menu-text-field {
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
+    font-size: 30px;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.main-menu-text-field > .unity-label {
+    color: rgb(255, 255, 255);
+}
