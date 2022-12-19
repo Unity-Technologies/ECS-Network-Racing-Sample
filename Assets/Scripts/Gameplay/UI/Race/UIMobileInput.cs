@@ -1,8 +1,11 @@
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace Dots.Racing
+namespace Unity.Entities.Racing.Gameplay
 {
+    /// <summary>
+    /// Captures Mobile device input
+    /// </summary>
     public class UIMobileInput : MonoBehaviour
     {
         public static UIMobileInput Instance;

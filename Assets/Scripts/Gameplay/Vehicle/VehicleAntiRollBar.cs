@@ -1,16 +1,18 @@
-using Unity.Entities.Racing.Common;
 using Unity.Burst;
 using Unity.Collections;
-using Unity.Entities;
+using Unity.Entities.Racing.Common;
 using Unity.Physics;
 using Unity.Physics.Extensions;
 using Unity.Physics.Systems;
 using Unity.Transforms;
-using UnityEngine;
+using Unity.Mathematics;
 using static Unity.Entities.SystemAPI;
 
-namespace Dots.Racing
+namespace Unity.Entities.Racing.Gameplay
 {
+    /// <summary>
+    /// Prevents the car to rolling without input.
+    /// </summary>
     [BurstCompile]
     [WithAll(typeof(Simulate))]
     public partial struct AntiRollBarJob : IJobEntity
@@ -18,9 +20,8 @@ namespace Dots.Racing
         public PhysicsWorld PhysicsWorld;
         [ReadOnly] public ComponentLookup<Suspension> SuspensionFromEntity;
         [ReadOnly] public ComponentLookup<WheelHitData> WheelHitFromEntity;
-        [ReadOnly] public ComponentLookup<LocalToWorld> LocalToWorldFromEntity;
 
-        void Execute(Entity entity, in AntiRollBar antiRollBar)
+        private void Execute(Entity entity, in LocalTransform localTrans, in AntiRollBar antiRollBar)
         {
             var ceIdx = PhysicsWorld.GetRigidBodyIndex(entity);
             var flSuspension = SuspensionFromEntity[antiRollBar.FrontLeftWheel];
@@ -28,10 +29,7 @@ namespace Dots.Racing
             var rlSuspension = SuspensionFromEntity[antiRollBar.RearLeftWheel];
             var rrSuspension = SuspensionFromEntity[antiRollBar.RearRightWheel];
 
-            var flLocalToWorld = LocalToWorldFromEntity[antiRollBar.FrontLeftWheel];
-            var frLocalToWorld = LocalToWorldFromEntity[antiRollBar.FrontRightWheel];
-            var rlLocalToWorld = LocalToWorldFromEntity[antiRollBar.RearLeftWheel];
-            var rrLocalToWorld = LocalToWorldFromEntity[antiRollBar.RearRightWheel];
+            var localUp = math.mul(localTrans.Rotation, new float3(0,1,0));
 
             var flHit = WheelHitFromEntity[antiRollBar.FrontLeftWheel];
             var frHit = WheelHitFromEntity[antiRollBar.FrontRightWheel];
@@ -42,58 +40,59 @@ namespace Dots.Racing
             var rearLengthDiff = 0.0f;
 
             if (flHit.HasHit || frHit.HasHit)
+            {
                 frontLengthDiff = (flSuspension.SpringLength - frSuspension.SpringLength) / flSuspension.RestLength;
+            }
 
             if (rlHit.HasHit || rrHit.HasHit)
+            {
                 rearLengthDiff = (rlSuspension.SpringLength - rrSuspension.SpringLength) / rlSuspension.RestLength;
+            }
 
             var frontForce = frontLengthDiff * antiRollBar.Stiffness;
             var rearForce = rearLengthDiff * antiRollBar.Stiffness;
 
             //Front wheels anti roll forces
-            PhysicsWorld.ApplyImpulse(ceIdx, -flLocalToWorld.Up * frontForce, flHit.WheelCenter);
-            PhysicsWorld.ApplyImpulse(ceIdx, frLocalToWorld.Up * frontForce, frHit.WheelCenter);
-            
+            PhysicsWorld.ApplyImpulse(ceIdx, -localUp * frontForce, flHit.WheelCenter);
+            PhysicsWorld.ApplyImpulse(ceIdx, localUp * frontForce, frHit.WheelCenter);
+
             //Rear wheels anti roll forces
-            PhysicsWorld.ApplyImpulse(ceIdx, -rlLocalToWorld.Up * rearForce, rlHit.WheelCenter);
-            PhysicsWorld.ApplyImpulse(ceIdx, rrLocalToWorld.Up * rearForce, rrHit.WheelCenter);
+            PhysicsWorld.ApplyImpulse(ceIdx, -localUp * rearForce, rlHit.WheelCenter);
+            PhysicsWorld.ApplyImpulse(ceIdx, localUp * rearForce, rrHit.WheelCenter);
         }
     }
-    
+
     [BurstCompile]
     [UpdateInGroup(typeof(PhysicsSimulationGroup))]
+    [UpdateAfter(typeof(WheelsForcesSystem))]
     public partial struct AntiRollBarSystem : ISystem
     {
-        ComponentLookup<Suspension> SuspensionFromEntity;
-        ComponentLookup<LocalToWorld> LocalToWorldFromEntity;
-        ComponentLookup<WheelHitData> WheelHitFromEntity;
-        
+        private ComponentLookup<Suspension> SuspensionFromEntity;
+        private ComponentLookup<WheelHitData> WheelHitFromEntity;
+
         public void OnCreate(ref SystemState state)
         {
             SuspensionFromEntity = state.GetComponentLookup<Suspension>(true);
-            LocalToWorldFromEntity = state.GetComponentLookup<LocalToWorld>(true);
-            WheelHitFromEntity  = state.GetComponentLookup<WheelHitData>(true);
+            WheelHitFromEntity = state.GetComponentLookup<WheelHitData>(true);
         }
-        
+
         public void OnDestroy(ref SystemState state)
         {
         }
-        
+
         public void OnUpdate(ref SystemState state)
         {
             SuspensionFromEntity.Update(ref state);
-            LocalToWorldFromEntity.Update(ref state);
             WheelHitFromEntity.Update(ref state);
-            var physicsWorld = GetSingleton<PhysicsWorldSingleton>().PhysicsWorld;
+            var physicsWorld = GetSingletonRW<PhysicsWorldSingleton>().ValueRW.PhysicsWorld;
             var antiRollBarJob = new AntiRollBarJob
             {
                 PhysicsWorld = physicsWorld,
                 SuspensionFromEntity = SuspensionFromEntity,
-                LocalToWorldFromEntity = LocalToWorldFromEntity,
-                WheelHitFromEntity = WheelHitFromEntity,
+                WheelHitFromEntity = WheelHitFromEntity
             };
-            // TODO: Add it to the forces system
-            state.Dependency.Complete();
+            state.Dependency = antiRollBarJob.Schedule(state.Dependency);
+            //state.Dependency.Complete();
         }
     }
 }

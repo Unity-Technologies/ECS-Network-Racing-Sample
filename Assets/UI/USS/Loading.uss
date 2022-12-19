@@ -2,14 +2,14 @@
     flex-grow: 1;
     align-items: center;
     justify-content: center;
-    background-color: rgba(12, 13, 14, 0.99);
+    background-color: rgb(26, 29, 31);
 }
 
 .loading-text {
-    -unity-font-definition: url('project://database/Assets/Fonts/Phage/PhageRegularSDF.asset?fileID=11400000&guid=e8b050a8e7bdf014fa1028d5e7d13d78&type=2#PhageRegularSDF');
     font-size: 50px;
     color: rgba(255, 255, 255, 0.83);
-    -unity-font: url('project://database/Assets/Fonts/Phage/PhageRegular.otf?fileID=12800000&guid=19098dc4f0464cd4ca9c88825baaab42&type=3#PhageRegular');
+    -unity-font-definition: url('project://database/Assets/Fonts/Rajdhani/Rajdhani-Bold%20SDF.asset?fileID=11400000&guid=79f9abbad64889d4e83b41e981575539&type=2#Rajdhani-Bold SDF');
+    -unity-font: url('project://database/Assets/Fonts/Rajdhani/Rajdhani-Bold.ttf?fileID=12800000&guid=48bcc1cee44fa824c86a6bcf2c0be8a2&type=3#Rajdhani-Bold');
 }
 
 .loading-bar {
@@ -31,4 +31,11 @@
     -unity-background-scale-mode: stretch-to-fill;
     -unity-background-image-tint-color: rgb(120, 114, 125);
     background-color: rgba(0, 0, 0, 0);
+}
+
+.loading-circle {
+    background-color: rgba(0, 0, 0, 0);
+    background-image: url('project://database/Assets/Art/Textures/UI/loading-circle.png?fileID=21300000&guid=c621fadaf84534a4197c837f12479d4c&type=3#loading-circle');
+    width: 150px;
+    height: 150px;
 }

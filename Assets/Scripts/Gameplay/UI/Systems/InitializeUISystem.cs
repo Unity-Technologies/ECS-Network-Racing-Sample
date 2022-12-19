@@ -3,8 +3,11 @@ using Unity.Entities;
 using Unity.NetCode;
 using static Unity.Entities.SystemAPI;
 
-namespace Dots.Racing
+namespace Unity.Entities.Racing.Gameplay
 {
+    /// <summary>
+    /// Adds events to lobby buttons.
+    /// </summary>
     [WorldSystemFilter(WorldSystemFilterFlags.ClientSimulation)]
     public partial struct InitializeHUDSystem : ISystem
     {
@@ -32,6 +35,7 @@ namespace Dots.Racing
 
             HUDController.CancelStartButton.clicked += () =>
             {
+                PlayerAudioManager.Instance.PlayClick();
                 entityManager.CreateEntity(typeof(CancelPlayerReadyRPC), typeof(SendRpcCommandRequestComponent));
             };
 
@@ -39,11 +43,13 @@ namespace Dots.Racing
             {
                 var requestEntity = entityManager.CreateEntity(typeof(SendRpcCommandRequestComponent));
                 entityManager.AddComponentData(requestEntity, new ResetCarRPC {Id = networkId});
+                PlayerAudioManager.Instance.PlayClick();
             };
             
             HUDController.StartRaceButton.clicked += () =>
             {
                 entityManager.CreateEntity(typeof(PlayersReadyRPC), typeof(SendRpcCommandRequestComponent));
+                PlayerAudioManager.Instance.PlayClick();
             };
 
             m_HUDInitialized = true;

@@ -11,7 +11,11 @@ namespace Dots.Racing
     {
         public override void Bake(CheckPointLocatorAuthoring authoring)
         {
-            AddComponent(new CheckPointLocator());
+            var checkPointLocator = new CheckPointLocator()
+            {
+                ResetPosition = authoring.transform.position
+            };
+            AddComponent(checkPointLocator);
         }
     }
 }

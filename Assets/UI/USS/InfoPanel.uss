@@ -1,34 +1,28 @@
 .label-info {
-    -unity-font: url('project://database/Assets/Fonts/Rajdhani/Rajdhani-Regular.ttf?fileID=12800000&guid=30334fc0d67986141a4e0ca1572997c9&type=3#Rajdhani-Regular');
-    -unity-font-definition: url('project://database/Assets/Fonts/Rajdhani/Rajdhani-Regular%20SDF.asset?fileID=11400000&guid=e1c1a190303544844aff0c6657c1461b&type=2#Rajdhani-Regular SDF');
+    -unity-font: url('project://database/Assets/Fonts/Rajdhani/Rajdhani-SemiBold.ttf?fileID=12800000&guid=e747d827f2d247346863924cef4913e0&type=3#Rajdhani-SemiBold');
+    -unity-font-definition: url('project://database/Assets/Fonts/Rajdhani/Rajdhani-SemiBold%20SDF.asset?fileID=11400000&guid=1a67727cfc8a0524e916b558966b6442&type=2#Rajdhani-SemiBold SDF');
     -unity-font-style: bold;
     width: 125px;
     color: rgb(255, 255, 255);
-    font-size: 30px;
+    font-size: 24px;
     -unity-text-align: upper-left;
-    margin-left: 5px;
-    margin-right: 5px;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 .item {
     flex-direction: row;
-    margin-left: 2px;
-    margin-right: 2px;
-    margin-top: 2px;
-    margin-bottom: 2px;
-    padding-left: 3px;
-    padding-right: 0;
-    padding-top: 3px;
-    padding-bottom: 3px;
+    margin: 2px;
+    padding: 3px;
     align-self: auto;
     align-items: center;
 }
 
 .info-value-label {
-    -unity-font: url('project://database/Assets/Fonts/Rajdhani/Rajdhani-Regular.ttf?fileID=12800000&guid=30334fc0d67986141a4e0ca1572997c9&type=3#Rajdhani-Regular');
-    -unity-font-definition: url('project://database/Assets/Fonts/Rajdhani/Rajdhani-Regular%20SDF.asset?fileID=11400000&guid=e1c1a190303544844aff0c6657c1461b&type=2#Rajdhani-Regular SDF');
+    -unity-font: url('project://database/Assets/Fonts/Rajdhani/Rajdhani-Light.ttf?fileID=12800000&guid=19625c271dc5cdc4e9257ca1babece7f&type=3#Rajdhani-Light');
+    -unity-font-definition: url('project://database/Assets/Fonts/Rajdhani/Rajdhani-Light%20SDF.asset?fileID=11400000&guid=1f28b9efabcbbf24fa89b949ca608225&type=2#Rajdhani-Light SDF');
     color: rgb(255, 255, 255);
-    font-size: 30px;
+    font-size: 24px;
     width: 100px;
 }
 
@@ -61,6 +55,8 @@
     -unity-background-scale-mode: stretch-to-fill;
     -unity-background-image-tint-color: rgb(188, 180, 180);
     transition-duration: 0.25s;
+    transition-timing-function: ease-out;
+    transition-property: all;
     background-color: rgba(0, 0, 0, 0);
     border-color: rgba(0, 0, 0, 0);
     border-width: 0;
@@ -82,6 +78,8 @@
     -unity-background-image-tint-color: rgb(83, 71, 94);
     -unity-background-scale-mode: scale-to-fit;
     transition-duration: 0.25s;
+    transition-timing-function: ease-out;
+    transition-property: all;
 }
 
 .properties-container {

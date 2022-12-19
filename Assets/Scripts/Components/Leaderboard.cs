@@ -1,9 +1,12 @@
 ﻿using Unity.Collections;
-using Unity.Entities;
+
 using Unity.NetCode;
 
 namespace Unity.Entities.Racing.Common
 {
+    /// <summary>
+    /// Stores the result to be used in the UI.
+    /// </summary>
     public struct LeaderboardData : IBufferElementData
     {
         [GhostField] public int Rank;

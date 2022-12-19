@@ -3,7 +3,6 @@ using Unity.Entities;
 using Unity.Entities.Racing.Common;
 using UnityEngine;
 
-
 namespace Dots.Racing
 {
     [Serializable]

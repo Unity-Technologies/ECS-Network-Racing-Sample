@@ -1,15 +1,15 @@
-﻿using Dots.Racing;
-using Gameplay.UI;
+﻿using Gameplay.UI;
 using Unity.Burst;
 using Unity.Entities.Racing.Common;
-using Unity.NetCode;
 using Unity.Transforms;
 using UnityEngine.UIElements;
 using static Unity.Entities.SystemAPI;
 
 namespace Unity.Entities.Racing.Gameplay
 {
-    [WorldSystemFilter(WorldSystemFilterFlags.ClientSimulation)]
+    /// <summary>
+    /// Sets events for player skin buttons
+    /// </summary>
     public partial struct InitializeCarSelectionSystem : ISystem
     {
         private bool m_Initialized;
@@ -25,6 +25,7 @@ namespace Unity.Entities.Racing.Gameplay
 
         public void OnUpdate(ref SystemState state)
         {
+            // Set callbacks and initialize Car Selection once
             if (m_Initialized)
             {
                 state.Enabled = false;
@@ -42,23 +43,15 @@ namespace Unity.Entities.Racing.Gameplay
             {
                 var skinButton = CarSelectionUI.SkinButtons[i];
                 var index = i;
-                skinButton.RegisterCallback<ClickEvent>(evt =>
+                skinButton.RegisterCallback<ClickEvent>(_ => skinButton.Focus());
+                skinButton.RegisterCallback<FocusInEvent>(_ =>
                 {
                     entityManager.SetComponentData(carSelectionEntity, new CarSelectionUpdate
                     {
                         ShouldUpdate = true,
                         NewSkinId = index
                     });
-                    skinButton.Focus();
-                });
-
-                skinButton.RegisterCallback<FocusInEvent>(evt =>
-                {
-                    entityManager.SetComponentData(carSelectionEntity, new CarSelectionUpdate
-                    {
-                        ShouldUpdate = true,
-                        NewSkinId = index
-                    });
+                    PlayerInfoController.Instance.SkinId = index;
                 });
             }
 
@@ -67,13 +60,15 @@ namespace Unity.Entities.Racing.Gameplay
                 ShouldUpdate = true,
                 NewSkinId = 0
             });
-
             m_Initialized = true;
         }
     }
 
+    /// <summary>
+    /// Destroy the previous skin if there is
+    /// and instantiate the new prefab skin.
+    /// </summary>
     [BurstCompile]
-    [WorldSystemFilter(WorldSystemFilterFlags.ClientSimulation)]
     public partial struct UpdateCarSelectionSystem : ISystem
     {
         public void OnCreate(ref SystemState state)
@@ -112,56 +107,10 @@ namespace Unity.Entities.Racing.Gameplay
             });
 
             carSelection.CurrentSkin = newSkin;
-            carSelection.SelectedId = carSelectionUpdate.NewSkinId;
             carSelectionUpdate.ShouldUpdate = false;
 
             SetSingleton(carSelection);
             SetSingleton(carSelectionUpdate);
-        }
-    }
-
-
-    [WorldSystemFilter(WorldSystemFilterFlags.ClientSimulation | WorldSystemFilterFlags.ThinClientSimulation)]
-    public partial struct CarSelectionReadySystem : ISystem
-    {
-        private bool m_CarSelectionReady;
-
-        public void OnCreate(ref SystemState state)
-        {
-            state.RequireForUpdate<NetworkStreamInGame>();
-        }
-
-        public void OnDestroy(ref SystemState state)
-        {
-        }
-
-        public void OnUpdate(ref SystemState state)
-        {
-            if (m_CarSelectionReady)
-            {
-                state.Enabled = false;
-                return;
-            }
-
-            TryGetSingletonEntity<CarSelection>(out var carSelectionEntity);
-            var entityManager = state.EntityManager;
-            if (CarSelectionUI.Instance != null)
-            {
-                CarSelectionUI.Instance.StartGameEvent += () =>
-                {
-                    var name = MainMenu.Instance.NameField.value;
-                    var skinId = entityManager.GetComponentData<CarSelection>(carSelectionEntity).SelectedId;
-                    var e = entityManager.CreateEntity(typeof(SendRpcCommandRequestComponent));
-                    entityManager.AddComponentData(e, new SpawnPlayerRequest { Name = name, Id = skinId });
-                };
-            }
-            else
-            {
-                var e = entityManager.CreateEntity(typeof(SendRpcCommandRequestComponent));
-                entityManager.AddComponentData(e, new SpawnPlayerRequest());
-            }
-
-            m_CarSelectionReady = true;
         }
     }
 }

@@ -37,4 +37,6 @@
 
 .main-menu-text-field > .unity-label {
     color: rgb(255, 255, 255);
+    -unity-font: url('project://database/Assets/Fonts/Rajdhani/Rajdhani-Medium.ttf?fileID=12800000&guid=eb6e60153d0c2cb4a87a1905db351b76&type=3#Rajdhani-Medium');
+    -unity-font-definition: url('project://database/Assets/Fonts/Rajdhani/Rajdhani-Medium%20SDF.asset?fileID=11400000&guid=836ab2ef968125b4e89f57a4e3087518&type=2#Rajdhani-Medium SDF');
 }

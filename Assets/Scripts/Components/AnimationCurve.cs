@@ -1,10 +1,12 @@
 using Unity.Collections;
-using Unity.Entities;
 using Unity.Mathematics;
 using UnityEngine;
 
 namespace Unity.Entities.Racing.Common
 {
+    /// <summary>
+    /// Creates the animation curve for drive torque curve.
+    /// </summary>
     public struct AnimationCurveBlob
     {
         BlobArray<float> Keys;

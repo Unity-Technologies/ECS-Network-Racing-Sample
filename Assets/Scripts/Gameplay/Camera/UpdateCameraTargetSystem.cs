@@ -6,6 +6,9 @@ using static Unity.Entities.SystemAPI;
 
 namespace Unity.Entities.Racing.Gameplay
 {
+    /// <summary>
+    /// Takes the main camera and place it looking at the player
+    /// </summary>
     [UpdateAfter(typeof(TransformSystemGroup))]
     [WorldSystemFilter(WorldSystemFilterFlags.ClientSimulation)]
     public partial class UpdateCameraTargetSystem : SystemBase
@@ -25,15 +28,14 @@ namespace Unity.Entities.Racing.Gameplay
 
         protected override void OnUpdate()
         {
-            foreach (var player in Query<PlayerAspect>().WithAll<LocalUser>())
+            foreach (var localPlayer in Query<LocalPlayerAspect>())
             {
-                if (!player.HasValidPosition())
+                if (!localPlayer.HasValidPosition())
                 {
                     return;
                 }
-
-                m_CameraTarget.position = player.LocalToWorld.Position;
-                m_CameraTarget.rotation = player.LocalToWorld.Rotation;
+                m_CameraTarget.position = localPlayer.LocalToWorld.Position;
+                m_CameraTarget.rotation = localPlayer.LocalToWorld.Rotation;
             }
         }
     }

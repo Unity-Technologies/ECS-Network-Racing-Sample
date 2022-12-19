@@ -1,0 +1,9 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/USS/HUD.uss?fileID=7433441132597879392&amp;guid=498da6ba0e105bd40b2f51be14a3e861&amp;type=3#HUD" />
+    <Style src="project://database/Assets/UI/USS/Common.uss?fileID=7433441132597879392&amp;guid=dafc8585775e7e744a8d023b945260ae&amp;type=3#Common" />
+    <ui:VisualElement name="main-audio" picking-mode="Ignore" class="full-screen-container" style="flex-grow: 1; align-items: center; justify-content: center; -unity-background-scale-mode: scale-and-crop; display: flex; padding-top: 20px; padding-bottom: 20px;">
+        <ui:Button tabindex="0" name="audio-menu-button" class="circle-button" style="position: absolute; top: 20px; right: 20px;">
+            <ui:VisualElement name="volume-icon" class="child volume-icon" style="width: 75px; height: 75px;" />
+        </ui:Button>
+    </ui:VisualElement>
+</ui:UXML>

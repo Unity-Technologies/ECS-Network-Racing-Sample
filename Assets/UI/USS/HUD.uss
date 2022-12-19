@@ -39,6 +39,9 @@
     color: rgb(255, 255, 255);
     -unity-text-align: middle-left;
     padding: 0;
+    -unity-font: url('project://database/Assets/Fonts/Rajdhani/Rajdhani-Bold.ttf?fileID=12800000&guid=48bcc1cee44fa824c86a6bcf2c0be8a2&type=3#Rajdhani-Bold');
+    -unity-font-definition: url('project://database/Assets/Fonts/Rajdhani/Rajdhani-Bold%20SDF.asset?fileID=11400000&guid=79f9abbad64889d4e83b41e981575539&type=2#Rajdhani-Bold SDF');
+    text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.67);
 }
 
 .info-secondary-label {
@@ -46,6 +49,7 @@
     color: rgb(255, 255, 255);
     -unity-text-align: middle-left;
     padding: 0;
+    text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.67);
 }
 
 .center-panel {
@@ -62,6 +66,8 @@
     color: rgb(229, 229, 229);
     text-shadow: 5px 5px 10px rgba(0, 0, 0, 0.8);
     translate: 0 0;
+    -unity-font: url('project://database/Assets/Fonts/Rajdhani/Rajdhani-Bold.ttf?fileID=12800000&guid=48bcc1cee44fa824c86a6bcf2c0be8a2&type=3#Rajdhani-Bold');
+    -unity-font-definition: url('project://database/Assets/Fonts/Rajdhani/Rajdhani-Bold%20SDF.asset?fileID=11400000&guid=79f9abbad64889d4e83b41e981575539&type=2#Rajdhani-Bold SDF');
 }
 
 .bottom-panel {

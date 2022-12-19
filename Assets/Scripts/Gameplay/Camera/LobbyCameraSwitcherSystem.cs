@@ -4,6 +4,9 @@ using static Unity.Entities.SystemAPI;
 
 namespace Unity.Entities.Racing.Gameplay
 {
+    /// <summary>
+    /// Creates camera transition for Lobby
+    /// </summary>
     [BurstCompile]
     [WorldSystemFilter(WorldSystemFilterFlags.ClientSimulation)]
     public partial struct LobbyCameraSwitcherSystem : ISystem

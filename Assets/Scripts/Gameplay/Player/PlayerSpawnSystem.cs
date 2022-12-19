@@ -8,6 +8,41 @@ using static Unity.Entities.SystemAPI;
 
 namespace Unity.Entities.Racing.Gameplay
 {
+    [WorldSystemFilter(WorldSystemFilterFlags.ClientSimulation | WorldSystemFilterFlags.ThinClientSimulation)]
+    public partial struct RequestSpawnCarSystem : ISystem
+    {
+        public void OnCreate(ref SystemState state)
+        {
+            state.RequireForUpdate<NetworkStreamInGame>();
+        }
+
+        public void OnDestroy(ref SystemState state)
+        {
+        }
+
+        public void OnUpdate(ref SystemState state)
+        {
+            var name = PlayerInfoController.Instance.LocalPlayerName;
+            if (name == string.Empty)
+            {
+                name = "Player";
+            }
+            
+            var requestSpawnEntity = state.EntityManager.CreateEntity(typeof(SendRpcCommandRequestComponent));
+            state.EntityManager.AddComponentData(requestSpawnEntity,
+                new SpawnPlayerRequest
+                {
+                    Name = name,
+                    Id = PlayerInfoController.Instance.SkinId
+                });
+
+            state.Enabled = false;
+        }
+    }
+
+    /// <summary>
+    /// Gets the connection and spawn the player
+    /// </summary>
     [BurstCompile]
     [WorldSystemFilter(WorldSystemFilterFlags.ServerSimulation)]
     [UpdateInGroup(typeof(GhostSimulationSystemGroup))]
@@ -45,11 +80,11 @@ namespace Unity.Entities.Racing.Gameplay
 
                 // The network ID owner must be set on the ghost owner component on the players
                 // this is used internally for example to set up the CommandTarget properly
-                commandBuffer.SetComponent(player, new GhostOwnerComponent { NetworkId = networkId.Value });
+                commandBuffer.SetComponent(player, new GhostOwnerComponent {NetworkId = networkId.Value});
                 var name = request.Name;
                 name = name == "" ? $"Player{networkId.Value}" : name;
-                commandBuffer.SetComponent(player, new PlayerName { Name = name });
-                commandBuffer.SetComponent(player, new Player { State = PlayerState.Lobby });
+                commandBuffer.SetComponent(player, new PlayerName {Name = name});
+                commandBuffer.SetComponent(player, new Player {State = PlayerState.Lobby});
 
                 // Mark that this connection has had a player spawned for it so we won't process it again
                 commandBuffer.AddComponent<PlayerSpawned>(entityNetwork);
@@ -81,7 +116,7 @@ namespace Unity.Entities.Racing.Gameplay
 
                 // Add the player to the linked entity group on the connection so it is destroyed
                 // automatically on disconnect (destroyed with connection entity destruction)
-                commandBuffer.AppendToBuffer(entityNetwork, new LinkedEntityGroup { Value = player });
+                commandBuffer.AppendToBuffer(entityNetwork, new LinkedEntityGroup {Value = player});
 
                 // Create an entity to allow server to reset when all players disconnect 
                 if (!HasSingleton<ResetServerOnDisconnect>())
@@ -96,3 +131,5 @@ namespace Unity.Entities.Racing.Gameplay
         }
     }
 }
+
+

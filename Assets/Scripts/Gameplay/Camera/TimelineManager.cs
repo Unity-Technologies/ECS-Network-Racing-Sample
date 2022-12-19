@@ -5,6 +5,9 @@ using UnityEngine.Playables;
 
 namespace Unity.Entities.Racing.Gameplay
 {
+    /// <summary>
+    /// Access and play timeline directors 
+    /// </summary>
     public class TimelineManager : MonoBehaviour
     {
         public static TimelineManager Instance;
@@ -29,8 +32,11 @@ namespace Unity.Entities.Racing.Gameplay
                 CameraSwitcher.Instance.ShowBackCamera();
             }
 
-            CountdownDirector.time = 0;
-            CountdownDirector.Play();
+            if (CountdownDirector != null)
+            {
+                CountdownDirector.time = 0;
+                CountdownDirector.Play();
+            }
         }
 
         public void SwitchToNearestCamera()

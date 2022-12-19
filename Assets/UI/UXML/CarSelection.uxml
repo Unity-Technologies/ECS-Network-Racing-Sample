@@ -1,64 +1,64 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/UI/USS/CarSelection.uss?fileID=7433441132597879392&amp;guid=c796aa57f1861374eb19bdc235db03ac&amp;type=3#CarSelection" />
     <Style src="project://database/Assets/UI/USS/Common.uss?fileID=7433441132597879392&amp;guid=dafc8585775e7e744a8d023b945260ae&amp;type=3#Common" />
-    <ui:VisualElement name="container" tabindex="-1" class="full-screen-container" style="display: none;">
-        <ui:VisualElement name="left-menu" tabindex="-1" class="left-menu">
-            <ui:Label tabindex="-1" text="CAR SELECTION" name="title" class="car-selection-horizontal-title" />
+    <Style src="project://database/Assets/UI/USS/CarSelection.uss?fileID=7433441132597879392&amp;guid=c796aa57f1861374eb19bdc235db03ac&amp;type=3#CarSelection" />
+    <ui:VisualElement name="car-selection-container" tabindex="-1" class="full-screen-container" style="display: none;">
+        <ui:VisualElement name="car-selection-left-menu" tabindex="-1" class="left-menu">
+            <ui:Label tabindex="-1" text="CAR SELECTION" name="car-selection-title" class="car-selection-horizontal-title" />
             <ui:VisualElement name="skin-container" class="skin-container">
                 <ui:Button tabindex="0" name="skin-1" class="skin-selector" style="background-image: url(&apos;project://database/Assets/Art/Textures/UI/CarSelection/car-1.jpg?fileID=21300000&amp;guid=a5131ed89514c4449add67054ea91aa8&amp;type=3#car-1&apos;);">
                     <ui:Label tabindex="-1" name="car" />
                 </ui:Button>
-                <ui:Button tabindex="1" name="skin-2" class="skin-selector" style="background-image: url(&apos;project://database/Assets/Art/Textures/UI/CarSelection/car-1.jpg?fileID=21300000&amp;guid=a5131ed89514c4449add67054ea91aa8&amp;type=3#car-1&apos;);">
+                <ui:Button tabindex="1" name="skin-2" class="skin-selector" style="background-image: url(&apos;project://database/Assets/Art/Textures/UI/CarSelection/car-2.jpg?fileID=21300000&amp;guid=43117aa49d3d0004c9f5afc8a342eb6c&amp;type=3#car-2&apos;);">
                     <ui:Label tabindex="-1" name="car" />
                 </ui:Button>
-                <ui:Button tabindex="2" name="skin-3" class="skin-selector" style="background-image: url(&apos;project://database/Assets/Art/Textures/UI/CarSelection/car-1.jpg?fileID=21300000&amp;guid=a5131ed89514c4449add67054ea91aa8&amp;type=3#car-1&apos;);">
+                <ui:Button tabindex="2" name="skin-3" class="skin-selector" style="background-image: url(&apos;project://database/Assets/Art/Textures/UI/CarSelection/car-3.jpg?fileID=21300000&amp;guid=d0d2be30530ab5040b8d1eb3554005da&amp;type=3#car-3&apos;);">
                     <ui:Label tabindex="-1" name="car" />
                 </ui:Button>
-                <ui:Button tabindex="3" name="skin-4" class="skin-selector" style="background-image: url(&apos;project://database/Assets/Art/Textures/UI/CarSelection/car-1.jpg?fileID=21300000&amp;guid=a5131ed89514c4449add67054ea91aa8&amp;type=3#car-1&apos;);">
+                <ui:Button tabindex="3" name="skin-4" class="skin-selector" style="background-image: url(&apos;project://database/Assets/Art/Textures/UI/CarSelection/car-4.jpg?fileID=21300000&amp;guid=178f1c73dfa156a4ebcbeb6ab2ee01dd&amp;type=3#car-4&apos;);">
                     <ui:Label tabindex="-1" name="car" />
                 </ui:Button>
-                <ui:Button tabindex="4" name="skin-5" class="skin-selector" style="background-image: url(&apos;project://database/Assets/Art/Textures/UI/CarSelection/car-2.jpg?fileID=21300000&amp;guid=43117aa49d3d0004c9f5afc8a342eb6c&amp;type=3#car-2&apos;);">
+                <ui:Button tabindex="4" name="skin-5" class="skin-selector" style="background-image: url(&apos;project://database/Assets/Art/Textures/UI/CarSelection/car-5.jpg?fileID=21300000&amp;guid=4d100ab01c810eb4f88a524652d81cf7&amp;type=3#car-5&apos;);">
                     <ui:Label tabindex="-1" name="car" />
                 </ui:Button>
-                <ui:Button tabindex="5" name="skin-6" class="skin-selector" style="background-image: url(&apos;project://database/Assets/Art/Textures/UI/CarSelection/car-2.jpg?fileID=21300000&amp;guid=43117aa49d3d0004c9f5afc8a342eb6c&amp;type=3#car-2&apos;);">
+                <ui:Button tabindex="5" name="skin-6" class="skin-selector" style="background-image: url(&apos;project://database/Assets/Art/Textures/UI/CarSelection/car-6.jpg?fileID=21300000&amp;guid=08c80f55b4103c3468a13f7b2ad7f63a&amp;type=3#car-6&apos;);">
                     <ui:Label tabindex="-1" name="car" />
                 </ui:Button>
-                <ui:Button tabindex="6" name="skin-7" class="skin-selector" style="background-image: url(&apos;project://database/Assets/Art/Textures/UI/CarSelection/car-2.jpg?fileID=21300000&amp;guid=43117aa49d3d0004c9f5afc8a342eb6c&amp;type=3#car-2&apos;);">
+                <ui:Button tabindex="6" name="skin-7" class="skin-selector" style="background-image: url(&apos;project://database/Assets/Art/Textures/UI/CarSelection/car-7.jpg?fileID=21300000&amp;guid=db4dd60e0b95dd849abe8883c017d072&amp;type=3#car-7&apos;);">
                     <ui:Label tabindex="-1" name="car" />
                 </ui:Button>
-                <ui:Button tabindex="7" name="skin-8" class="skin-selector" style="background-image: url(&apos;project://database/Assets/Art/Textures/UI/CarSelection/car-2.jpg?fileID=21300000&amp;guid=43117aa49d3d0004c9f5afc8a342eb6c&amp;type=3#car-2&apos;);">
+                <ui:Button tabindex="7" name="skin-8" class="skin-selector" style="background-image: url(&apos;project://database/Assets/Art/Textures/UI/CarSelection/car-8.jpg?fileID=21300000&amp;guid=bc6fe3633cd81ea4db7a6dabfa65d921&amp;type=3#car-8&apos;);">
                     <ui:Label tabindex="-1" name="car" />
                 </ui:Button>
-                <ui:Button tabindex="8" name="skin-9" class="skin-selector" style="background-image: url(&apos;project://database/Assets/Art/Textures/UI/CarSelection/car-3.jpg?fileID=21300000&amp;guid=d0d2be30530ab5040b8d1eb3554005da&amp;type=3#car-3&apos;);">
+                <ui:Button tabindex="8" name="skin-9" class="skin-selector" style="background-image: url(&apos;project://database/Assets/Art/Textures/UI/CarSelection/car-9.jpg?fileID=21300000&amp;guid=2d242de58d0dd6848a7ca20cad837f82&amp;type=3#car-9&apos;);">
                     <ui:Label tabindex="-1" name="car" />
                 </ui:Button>
-                <ui:Button tabindex="9" name="skin-10" class="skin-selector" style="background-image: url(&apos;project://database/Assets/Art/Textures/UI/CarSelection/car-3.jpg?fileID=21300000&amp;guid=d0d2be30530ab5040b8d1eb3554005da&amp;type=3#car-3&apos;);">
+                <ui:Button tabindex="9" name="skin-10" class="skin-selector" style="background-image: url(&apos;project://database/Assets/Art/Textures/UI/CarSelection/car-10.jpg?fileID=21300000&amp;guid=40f2ba363d8488545a2a796356a8e014&amp;type=3#car-10&apos;);">
                     <ui:Label tabindex="-1" name="car" />
                 </ui:Button>
-                <ui:Button tabindex="10" name="skin-11" class="skin-selector" style="background-image: url(&apos;project://database/Assets/Art/Textures/UI/CarSelection/car-3.jpg?fileID=21300000&amp;guid=d0d2be30530ab5040b8d1eb3554005da&amp;type=3#car-3&apos;);">
+                <ui:Button tabindex="10" name="skin-11" class="skin-selector" style="background-image: url(&apos;project://database/Assets/Art/Textures/UI/CarSelection/car-11.jpg?fileID=21300000&amp;guid=d86a1c941626337478211f8be52d52e2&amp;type=3#car-11&apos;);">
                     <ui:Label tabindex="-1" name="car" />
                 </ui:Button>
-                <ui:Button tabindex="11" name="skin-12" class="skin-selector" style="background-image: url(&apos;project://database/Assets/Art/Textures/UI/CarSelection/car-3.jpg?fileID=21300000&amp;guid=d0d2be30530ab5040b8d1eb3554005da&amp;type=3#car-3&apos;);">
+                <ui:Button tabindex="11" name="skin-12" class="skin-selector" style="background-image: url(&apos;project://database/Assets/Art/Textures/UI/CarSelection/car-12.jpg?fileID=21300000&amp;guid=9d4ea7991f452c348b2f54cb9ac7f95c&amp;type=3#car-12&apos;);">
                     <ui:Label tabindex="-1" name="car" />
                 </ui:Button>
-                <ui:Button tabindex="12" name="skin-13" class="skin-selector" style="background-image: url(&apos;project://database/Assets/Art/Textures/UI/CarSelection/car-4.jpg?fileID=21300000&amp;guid=178f1c73dfa156a4ebcbeb6ab2ee01dd&amp;type=3#car-4&apos;);">
+                <ui:Button tabindex="12" name="skin-13" class="skin-selector" style="background-image: url(&apos;project://database/Assets/Art/Textures/UI/CarSelection/car-13.jpg?fileID=21300000&amp;guid=7b7e6433c39676d45b61e82ddb82e2a3&amp;type=3#car-13&apos;);">
                     <ui:Label tabindex="-1" name="car" />
                 </ui:Button>
-                <ui:Button tabindex="13" name="skin-14" class="skin-selector" style="background-image: url(&apos;project://database/Assets/Art/Textures/UI/CarSelection/car-4.jpg?fileID=21300000&amp;guid=178f1c73dfa156a4ebcbeb6ab2ee01dd&amp;type=3#car-4&apos;);">
+                <ui:Button tabindex="13" name="skin-14" class="skin-selector" style="background-image: url(&apos;project://database/Assets/Art/Textures/UI/CarSelection/car-14.jpg?fileID=21300000&amp;guid=7fdc73c658314bd4ba6f1e4f16ae2a2b&amp;type=3#car-14&apos;);">
                     <ui:Label tabindex="-1" name="car" />
                 </ui:Button>
-                <ui:Button tabindex="14" name="skin-15" class="skin-selector" style="background-image: url(&apos;project://database/Assets/Art/Textures/UI/CarSelection/car-4.jpg?fileID=21300000&amp;guid=178f1c73dfa156a4ebcbeb6ab2ee01dd&amp;type=3#car-4&apos;);">
+                <ui:Button tabindex="14" name="skin-15" class="skin-selector" style="background-image: url(&apos;project://database/Assets/Art/Textures/UI/CarSelection/car-15.jpg?fileID=21300000&amp;guid=d6157c9aef7d5e04089ca0d3db189502&amp;type=3#car-15&apos;);">
                     <ui:Label tabindex="-1" name="car" />
                 </ui:Button>
-                <ui:Button tabindex="15" name="skin-16" class="skin-selector" style="background-image: url(&apos;project://database/Assets/Art/Textures/UI/CarSelection/car-4.jpg?fileID=21300000&amp;guid=178f1c73dfa156a4ebcbeb6ab2ee01dd&amp;type=3#car-4&apos;);">
+                <ui:Button tabindex="15" name="skin-16" class="skin-selector" style="background-image: url(&apos;project://database/Assets/Art/Textures/UI/CarSelection/car-16.jpg?fileID=21300000&amp;guid=48d8505c714dd104a8aafd918ad5b17a&amp;type=3#car-16&apos;);">
                     <ui:Label tabindex="-1" name="car" />
                 </ui:Button>
             </ui:VisualElement>
         </ui:VisualElement>
-        <ui:Button tabindex="-1" display-tooltip-when-elided="true" name="start-button" focusable="false" class="button" style="position: absolute; right: 100px; bottom: 20px;">
-            <ui:VisualElement name="start-button-fill" tabindex="-1" class="hold-button-fill" style="width: 0;" />
-            <ui:Label tabindex="-1" text="PLAY" name="button-label" />
-            <ui:VisualElement name="icon-button" tabindex="1" class="button-icon" style="background-image: url(&apos;project://database/Assets/Art/Textures/UI/ps-x-icon.png?fileID=21300000&amp;guid=0b7182b119a464548b93fe81bf55b070&amp;type=3#ps-x-icon&apos;);" />
+        <ui:Button tabindex="-1" name="car-selection-start-button" focusable="false" class="button" style="position: absolute; right: 100px; bottom: 20px;">
+            <ui:VisualElement name="car-selection-start-button-fill" tabindex="-1" class="hold-button-fill" style="width: 0;" />
+            <ui:Label tabindex="-1" text="PLAY" name="car-selection-start-button-label" class="button-label" style="-unity-font: url(&apos;project://database/Assets/Fonts/Rajdhani/Rajdhani-Bold.ttf?fileID=12800000&amp;guid=48bcc1cee44fa824c86a6bcf2c0be8a2&amp;type=3#Rajdhani-Bold&apos;); -unity-font-definition: url(&apos;project://database/Assets/Fonts/Rajdhani/Rajdhani-Bold%20SDF.asset?fileID=11400000&amp;guid=79f9abbad64889d4e83b41e981575539&amp;type=2#Rajdhani-Bold SDF&apos;);" />
+            <ui:VisualElement name="car-selection-start-button-icon" tabindex="1" class="button-icon" style="background-image: url(&apos;project://database/Assets/Art/Textures/UI/ps-x-icon.png?fileID=21300000&amp;guid=0b7182b119a464548b93fe81bf55b070&amp;type=3#ps-x-icon&apos;);" />
         </ui:Button>
     </ui:VisualElement>
 </ui:UXML>

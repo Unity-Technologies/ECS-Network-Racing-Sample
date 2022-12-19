@@ -3,34 +3,39 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEngine.UIElements.Experimental;
 
-namespace Dots.Racing
+namespace Unity.Entities.Racing.Gameplay
 {
+    /// <summary>
+    /// Shows diagnostics of the performance, and Ping.
+    /// </summary>
     public class InfoPanel : MonoBehaviour
     {
+        private readonly string m_FPSFormattedString = "{value} FPS";
         private Button m_BackButton;
-        private VisualElement m_InfoPanel;
         private VisualElement m_BackIcon;
-        private Label m_FPSLabel;
-        private Label m_PlayersLabel;
-        private Label m_PingLabel;
         private Label m_EntitiesLabel;
-        private Label m_SystemsLabel;
-        private string m_FPSFormattedString = "{value} FPS";
+        private Label m_FPSLabel;
+        private VisualElement m_InfoPanel;
         private bool m_PanelHidden;
+        private Label m_PingLabel;
+        private Label m_PlayersLabel;
+        private Label m_SystemsLabel;
 
         public static InfoPanel Instance { private set; get; }
 
         private void Awake()
         {
             if (Instance == null)
+            {
                 Instance = this;
+            }
         }
 
         private void OnEnable()
         {
             var root = GetComponent<UIDocument>().rootVisualElement;
             m_InfoPanel = root.Q<VisualElement>("info-panel-body");
-            m_BackButton = root.Q<Button>("back-button");
+            m_BackButton = root.Q<Button>("info-panel-back-button");
             m_FPSLabel = root.Q<Label>("fps-value");
             m_PlayersLabel = root.Q<Label>("players-value");
             m_PingLabel = root.Q<Label>("ping-value");
@@ -38,6 +43,7 @@ namespace Dots.Racing
             m_SystemsLabel = root.Q<Label>("systems-value");
             m_BackIcon = root.Q<VisualElement>("back-icon");
             m_BackButton.clicked += ShowPanel;
+            m_BackButton.clicked += () => { PlayerAudioManager.Instance.PlayClick(); };
         }
 
         private void ShowPanel()

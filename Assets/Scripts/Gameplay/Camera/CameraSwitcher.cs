@@ -3,13 +3,15 @@ using UnityEngine;
 
 namespace Unity.Entities.Racing.Gameplay
 {
+    /// <summary>
+    /// Access and switch cameras
+    /// </summary>
     public class CameraSwitcher : MonoBehaviour
     {
         public static CameraSwitcher Instance;
 
         [SerializeField] private CinemachineVirtualCamera mainCamera;
         [SerializeField] private CinemachineVirtualCamera frontCamera;
-        [SerializeField] private CinemachineVirtualCamera carSelectionCamera;
 
         private void Awake()
         {
@@ -29,13 +31,6 @@ namespace Unity.Entities.Racing.Gameplay
         {
             frontCamera.Priority = 6;
             mainCamera.Priority = 10;
-        }
-
-        public void ShowCarSelectionCamera()
-        {
-            carSelectionCamera.Priority = 10;
-            mainCamera.Priority = 6;
-            frontCamera.Priority = 6;
         }
     }
 }

@@ -6,7 +6,7 @@ using static Unity.Entities.SystemAPI;
 namespace Unity.Entities.Racing.Gameplay
 {
     /// <summary>
-    ///     Update the Player Audio Sources
+    /// Update the Player Audio Sources position and volume
     /// </summary>
     [BurstCompile]
     [UpdateAfter(typeof(UpdateCameraTargetSystem))]
@@ -49,6 +49,91 @@ namespace Unity.Entities.Racing.Gameplay
 
             ecb.Playback(state.EntityManager);
             ecb.Dispose();
+        }
+    }
+
+    /// <summary>
+    /// Update music clips
+    /// </summary>
+    [BurstCompile]
+    [UpdateAfter(typeof(UpdateCameraTargetSystem))]
+    [WorldSystemFilter(WorldSystemFilterFlags.ClientSimulation | WorldSystemFilterFlags.ThinClientSimulation)]
+    public partial struct UpdateMusicSourceSystem : ISystem
+    {
+        public void OnCreate(ref SystemState state)
+        {
+        }
+
+        public void OnDestroy(ref SystemState state)
+        { 
+        }
+
+        public void OnUpdate(ref SystemState state)
+        {
+            if (PlayerAudioManager.Instance == null)
+            {
+                return;
+            }
+
+            PlayerAudioManager.Instance.CreateAndPlayMusicAudioSourceOnce();
+
+            if (!TryGetSingleton<Race>(out var race))
+                return;
+
+            if (race.NotStarted) 
+            {
+                PlayerAudioManager.Instance.PlayLobbyMusic();
+            }
+            else if (race.IsRaceStarting)
+            {
+                PlayerAudioManager.Instance.PlayRaceMusic();
+            }
+            else if (race.IsInProgress)
+            {
+                foreach (var localPlayer in Query<LocalPlayerAspect>())
+                {
+                    if (localPlayer.LapProgress.HasArrived)
+                    {
+                        PlayerAudioManager.Instance.PlayCelebrationMusic();
+                    }
+                }
+            }
+            else if (race.HasFinished) 
+            {
+                PlayerAudioManager.Instance.PlayCelebrationMusic();
+            }
+        }
+            
+    }
+
+    /// <summary>
+    /// Update the Player Audio Sources position and volume
+    /// </summary>
+    [BurstCompile]
+    [UpdateAfter(typeof(UpdateCameraTargetSystem))]
+    [WorldSystemFilter(WorldSystemFilterFlags.ClientSimulation | WorldSystemFilterFlags.ThinClientSimulation)]
+    public partial struct UpdateUIAudioSourceSystem : ISystem
+    {
+        public void OnCreate(ref SystemState state)
+        {
+        }
+
+        public void OnDestroy(ref SystemState state)
+        {
+            foreach (var car in Query<PlayerAspect>().WithAll<AudioSourceTag>())
+            {
+                PlayerAudioManager.Instance.DeleteAudioSource(car.Self);
+            }
+        }
+
+        public void OnUpdate(ref SystemState state)
+        {
+            if (PlayerAudioManager.Instance == null)
+            {
+                return;
+            }
+
+            PlayerAudioManager.Instance.CreateUIAudioSource();
         }
     }
 }

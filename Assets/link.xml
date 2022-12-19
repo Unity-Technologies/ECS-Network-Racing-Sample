@@ -1,0 +1,4 @@
+<linker>
+	<!--Preserve entire assembly-->
+	<assembly fullname="Unity.Entities.Graphics" preserve="all"/>
+</linker>

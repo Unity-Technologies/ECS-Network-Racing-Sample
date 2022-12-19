@@ -1,0 +1,18 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/USS/HUD.uss?fileID=7433441132597879392&amp;guid=498da6ba0e105bd40b2f51be14a3e861&amp;type=3#HUD" />
+    <Style src="project://database/Assets/UI/USS/Common.uss?fileID=7433441132597879392&amp;guid=dafc8585775e7e744a8d023b945260ae&amp;type=3#Common" />
+    <ui:VisualElement name="main-hud" picking-mode="Ignore" class="full-screen-container" style="flex-grow: 1; align-items: center; justify-content: center; -unity-background-scale-mode: scale-and-crop; display: flex; padding-top: 20px; padding-bottom: 20px;">
+        <ui:Button tabindex="0" name="left-button" class="circle-button" style="position: absolute; left: 20px; bottom: 20px;">
+            <ui:VisualElement name="menu-icon" class="child" style="width: 50px; background-image: url(&apos;project://database/Assets/Art/Textures/UI/menu-icon.png?fileID=21300000&amp;guid=88fcc901ed71b61429830f38b4a4298b&amp;type=3#menu-icon&apos;); -unity-background-scale-mode: scale-to-fit; height: 50px;" />
+        </ui:Button>
+        <ui:Button tabindex="0" name="right-button" class="circle-button" style="position: absolute; left: 180px; bottom: 20px;">
+            <ui:VisualElement name="menu-icon" class="child" style="width: 50px; background-image: url(&apos;project://database/Assets/Art/Textures/UI/menu-icon.png?fileID=21300000&amp;guid=88fcc901ed71b61429830f38b4a4298b&amp;type=3#menu-icon&apos;); -unity-background-scale-mode: scale-to-fit; height: 50px;" />
+        </ui:Button>
+        <ui:Button tabindex="0" name="left-1" class="circle-button" style="position: absolute; bottom: 20px; right: 180px;">
+            <ui:VisualElement name="menu-icon" class="child" style="width: 50px; background-image: url(&apos;project://database/Assets/Art/Textures/UI/menu-icon.png?fileID=21300000&amp;guid=88fcc901ed71b61429830f38b4a4298b&amp;type=3#menu-icon&apos;); -unity-background-scale-mode: scale-to-fit; height: 50px;" />
+        </ui:Button>
+        <ui:Button tabindex="0" name="throttle-button" class="circle-button" style="position: absolute; bottom: 20px; right: 20px;">
+            <ui:VisualElement name="menu-icon" class="child" style="width: 50px; background-image: url(&apos;project://database/Assets/Art/Textures/UI/menu-icon.png?fileID=21300000&amp;guid=88fcc901ed71b61429830f38b4a4298b&amp;type=3#menu-icon&apos;); -unity-background-scale-mode: scale-to-fit; height: 50px;" />
+        </ui:Button>
+    </ui:VisualElement>
+</ui:UXML>

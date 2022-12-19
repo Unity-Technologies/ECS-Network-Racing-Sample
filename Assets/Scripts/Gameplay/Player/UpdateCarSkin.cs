@@ -6,6 +6,9 @@ using static Unity.Entities.SystemAPI;
 
 namespace Unity.Entities.Racing.Gameplay
 {
+    /// <summary>
+    /// Instantiates a player skin entity prefab.
+    /// </summary>
     [WorldSystemFilter(WorldSystemFilterFlags.ClientSimulation | WorldSystemFilterFlags.ThinClientSimulation)]
     [BurstCompile]
     public partial struct SetPlayerSkinSystem : ISystem
@@ -52,6 +55,9 @@ namespace Unity.Entities.Racing.Gameplay
         }
     }
 
+    /// <summary>
+    /// Instantiate the entity prefab wheels for the skin.
+    /// </summary>
     [WorldSystemFilter(WorldSystemFilterFlags.ClientSimulation | WorldSystemFilterFlags.ThinClientSimulation)]
     [BurstCompile]
     public partial struct SetWheelVisualSystem : ISystem

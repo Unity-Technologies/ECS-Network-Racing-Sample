@@ -8,9 +8,13 @@ using UnityEngine.SceneManagement;
 
 namespace Unity.Entities.Racing.Gameplay
 {
+    /// <summary>
+    /// Creates audio source and handles volume and position 
+    /// </summary>
     public class PlayerAudioManager : MonoBehaviour
     {
         public static PlayerAudioManager Instance;
+        public float InitialAudioSourceVolume;
         public AnimationCurve VolumeCurve;
         public AnimationCurve PitchCurve;
         public GameObject ReverbZonesPrefab;
@@ -18,14 +22,31 @@ namespace Unity.Entities.Racing.Gameplay
         public AudioClip StartEngine;
         public AudioClip LoopEngine;
         public AudioClip TopSpeed;
+
+        public AudioClip Lobby;
+        public AudioClip Click;
+        public AudioClip Race;
+        public AudioClip Celebration;
+
+        public AudioMixerGroup MusicChannel;
+        public AudioMixerGroup UIChannel;
         public AudioMixer AudioMixer;
         private readonly Dictionary<Entity, AudioReference> m_Collection = new();
         private Scene m_AdditiveScene;
+        private AudioSource MusicAudioSource;
+        private AudioSource UIAudioSource;
 
         private float m_PreviousVolume = 1f;
         private GameObject m_ReverbZones;
 
-        public bool IsMute => math.distance(0, m_PreviousVolume) > 0.1f;
+        public bool IsMute 
+        {
+            get
+            {
+                AudioMixer.GetFloat("Volume", out var value);
+                return value < -180f;
+            }
+        }
 
         private void Awake()
         {
@@ -50,15 +71,15 @@ namespace Unity.Entities.Racing.Gameplay
 
         public void ToggleVolume()
         {
-            if (math.distance(0, m_PreviousVolume) > 0.1f)
-            {
-                m_PreviousVolume = 0.0001f;
-                m_ReverbZones.SetActive(false);
-            }
-            else
+            if (IsMute)
             {
                 m_PreviousVolume = 1f;
                 m_ReverbZones.SetActive(true);
+            }
+            else
+            {
+                m_PreviousVolume = 0.0001f;
+                m_ReverbZones.SetActive(false);
             }
 
             AudioMixer.SetFloat("Volume", math.log(m_PreviousVolume) * 20f);
@@ -72,16 +93,16 @@ namespace Unity.Entities.Racing.Gameplay
             }
 
             var instance = Instantiate(AudioSourcePrefab);
+            var audioSource = InstantiateAudioSource(instance, StartEngine, is2D);
             instance.name = $"{(is2D ? "2D" : "3D")} AudioSource - Entity : [{player.Index}]";
-            var audioSource = instance.GetComponent<AudioSource>();
-            audioSource.spatialBlend = is2D ? 0f : 1f;
+            
             var data = new AudioReference
             {
                 GameObject = instance,
                 AudioSource = audioSource,
                 StartEngine = audioSource.clip
             };
-            audioSource.velocityUpdateMode = AudioVelocityUpdateMode.Fixed;
+
             m_Collection.Add(player, data);
             SceneManager.MoveGameObjectToScene(instance, m_AdditiveScene);
             StartCoroutine(InitEngine(audioSource));
@@ -117,8 +138,11 @@ namespace Unity.Entities.Racing.Gameplay
 
         public void DeleteAudioSource(Entity player)
         {
-            Destroy(m_Collection[player].GameObject);
-            m_Collection.Remove(player);
+            if (m_Collection.ContainsKey(player)) 
+            {
+                Destroy(m_Collection[player].GameObject);
+                m_Collection.Remove(player);
+            }
         }
 
         public void UpdatePitchAndVolume(Entity player, float velocity)
@@ -141,18 +165,83 @@ namespace Unity.Entities.Racing.Gameplay
             }
         }
 
+        public void CreateAndPlayMusicAudioSourceOnce() 
+        {
+            if (MusicAudioSource != null)
+                return;
+
+            var instance = Instantiate(AudioSourcePrefab);
+            instance.name = "UI - AudioSource";
+            MusicAudioSource = InstantiateAudioSource(instance, Lobby,true);
+            MusicAudioSource.outputAudioMixerGroup = MusicChannel;
+            MusicAudioSource.Play();
+            SceneManager.MoveGameObjectToScene(instance, m_AdditiveScene);
+        }
+
+        public void CreateUIAudioSource() 
+        {
+            if (UIAudioSource != null)
+                return;
+
+            var instance = Instantiate(AudioSourcePrefab);
+            instance.name = "Music - AudioSource";
+            UIAudioSource = InstantiateAudioSource(instance, Click, true);
+            UIAudioSource.outputAudioMixerGroup = UIChannel;
+            UIAudioSource.loop = false;
+            SceneManager.MoveGameObjectToScene(instance, m_AdditiveScene);
+        }
+
+        public void PlayRaceMusic()
+        {
+            ChangeAudio(MusicAudioSource, Race);
+        }
+
+        public void PlayCelebrationMusic()
+        {
+            ChangeAudio(MusicAudioSource, Celebration);
+        }
+
+        public void PlayLobbyMusic()
+        {
+            ChangeAudio(MusicAudioSource, Lobby);
+        }
+
+        public void PlayClick()
+        {
+            if (UIAudioSource == null)
+            {
+                CreateUIAudioSource();
+            }
+            UIAudioSource.clip = Click;
+            UIAudioSource.Play();
+        }
+
         private IEnumerator InitEngine(AudioSource audioSource)
         {
             ChangeAudio(audioSource, StartEngine);
+            audioSource.Play();
             yield return new WaitForEndOfFrame();
             yield return new WaitForSeconds(audioSource.clip.length);
             ChangeAudio(audioSource, LoopEngine);
         }
 
+        private AudioSource InstantiateAudioSource(GameObject instance, AudioClip clip, bool is2D)
+        {
+            var audioSource = instance.GetComponent<AudioSource>();
+            audioSource.spatialBlend = is2D ? 0f : 1f;
+            audioSource.clip = clip;
+            audioSource.volume = InitialAudioSourceVolume;
+            audioSource.velocityUpdateMode = AudioVelocityUpdateMode.Fixed;
+            return audioSource;
+        }
+
         private void ChangeAudio(AudioSource audioSource, AudioClip clip)
         {
-            audioSource.clip = clip;
-            audioSource.Play();
+            if (audioSource.clip != clip) 
+            {
+                audioSource.clip = clip;
+                audioSource.Play();
+            }
         }
 
         private struct AudioReference

@@ -1,0 +1,96 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &5273116912892317582
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1811993431386470192, guid: d83580e8bb504a642b95ddf18c71cc83,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c8e65bc47ff39c0498c5206dab623b5b, type: 2}
+    - target: {fileID: 4857708565277794240, guid: d83580e8bb504a642b95ddf18c71cc83,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c8e65bc47ff39c0498c5206dab623b5b, type: 2}
+    - target: {fileID: 5744309445182811558, guid: d83580e8bb504a642b95ddf18c71cc83,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c8e65bc47ff39c0498c5206dab623b5b, type: 2}
+    - target: {fileID: 7208731907615544297, guid: d83580e8bb504a642b95ddf18c71cc83,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7208731907615544297, guid: d83580e8bb504a642b95ddf18c71cc83,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7208731907615544297, guid: d83580e8bb504a642b95ddf18c71cc83,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7208731907615544297, guid: d83580e8bb504a642b95ddf18c71cc83,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7208731907615544297, guid: d83580e8bb504a642b95ddf18c71cc83,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 7208731907615544297, guid: d83580e8bb504a642b95ddf18c71cc83,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 7208731907615544297, guid: d83580e8bb504a642b95ddf18c71cc83,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7208731907615544297, guid: d83580e8bb504a642b95ddf18c71cc83,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7208731907615544297, guid: d83580e8bb504a642b95ddf18c71cc83,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 7208731907615544297, guid: d83580e8bb504a642b95ddf18c71cc83,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7208731907615544297, guid: d83580e8bb504a642b95ddf18c71cc83,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8016794181752228179, guid: d83580e8bb504a642b95ddf18c71cc83,
+        type: 3}
+      propertyPath: m_Name
+      value: Gas_StationSnow
+      objectReference: {fileID: 0}
+    - target: {fileID: 8377156712400758918, guid: d83580e8bb504a642b95ddf18c71cc83,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c8e65bc47ff39c0498c5206dab623b5b, type: 2}
+    m_RemovedComponents:
+    - {fileID: 0}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d83580e8bb504a642b95ddf18c71cc83, type: 3}

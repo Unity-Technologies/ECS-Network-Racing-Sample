@@ -3,6 +3,9 @@ using UnityEngine;
 
 namespace Unity.Entities.Racing.Gameplay
 {
+    /// <summary>
+    /// Makes the player name object to look at the main camera 
+    /// </summary>
     public class PlayerNameUpdater : MonoBehaviour
     {
         public Transform NameTag;

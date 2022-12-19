@@ -1,35 +1,35 @@
 using System.Collections;
-using Unity.Entities.Racing.Gameplay;
 using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEngine.UIElements.Experimental;
 
-namespace Dots.Racing
+namespace Unity.Entities.Racing.Gameplay
 {
+    /// <summary>
+    /// Updates race information and player position.
+    /// </summary>
     public class HUDController : MonoBehaviour
     {
         public static HUDController Instance;
         public static Button StartRaceButton;
         public static Button CancelStartButton;
         public static Button ResetCarButton;
-        public static Button AudioButton;
-
-        private Button m_MenuButton;
+        private readonly string[] m_CounterTextValue = { "3", "2", "1", "GO!" };
         private Button m_BackButton;
-        private VisualElement m_MainHUD;
-        private VisualElement m_RaceInfoPanel;
-        private VisualElement m_BottomPanel;
-        private VisualElement m_LeftMenu;
-        private VisualElement m_AudioIcon;
-        private Label m_RankLabel;
-        private Label m_MainCenterLabel;
         private Label m_BottomMessageLabel;
-        private Label m_LapLabel;
+        private VisualElement m_BottomPanel;
 
         private bool m_Counting;
-        private bool m_ShowingFinish;
+        private Label m_LapLabel;
+        private VisualElement m_LeftMenu;
         private bool m_LeftMenuEnabled;
-        private string[] m_CounterTextValue = {"3", "2", "1", "GO!"};
+        private Label m_MainCenterLabel;
+        private VisualElement m_MainHUD;
+
+        private Button m_MenuButton;
+        private VisualElement m_RaceInfoPanel;
+        private Label m_RankLabel;
+        private bool m_ShowingFinish;
 
         private void Awake()
         {
@@ -37,11 +37,6 @@ namespace Dots.Racing
             {
                 Instance = this;
             }
-        }
-
-        private void Start()
-        {
-            ShowHUD(false);
         }
 
         private void OnEnable()
@@ -57,39 +52,22 @@ namespace Dots.Racing
             m_BottomMessageLabel = root.Q<Label>("bottom-message-label");
             // Panel
             m_MainHUD = root.Q<VisualElement>("main-hud");
-            m_RaceInfoPanel = root.Q<VisualElement>("race-info-panel");
-            m_LeftMenu = root.Q<VisualElement>("left-menu");
+            m_RaceInfoPanel = root.Q<VisualElement>("hud-race-info-panel");
+            m_LeftMenu = root.Q<VisualElement>("hud-left-menu");
             m_BottomPanel = root.Q<VisualElement>("bottom-panel");
             // Buttons
-            StartRaceButton = root.Q<Button>("start-race-button");
+            StartRaceButton = root.Q<Button>("hud-start-race-button");
             CancelStartButton = root.Q<Button>("cancel-start-button");
-            ResetCarButton = root.Q<Button>("reset-button");
-            AudioButton = root.Q<Button>("audio-button");
-            m_AudioIcon = AudioButton.Q<VisualElement>("icon");
-            m_MenuButton = root.Q<Button>("menu-button");
-            m_BackButton = root.Q<Button>("back-button");
+            ResetCarButton = root.Q<Button>("hud-reset-button");
+            m_MenuButton = root.Q<Button>("hud-menu-button");
+            m_BackButton = root.Q<Button>("hud-back-button");
 
-            m_MenuButton.clicked += () => { ShowLeftMenu(true); };
-            m_BackButton.clicked += () => { ShowLeftMenu(false); };
-            AudioButton.clicked += ToggleVolume;
+            if(m_MenuButton != null)
+                m_MenuButton.clicked += () => { ShowLeftMenu(true); };
+            if(m_BackButton != null)
+                m_BackButton.clicked += () => { ShowLeftMenu(false); };
         }
-
-        private void ToggleVolume()
-        {
-            if (PlayerAudioManager.Instance.IsMute)
-            {
-                m_AudioIcon.RemoveFromClassList("volume-icon");
-                m_AudioIcon.AddToClassList("volume-mute");
-            }
-            else
-            {
-                m_AudioIcon.AddToClassList("volume-icon");
-                m_AudioIcon.RemoveFromClassList("volume-mute");
-            }
-
-            PlayerAudioManager.Instance.ToggleVolume();
-        }
-
+        
         public void ShowHUD(bool value)
         {
             m_MainHUD.style.display = value ? DisplayStyle.Flex : DisplayStyle.None;
@@ -98,7 +76,9 @@ namespace Dots.Racing
         public void ShowLeftMenu(bool value, bool showMenuButton = true)
         {
             if (value && m_LeftMenuEnabled)
+            {
                 return;
+            }
 
             var layout = m_LeftMenu.layout;
             if (value)
@@ -112,7 +92,9 @@ namespace Dots.Racing
                     .Ease(Easing.OutCirc)
                     .OnCompleted(() => { ShowMenuButton(true); });
             }
+            
             m_LeftMenuEnabled = value;
+            PlayerAudioManager.Instance.PlayClick();
         }
 
         public void SetLap(int currentLap, int totalLaps)
@@ -173,12 +155,14 @@ namespace Dots.Racing
 
         public void StartCountDown()
         {
-            //TODO: Rewrite this to get the value from System
             // Show Countdown
             m_MainCenterLabel.style.display = DisplayStyle.Flex;
 
             if (m_Counting)
+            {
                 return;
+            }
+
             m_Counting = true;
             AnimateCounter(0);
         }
@@ -186,7 +170,9 @@ namespace Dots.Racing
         private void AnimateCounter(int index)
         {
             if (index >= m_CounterTextValue.Length)
+            {
                 return;
+            }
 
             m_MainCenterLabel.text = m_CounterTextValue[index];
             m_MainCenterLabel.style.opacity = 1;
@@ -194,8 +180,8 @@ namespace Dots.Racing
             m_MainCenterLabel.transform.position = Vector3.zero;
             m_MainCenterLabel.experimental.animation.Position(new Vector3(0, -50f), 1000).Ease(Easing.OutCubic);
             m_MainCenterLabel.experimental.animation.Scale(1.5f, 1000).Ease(Easing.OutCubic);
-            m_MainCenterLabel.experimental.animation.Start(new StyleValues {opacity = 0f}, 1000);
-            m_MainCenterLabel.experimental.animation.Start(new StyleValues {opacity = 0f}, 1000)
+            m_MainCenterLabel.experimental.animation.Start(new StyleValues { opacity = 0f }, 1000);
+            m_MainCenterLabel.experimental.animation.Start(new StyleValues { opacity = 0f }, 1000)
                 .Ease(Easing.InCubic)
                 .OnCompleted(() => { AnimateCounter(++index); });
         }
@@ -205,7 +191,9 @@ namespace Dots.Racing
             if (value)
             {
                 if (m_ShowingFinish)
+                {
                     return;
+                }
 
                 m_ShowingFinish = true;
                 StartCoroutine(ShowFinish(rank));
@@ -220,7 +208,7 @@ namespace Dots.Racing
 
         public void ShowFinishCounter(int timer)
         {
-            m_BottomMessageLabel.text = $"THE RACE WILL FINISH IN {timer}";
+            m_BottomMessageLabel.text = timer == 0? $"FINISHED" : $"THE RACE WILL FINISH IN {timer}";
             m_BottomMessageLabel.style.display = DisplayStyle.Flex;
             m_BottomPanel.style.display = DisplayStyle.Flex;
         }
@@ -247,7 +235,7 @@ namespace Dots.Racing
             m_MainCenterLabel.style.opacity = 1;
             m_MainCenterLabel.transform.scale = Vector3.one;
             m_MainCenterLabel.transform.position = Vector3.zero;
-            m_RaceInfoPanel.experimental.animation.Start(new StyleValues {opacity = 0f}, 500).Ease(Easing.InCubic);
+            m_RaceInfoPanel.experimental.animation.Start(new StyleValues { opacity = 0f }, 500).Ease(Easing.InCubic);
             yield return new WaitForSeconds(2f);
             m_MainCenterLabel.text = $"{GetOrdinal(rank)} PLACE";
             m_MainCenterLabel.experimental.animation.Position(new Vector3(0, -500f), 500).Ease(Easing.OutCubic);

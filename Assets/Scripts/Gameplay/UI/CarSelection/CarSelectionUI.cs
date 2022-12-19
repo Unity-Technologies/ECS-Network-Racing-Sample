@@ -1,14 +1,15 @@
 ﻿using System.Collections.Generic;
-using Dots.Racing;
 using Unity.Entities.Racing.Gameplay;
 using Unity.Mathematics;
-using Unity.Services.Vivox;
+using Unity.NetCode;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.UIElements;
 
 namespace Gameplay.UI
 {
+    /// <summary>
+    /// Creates the list of skins
+    /// </summary>
     public class CarSelectionUI : MonoBehaviour
     {
         private const int NUM_OF_SKINS = 16;
@@ -16,11 +17,8 @@ namespace Gameplay.UI
         public static CarSelectionUI Instance;
         public static List<Button> SkinButtons;
         
-        public UnityAction StartGameEvent;
-        
         private VisualElement m_StartButton;
         private VisualElement m_CarSelectionContainer;
-        private VisualElement m_SkinContainer;
         private VisualElement m_StartButtonFill;
         private FocusController m_FocusController;
         private bool m_InCarSelection;
@@ -29,21 +27,24 @@ namespace Gameplay.UI
 
         private void Awake()
         {
-            if (Instance == null)
-            {
-                Instance = this;
-            }
+            if (Instance != null && Instance != this) 
+            { 
+                Destroy(this); 
+            } 
+            else 
+            { 
+                Instance = this; 
+            } 
         }
         
         private void OnEnable()
         {
             var root = GetComponent<UIDocument>().rootVisualElement;
             m_FocusController = root.focusController;
-            m_CarSelectionContainer = root.Q<VisualElement>("container");
-            m_StartButtonFill = root.Q<VisualElement>("start-button-fill");
-            m_StartButton = root.Q<VisualElement>("start-button");
+            m_CarSelectionContainer = root.Q<VisualElement>("car-selection-container");
+            m_StartButtonFill = root.Q<VisualElement>("car-selection-start-button-fill");
+            m_StartButton = root.Q<VisualElement>("car-selection-start-button");
             m_StartButton.RegisterCallback<ClickEvent>(OnStartButtonClicked);
-            
             SetSkinButtons(root);
         }
 
@@ -56,7 +57,7 @@ namespace Gameplay.UI
         {
             if (value)
             {
-                // Focus on the first Car Skin
+                // Focus on the first Car Skin Button
                 SkinButtons[0].Focus();
             }
             
@@ -71,6 +72,7 @@ namespace Gameplay.UI
             {
                 var button = root.Q<Button>("skin-" + i);
                 button.clicked += () => { OnSkinSelected(button); };
+                button.clicked += () => { PlayerAudioManager.Instance.PlayClick(); };
                 SkinButtons.Add(button);
             }
         }
@@ -83,16 +85,25 @@ namespace Gameplay.UI
         
         private void OnStartButtonClicked(ClickEvent evt)
         {
-            if (!string.IsNullOrEmpty(VivoxService.Instance.PlayerId) && VivoxService.Instance.Client.Initialized)
-            {
-                VivoxManager.Instance.Login(PlayerNamesController.Instance.LocalPlayerName);
-            }
+            PlayerAudioManager.Instance.PlayClick();
             ShowCarSelection(false);
-            CameraSwitcher.Instance.ShowFrontCamera();
-            HUDController.Instance.ShowHUD(true);
-            Fader.Instance.FadeOutIn();
             
-            StartGameEvent.Invoke();
+            // Connect to Server of Create Client & Server
+#if UNITY_CLIENT || FRONTEND_PLAYER_BUILD
+            ServerConnectionUtils.ConnectToServer(PlayerInfoController.Instance.Ip, PlayerInfoController.Instance.Port);
+#else
+            ServerConnectionUtils.StartClientServer(PlayerInfoController.Instance.Port);
+#endif
+            
+            // TODO: Client in the Editor is not connecting to Remote Server
+            // if (ClientServerBootstrap.RequestedPlayType == ClientServerBootstrap.PlayType.ClientAndServer)
+            // {
+            //     ServerConnectionUtils.StartClientServer(PlayerInfoController.Instance.Port);
+            // }
+            // else if (ClientServerBootstrap.RequestedPlayType == ClientServerBootstrap.PlayType.Client)
+            // {
+            //     ServerConnectionUtils.ConnectToServer(PlayerInfoController.Instance.Ip, PlayerInfoController.Instance.Port);
+            // }
         }
 
         private void Update()
@@ -109,19 +120,18 @@ namespace Gameplay.UI
                 
                 if (m_SubmitWidth >= m_StartButton.layout.width)
                 {
-                    
                     OnStartButtonClicked(new ClickEvent());
                 }
                 
                 // Increase Submit 
-                m_SubmitWidth += Time.deltaTime * 400;
+                m_SubmitWidth += Time.deltaTime * 400f;
                 m_SubmitWidth = math.clamp(m_SubmitWidth, 0, m_StartButton.layout.width);
                 m_StartButtonFill.style.width = m_SubmitWidth;
             }
             else
             {
                 // Decrease Submit
-                m_SubmitWidth -= Time.deltaTime * 800;
+                m_SubmitWidth -= Time.deltaTime * 800f;
                 m_SubmitWidth = math.clamp(m_SubmitWidth, 0, m_StartButton.layout.width);
                 m_StartButtonFill.style.width = m_SubmitWidth;
             }

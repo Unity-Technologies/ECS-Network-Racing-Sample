@@ -9,7 +9,7 @@ using static Unity.Entities.SystemAPI;
 namespace Unity.Entities.Racing.Gameplay
 {
     /// <summary>
-    ///     Place any established network connection in-game so ghost snapshot sync can start
+    ///  Place any established network connection in-game so ghost snapshot sync can start
     /// </summary>
     [BurstCompile]
     [WorldSystemFilter(WorldSystemFilterFlags.ClientSimulation |

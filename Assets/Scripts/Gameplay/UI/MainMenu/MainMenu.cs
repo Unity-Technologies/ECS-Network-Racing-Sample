@@ -1,8 +1,11 @@
 using System;
 using System.Collections;
+using System.Linq;
 using Gameplay.UI;
+using Unity.Entities.Racing.Common;
 using Unity.Entities.Racing.Gameplay;
 using Unity.Mathematics;
+using Unity.NetCode;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -12,11 +15,11 @@ namespace Dots.Racing
     {
         public static MainMenu Instance;
 
-        public TextField NameField;
-        public TextField IpField;
-        public TextField PortField;
+        private TextField m_NameField;
+        private TextField m_IpField;
+        private TextField m_PortField;
         private VisualElement m_MainMenuPanel;
-        private Button m_StartButton;
+        private Button m_JoinButton;
         private VisualElement[] m_FocusRing;
         private FocusController m_FocusController;
         private int m_FocusRingIndex;
@@ -33,44 +36,81 @@ namespace Dots.Racing
         private void OnEnable()
         {
             var root = GetComponent<UIDocument>().rootVisualElement;
-            m_MainMenuPanel = root.Q<VisualElement>("container");
-            NameField = root.Q<TextField>("name-field");
-            IpField = root.Q<TextField>("ip-field");
-            PortField = root.Q<TextField>("port-field");
-            NameField.value = Environment.UserName.ToUpper();
-            m_StartButton = root.Q<Button>("start-button");
-            m_StartButton.clicked += OnStartButtonClicked;
+            m_MainMenuPanel = root.Q<VisualElement>("main-menu-container");
+            m_NameField = root.Q<TextField>("name-field");
+            m_NameField.value = Environment.UserName.ToUpper();
+
+            m_IpField = root.Q<TextField>("ip-field");
+            m_PortField = root.Q<TextField>("port-field");
+            
+            m_JoinButton = root.Q<Button>("main-menu-start-button");
+            m_JoinButton.clicked += OnJoinButtonClicked;
+
             m_FocusController = root.focusController;
         }
 
         private void Start()
         {
-            // Set the focus ring manually
-            m_FocusRing = new VisualElement[] {NameField, IpField, PortField, m_StartButton};
+            // If we are running a Client, we show the IP and Port to connect
+            if (ClientServerBootstrap.RequestedPlayType == ClientServerBootstrap.PlayType.Client)
+            {
+                m_JoinButton.text = "JOIN";
+                // Set the focus ring manually
+                m_FocusRing = new VisualElement[] {m_NameField, m_IpField, m_PortField, m_JoinButton};
+            }
+            else
+            {
+                m_JoinButton.text = "START CLIENT & SERVER";
+                m_IpField.style.display = DisplayStyle.None;
+                m_PortField.style.display = DisplayStyle.None;
+                
+                // Set the focus ring manually
+                m_FocusRing = new VisualElement[] {m_NameField, m_JoinButton};
+            }
+            
+            
             // Set focus to the name text field
-            NameField.Focus();
+            m_NameField.Focus();
             StartCoroutine(UpdateInput());
         }
 
         private void OnDisable()
         {
-            m_StartButton.clicked -= OnStartButtonClicked;
+            m_JoinButton.clicked -= OnJoinButtonClicked;
+            StopCoroutine(UpdateInput());
         }
 
-        private void OnStartButtonClicked()
+        private void OnJoinButtonClicked()
         {
-            PlayerNamesController.Instance.LocalPlayerName = NameField.value;
-            // Disable Main Menu
-            m_MainMenuPanel.style.display = DisplayStyle.None;
-            if (CameraSwitcher.Instance != null)
+            if (!ServerConnectionUtils.ValidateIPv4(m_IpField.value))
             {
-                CameraSwitcher.Instance.ShowCarSelectionCamera();
-                CarSelectionUI.Instance.ShowCarSelection(true);
+                Popup.Instance.Show("Error", "Please enter a valid IP.", "Retry");
+                return;
             }
 
+            // Assign Player Name
+            PlayerInfoController.Instance.LocalPlayerName = m_NameField.value;
+            
+            // Disable Main Menu
+            m_MainMenuPanel.style.display = DisplayStyle.None;
+            
+            // Switch camera
+            if (MainMenuCameraSwitcher.Instance != null)
+            {
+                MainMenuCameraSwitcher.Instance.ShowCarSelectionCamera();
+                CarSelectionUI.Instance.ShowCarSelection(true);
+            }
+            // Stop checking input in Main Menu
             StopCoroutine(UpdateInput());
             m_InMainMenu = false;
+            
+            // Set Player Info for Connection
+            PlayerInfoController.Instance.SetConnectionInfo(m_IpField.value, m_PortField.value);
+
+            PlayerAudioManager.Instance.PlayClick();
         }
+
+       
 
         private IEnumerator UpdateInput()
         {
@@ -99,10 +139,8 @@ namespace Dots.Racing
 
                     yield return new WaitForSeconds(0.25f);
                 }
-
                 yield return null;
             }
-
             yield return null;
         }
 

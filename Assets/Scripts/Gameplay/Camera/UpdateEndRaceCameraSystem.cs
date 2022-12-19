@@ -5,14 +5,15 @@ using static Unity.Entities.SystemAPI;
 
 namespace Unity.Entities.Racing.Gameplay
 {
+    /// <summary>
+    /// Plays the camera transition ending 
+    /// when the player has finished the race.
+    /// </summary>
     [UpdateAfter(typeof(TransformSystemGroup))]
     [WorldSystemFilter(WorldSystemFilterFlags.ClientSimulation)]
     public partial class UpdateEndRaceCameraSystem : SystemBase
     {
         private Entity m_CurrentTarget;
-
-        //   private const float ChangeCameraTime = 2f;
-        private float m_CurrentTimer;
         private Transform m_TargetTransform;
 
         protected override void OnCreate()
@@ -23,7 +24,6 @@ namespace Unity.Entities.Racing.Gameplay
 
         protected override void OnStartRunning()
         {
-            var race = SystemAPI.GetSingleton<Race>();
             var cinematicTarget = GameObject.FindWithTag("FinalCinematicTarget");
             if (cinematicTarget == null)
             {
@@ -32,20 +32,27 @@ namespace Unity.Entities.Racing.Gameplay
             }
 
             m_TargetTransform = cinematicTarget.transform;
-            m_CurrentTimer = race.WaitToShowLeaderboardTimer;
             base.OnStartRunning();
         }
 
         protected override void OnUpdate()
         {
             var race = SystemAPI.GetSingleton<Race>();
-            if (race.State is not RaceState.Finished)
+            if (!race.IsFinishing)
             {
                 return;
             }
 
-            m_CurrentTimer -= SystemAPI.Time.DeltaTime;
-            if (m_CurrentTimer <= 0)
+            var playerHasFinished = false;
+            foreach (var player in Query<LocalPlayerAspect>())
+            {
+                if (player.Player.HasFinished) 
+                {
+                    playerHasFinished = true;
+                }
+            }
+
+            if (playerHasFinished)
             {
                 // Search the next car in the Rank
                 foreach (var car in Query<PlayerAspect>())
@@ -53,20 +60,11 @@ namespace Unity.Entities.Racing.Gameplay
                     if (car.Rank == race.PlayersFinished + 1)
                     {
                         m_CurrentTarget = car.Self;
+                        break;
                     }
                 }
 
-                foreach (var car in Query<PlayerAspect>().WithAll<LocalUser>())
-                {
-                    if (car.LapProgress.Finished)
-                    {
-                        // Switch to the nearest camera
-                        TimelineManager.Instance.SwitchToNearestCamera();
-                    }
-                }
-
-                // Restart Timer
-                m_CurrentTimer = race.WaitToShowLeaderboardTimer;
+                TimelineManager.Instance.SwitchToNearestCamera();
             }
 
             if (!EntityManager.Exists(m_CurrentTarget))

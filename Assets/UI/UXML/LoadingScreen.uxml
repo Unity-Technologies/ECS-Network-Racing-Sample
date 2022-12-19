@@ -1,7 +1,7 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI/USS/Loading.uss?fileID=7433441132597879392&amp;guid=7ca9ef584799d5046b69cf8e6beb3d7c&amp;type=3#Loading" />
-    <ui:VisualElement name="container" class="container">
-        <ui:Label tabindex="-1" text="LOADING..." display-tooltip-when-elided="true" name="loading-label" class="loading-text" />
-        <ui:ProgressBar name="loading-progress-bar" class="loading-bar" />
+    <ui:VisualElement name="loading-screen-container" class="container" style="display: none;">
+        <ui:Label tabindex="-1" text="LOADING..." name="loading-label" class="loading-text" />
+        <ui:VisualElement name="loading-circle" class="loading-circle" />
     </ui:VisualElement>
 </ui:UXML>

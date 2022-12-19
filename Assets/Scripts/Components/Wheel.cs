@@ -6,13 +6,16 @@ using Unity.Transforms;
 
 namespace Unity.Entities.Racing.Common
 {
+    /// <summary>
+    /// Stores wheel data such as, visuals, rotation, size...
+    /// </summary>
     [GhostComponent(SendDataForChildEntity = true)]
     public struct Wheel : IComponentData
     {
         public CollisionCategories CollisionMask;
         public float Radius;
         public WheelPlacement Placement;
-        public float DriveTorque;     
+        public float DriveTorque;
         public float MaxDriveTorque;
         public Entity VisualMesh;
         public float RotationAngle;
@@ -41,7 +44,9 @@ namespace Unity.Entities.Racing.Common
             DriveForce = (DriveForce + newData.DriveForce) * delta;
         }
     }
-
+    /// <summary>
+    /// Stores data for physics Steering.
+    /// </summary>
     [GhostComponent(SendDataForChildEntity = true)]
     public struct Steering : IComponentData
     {
@@ -77,11 +82,14 @@ namespace Unity.Entities.Racing.Common
         Car = 0x8,
     }
 
+    /// <summary>
+    /// Keeps the driving physics parameters.
+    /// </summary>
     public struct WheelDriveControls : IComponentData
     {
-        [GhostField(Quantization = 1000)] public float DriveAmount;
-        [GhostField(Quantization = 1000)] public float SteerAmount;
-        [GhostField] public bool HandBreak;
+        public float DriveAmount;
+        public float SteerAmount;
+        public bool HandBreak;
 
         public void Reset()
         {
@@ -91,6 +99,9 @@ namespace Unity.Entities.Racing.Common
         }
     }
 
+    /// <summary>
+    /// Stores suspension parameters for physics
+    /// </summary>
     [GhostComponent(SendDataForChildEntity = true)]
     public struct Suspension : IComponentData
     {
@@ -119,15 +130,18 @@ namespace Unity.Entities.Racing.Common
         }
     }
 
+    /// <summary>
+    /// Stores all hit collision data for Wheels.
+    /// </summary>
     [GhostComponent(SendDataForChildEntity = true)]
     public struct WheelHitData : IComponentData
     {
-        [GhostField(Quantization = 10000)] public float3 Origin;
-        [GhostField(Quantization = 10000)] public float3 WheelCenter;
-        [GhostField(Quantization = 10000)] public float3 Position;
-        [GhostField(Quantization = 10000)] public float SurfaceFriction;
-        [GhostField(Quantization = 10000)] public float3 Velocity;
-        [GhostField] public bool HasHit;
+        public float3 Origin;
+        public float3 WheelCenter;
+        public float3 Position;
+        public float SurfaceFriction;
+        public float3 Velocity;
+        public bool HasHit;
 
         public void Reset()
         {
@@ -156,7 +170,7 @@ namespace Unity.Entities.Racing.Common
     {
         public Entity Value;
     }
-    
+
     public readonly partial struct WheelAspect : IAspect
     {
         readonly RefRW<Wheel> m_Wheel;
@@ -170,6 +184,9 @@ namespace Unity.Entities.Racing.Common
         }
     }
 
+    /// <summary>
+    /// Access all components required for debuging wheels.
+    /// </summary>
     public readonly partial struct WheelDebugAspect : IAspect
     {
         public readonly TransformAspect Transform;

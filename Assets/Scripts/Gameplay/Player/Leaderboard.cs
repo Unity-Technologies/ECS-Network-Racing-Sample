@@ -1,11 +1,8 @@
 using System.Collections.Generic;
-using Dots.Racing;
+using System.Diagnostics;
 using Unity.Burst;
-using Unity.Entities;
 using Unity.Collections;
-using Unity.Transforms;
 using Unity.Entities.Racing.Common;
-using Unity.Entities.Racing.Gameplay;
 using static Unity.Entities.SystemAPI;
 
 namespace Unity.Entities.Racing.Gameplay
@@ -16,7 +13,7 @@ namespace Unity.Entities.Racing.Gameplay
     [BurstCompile]
     [WorldSystemFilter(WorldSystemFilterFlags.ServerSimulation)]
     [UpdateAfter(typeof(UpdateTimerSystem))]
-    public partial struct ShowLeaderboard : ISystem
+    public partial struct ClearLeaderboard : ISystem
     {
         public void OnCreate(ref SystemState state)
         {
@@ -34,9 +31,6 @@ namespace Unity.Entities.Racing.Gameplay
             if (race.State is not RaceState.Leaderboard)
                 return;
 
-            var leaderboard = GetSingletonBuffer<LeaderboardData>();
-
-            race.CurrentTimer -= Time.DeltaTime;
             if (race.CurrentTimer < 0)
             {
                 // Change all the players state
@@ -47,12 +41,12 @@ namespace Unity.Entities.Racing.Gameplay
                 };
                 state.Dependency = changePlayerStateJob.ScheduleParallel(state.Dependency);
 
-                race.SetRaceState(RaceState.Lobby);
-
                 // Clear Leaderboard Buffer
+                var leaderboard = GetSingletonBuffer<LeaderboardData>();
                 leaderboard.Clear();
 
-                // Reset Players in Race                
+                // Reset Players in Race
+                race.SetRaceState(RaceState.NotStarted);
                 race.ResetRace();
 
                 var resetWheelsJob = new ResetWheelsJob();
@@ -68,6 +62,8 @@ namespace Unity.Entities.Racing.Gameplay
     /// Fills the Leaderboard Data for each player that finishes the race
     /// </summary>
     [BurstCompile]
+    [UpdateAfter(typeof(RaceFinishSystem))]
+    [UpdateBefore(typeof(WaitToShowLeaderboard))]
     [WorldSystemFilter(WorldSystemFilterFlags.ServerSimulation)]
     public partial struct SetLeaderboard : ISystem
     {
@@ -86,20 +82,21 @@ namespace Unity.Entities.Racing.Gameplay
             var race = GetSingleton<Race>();
 
             // If the race is not finished, skip this
-            if (race.State is not (RaceState.AllFinished or RaceState.Finished))
+            if (!race.HasFinished)
                 return;
 
             var leaderboard = GetSingletonBuffer<LeaderboardData>();
 
-            foreach (var car in Query<PlayerAspect>())
+            foreach (var player in Query<PlayerAspect>())
             {
                 var ping = 0;
-                if (car.LapProgress.Finished && !car.LapProgress.AddedToLeaderboard)
+
+                if (player.HasArrived && !player.LapProgress.AddedToLeaderboard)
                 {
-                    var time = Time.ElapsedTime - race.InitialTime;
+                    var time = player.LapProgress.ArrivalTime - race.InitialTime;
                     foreach (var networkId in Query<NetworkIdAspect>())
                     {
-                        if (car.NetworkId == networkId.Id)
+                        if (player.NetworkId == networkId.Id)
                         {
                             ping = networkId.EstimatedRTT;
                         }
@@ -107,20 +104,20 @@ namespace Unity.Entities.Racing.Gameplay
 
                     leaderboard.Add(new LeaderboardData
                     {
-                        Name = car.Name,
-                        Rank = car.Rank,
+                        Name = player.Name,
+                        Rank = player.Rank,
                         Time = (float) time,
                         Ping = ping
                     });
 
-                    car.AddedToLeaderboard();
+                    player.AddedToLeaderboard();
                 }
                 
-                if (!car.LapProgress.Finished && !car.LapProgress.AddedToLeaderboard && race.State is RaceState.AllFinished)
+                if (player.Player.HasFinished && !player.LapProgress.HasArrived && !player.LapProgress.AddedToLeaderboard)
                 {
                     foreach (var networkId in Query<NetworkIdAspect>())
                     {
-                        if (car.NetworkId == networkId.Id)
+                        if (player.NetworkId == networkId.Id)
                         {
                             ping = networkId.EstimatedRTT;
                         }
@@ -128,13 +125,13 @@ namespace Unity.Entities.Racing.Gameplay
                     
                     leaderboard.Add(new LeaderboardData
                     {
-                        Name = car.Name,
-                        Rank = car.Rank,
+                        Name = player.Name,
+                        Rank = player.Rank,
                         Time = 0,
                         Ping = ping
                     });
 
-                    car.AddedToLeaderboard();
+                    player.AddedToLeaderboard();
                 }
             }
 
@@ -142,7 +139,9 @@ namespace Unity.Entities.Racing.Gameplay
         }
     }
 
-
+    /// <summary>
+    /// Sort the Native Array based on Rank value
+    /// </summary>
     [BurstCompile]
     public struct SortableLeadboardComparer : IComparer<LeaderboardData>
     {
@@ -152,6 +151,10 @@ namespace Unity.Entities.Racing.Gameplay
         }
     }
 
+    /// <summary>
+    /// Shows the leaderboard after the countdown has finished
+    /// Then change race state to show the leaderboard.
+    /// </summary>
     [BurstCompile]
     [UpdateAfter(typeof(UpdateTimerSystem))]
     [WorldSystemFilter(WorldSystemFilterFlags.ServerSimulation)]
@@ -171,11 +174,10 @@ namespace Unity.Entities.Racing.Gameplay
             var race = GetSingletonRW<Race>().ValueRW;
 
             // If the race is not finished, skip this
-            if (race.State is not RaceState.AllFinished)
+            if (!race.HasFinished)
                 return;
 
-            race.CurrentTimer -= Time.DeltaTime;
-            if (race.CurrentTimer < 0)
+            if (race.CurrentTimer <= 0)
             {
                 // Change all the players state from FINISHED to LEADERBOARD
                 var changePlayerStateJob = new ChangePlayerStateJob

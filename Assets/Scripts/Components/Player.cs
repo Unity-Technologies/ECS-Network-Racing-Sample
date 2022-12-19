@@ -1,23 +1,30 @@
 using Unity.Collections;
-using Unity.Entities;
 using Unity.Mathematics;
 using Unity.NetCode;
 using Unity.Physics;
 using Unity.Properties;
 using Unity.Transforms;
-using UnityEngine;
 
 namespace Unity.Entities.Racing.Common
 {
+    /// <summary>
+    /// Added to a player who already has a name
+    /// </summary>
     public struct PlayerNameTag : IComponentData
     {
     }
 
+    /// <summary>
+    /// Stores the player's name
+    /// </summary>
     public struct PlayerName : IComponentData
     {
         [GhostField] public FixedString64Bytes Name;
     }
 
+    /// <summary>
+    /// Access to player's name component
+    /// </summary>
     public readonly partial struct PlayerNameAspect : IAspect
     {
         public readonly Entity Self;
@@ -25,6 +32,9 @@ namespace Unity.Entities.Racing.Common
         public FixedString64Bytes Name => m_PlayerName.ValueRO.Name;
     }
 
+    /// <summary>
+    /// Tags the local player for filtering
+    /// </summary>
     public struct LocalUser : IComponentData
     {
     }
@@ -37,10 +47,14 @@ namespace Unity.Entities.Racing.Common
         StartingRace,
         Countdown,
         Race,
+        CelebrationIdle,
         Finished,
         Leaderboard,
     }
 
+    /// <summary>
+    /// Stores the initial player values
+    /// </summary>
     public struct Reset : IComponentData
     {
         [GhostField] public float3 TargetPosition;
@@ -49,24 +63,48 @@ namespace Unity.Entities.Racing.Common
         [GhostField] public bool Transform;
     }
 
+    /// <summary>
+    /// Access the player's parameters in the race.
+    /// </summary>
     public struct Player : IComponentData
     {
         [GhostField] public PlayerState State;
+        public bool StartingRace => State == PlayerState.StartingRace;
+        public bool InRace => State == PlayerState.Race;
+        public bool HasFinished => State == PlayerState.Finished;
+
+        public bool IsCelebrating => State == PlayerState.CelebrationIdle;
     }
 
+    /// <summary>
+    /// Access the only the local player information
+    /// </summary>
     public readonly partial struct LocalPlayerAspect : IAspect
     {
-        public readonly Entity Self;
-        readonly RefRO<LocalUser> m_localUser;
-        readonly RefRW<Player> m_Player;
-        private readonly RefRO<CarInput> m_CarInput;
+        public readonly RefRW<CarInput> CarInput;
+        private readonly TransformAspect m_Transform;
+        private readonly RefRO<LapProgress> m_LapProgress;
+        private readonly RefRW<Player> m_Player;
+        private readonly RefRW<LocalUser> m_LocalUser;
+        private readonly RefRO<LocalToWorld> m_LocalToWorld;
         public Player Player => m_Player.ValueRO;
+        public LapProgress LapProgress => m_LapProgress.ValueRO;
+        public LocalToWorld LocalToWorld => m_LocalToWorld.ValueRO;
+        
         public bool HasAnyInput()
         {
-            return math.abs(m_CarInput.ValueRO.Horizontal) > 0 ||  math.abs(m_CarInput.ValueRO.Vertical)>0;
+            return math.abs(CarInput.ValueRO.Horizontal) > 0 ||  math.abs(CarInput.ValueRO.Vertical)>0;
+        }
+        public bool HasValidPosition()
+        {
+            var isFinite = math.isfinite(m_Transform.LocalPosition);
+            return isFinite.x && isFinite.y && isFinite.z;
         }
     }
 
+    /// <summary>
+    /// Access all players information
+    /// </summary>
     public readonly partial struct PlayerAspect : IAspect
     {
         public readonly Entity Self;
@@ -85,6 +123,11 @@ namespace Unity.Entities.Racing.Common
         public int Rank => m_Rank.ValueRO.Value;
         public FixedString64Bytes Name => m_Name.ValueRO.Name;
 
+        public bool IsCelebrating => Player.IsCelebrating && LapProgress.CelebrationIdleDelay > 0;
+        public bool FinishedCelebration => Player.IsCelebrating && LapProgress.CelebrationIdleDelay <= 0;
+
+        public bool HasArrived => (Player.IsCelebrating || Player.HasFinished) && LapProgress.HasArrived;
+
         [CreateProperty]
         public LapProgress LapProgress => m_LapProgress.ValueRO;
 
@@ -97,10 +140,9 @@ namespace Unity.Entities.Racing.Common
         {
             m_LapProgress.ValueRW.Reset();
         }
-        
-        public void ExitRace()
+        public void ResetCheckpoint()
         {
-            m_LapProgress.ValueRW.InRace = false;
+            m_LapProgress.ValueRW.CurrentCheckPoint = 0;
         }
 
         public void SetCheckPoint(float3 value)
@@ -108,11 +150,19 @@ namespace Unity.Entities.Racing.Common
             m_LapProgress.ValueRW.LastCheckPointPosition = value;
         }
 
-        public void CountdownTeleportTimer(float deltaTime)
+        public void IncreaseLapCount()
         {
-            m_LapProgress.ValueRW.TimerToMovePlayer -= deltaTime;
+            m_LapProgress.ValueRW.CurrentLap++;
+        }
+        public void RestLapCount()
+        {
+            m_LapProgress.ValueRW.CurrentLap = 0;
         }
 
+        public void ReduceCelebrationTimer(float value) 
+        {
+            m_LapProgress.ValueRW.CelebrationIdleDelay -= value;
+        }
         public Player Player => m_Player.ValueRO;
         public Skin Skin => m_Skin.ValueRO;
         public PhysicsVelocity Velocity => m_Velocity.ValueRO;
@@ -124,7 +174,14 @@ namespace Unity.Entities.Racing.Common
             m_Skin.ValueRW.NeedUpdate = value;
         }
 
-        public void SetFinishedRace()
+        public void SetCelebration(float time, double elapseTime)
+        {
+            m_Player.ValueRW.State = PlayerState.CelebrationIdle;
+            m_LapProgress.ValueRW.CelebrationIdleDelay = time;
+            m_LapProgress.ValueRW.ArrivalTime = elapseTime;
+        }
+
+        public void SetFinishedRace() 
         {
             m_Player.ValueRW.State = PlayerState.Finished;
         }
@@ -154,12 +211,6 @@ namespace Unity.Entities.Racing.Common
         public void SetPlayerWheelsReady()
         {
             m_Reset.ValueRW.Wheels = false;
-        }
-
-        public bool HasValidPosition()
-        {
-            var isFinite = math.isfinite(Transform.LocalPosition);
-            return isFinite.x && isFinite.y && isFinite.z;
         }
     }
 }

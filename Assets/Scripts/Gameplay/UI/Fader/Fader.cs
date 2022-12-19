@@ -2,8 +2,11 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEngine.UIElements.Experimental;
 
-namespace Dots.Racing
+namespace Unity.Entities.Racing.Gameplay
 {
+    /// <summary>
+    /// Fades a black screen to make transitions
+    /// </summary>
     public class Fader : MonoBehaviour
     {
         public static Fader Instance;
@@ -11,10 +14,19 @@ namespace Dots.Racing
 
         private void Awake()
         {
-            if (Instance == null)
-            {
-                Instance = this;
-            }
+            if (Instance != null && Instance != this) 
+            { 
+                Destroy(this); 
+            } 
+            else 
+            { 
+                Instance = this; 
+            } 
+        }
+
+        private void Start()
+        {
+            FadeOutIn(2500);
         }
 
         private void OnEnable()
@@ -23,15 +35,16 @@ namespace Dots.Racing
             m_Fader = root.Q<VisualElement>("fader");
         }
 
-        private void Start()
+        public void FadeIn(float opacity = 1f, int duration = 1000) 
         {
-            FadeOutIn();
+            m_Fader.style.opacity = 0f;
+            m_Fader.experimental.animation.Start(new StyleValues { opacity = opacity }, duration).Ease(Easing.InCubic);
         }
 
-        public void FadeOutIn()
+        public void FadeOutIn(int duration = 1000)
         {
             m_Fader.style.opacity = 1f;
-            m_Fader.experimental.animation.Start(new StyleValues {opacity = 0f}, 1000).Ease(Easing.InCubic);
+            m_Fader.experimental.animation.Start(new StyleValues { opacity = 0f }, duration).Ease(Easing.InCubic);
         }
     }
 }

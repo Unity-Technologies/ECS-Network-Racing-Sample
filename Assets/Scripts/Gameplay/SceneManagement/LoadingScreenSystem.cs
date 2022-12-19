@@ -1,39 +1,35 @@
-using Unity.Entities.Racing.Common;
 using Unity.Burst;
-using Unity.Collections;
-using Unity.Entities;
-using Unity.Mathematics;
-using Unity.NetCode;
 using Unity.Scenes;
-using static Unity.Entities.SystemAPI;
+using Unity.Entities.Racing.Common;
 
-namespace Dots.Racing
+namespace Unity.Entities.Racing.Gameplay
 {
     /// <summary>
     /// Update the GameLoadInfo singleton with loaded sections number
     /// </summary>
-    [WorldSystemFilter(WorldSystemFilterFlags.ClientSimulation | WorldSystemFilterFlags.ServerSimulation)]
     [BurstCompile]
+    [WorldSystemFilter(WorldSystemFilterFlags.ClientSimulation | WorldSystemFilterFlags.ServerSimulation)]
     public partial struct LoadingScreenSystem : ISystem
     {
         private EntityQuery m_SceneSections;
-
+        private Entity m_GameLoadInfoEntity;
+        private bool ShouldShowLoadingScreen;
         public void OnCreate(ref SystemState state)
         {
             // Query only scene sections that are requested to load or loaded
             m_SceneSections = state.GetEntityQuery(
                 ComponentType.ReadOnly<SceneSectionData>(),
                 ComponentType.ReadOnly<RequestSceneLoaded>());
-            state.EntityManager.CreateEntity(typeof(GameLoadInfo));
+            m_GameLoadInfoEntity = state.EntityManager.CreateEntity(typeof(GameLoadInfo));
             state.RequireForUpdate<GameLoadInfo>();
-            state.RequireForUpdate<NetworkIdComponent>();
         }
-
-        public void OnDestroy(ref SystemState state) { }
+        public void OnDestroy(ref SystemState state) 
+        {
+        }
 
         public void OnUpdate(ref SystemState state)
         {
-            var sceneSectionEntities = m_SceneSections.ToEntityArray(Allocator.TempJob);
+            var sceneSectionEntities = m_SceneSections.ToEntityArray(state.WorldUpdateAllocator);
             var loadedSceneSections = 0;
             foreach (var entity in sceneSectionEntities)
             {
@@ -42,31 +38,31 @@ namespace Dots.Racing
                     loadedSceneSections++;
                 }
             }
-
             var gameLoadInfo = new GameLoadInfo
             {
                 TotalSceneSections = sceneSectionEntities.Length,
                 LoadedSceneSections = loadedSceneSections
             };
-
-            // Update Loading Screen
-            if (LoadingScreen.Instance == null)
-                return;
             
-            LoadingScreen.LoadingBar.value = math.lerp(LoadingScreen.LoadingBar.value, gameLoadInfo.GetProgress(),
-                Time.DeltaTime);
-
-            SetSingleton(gameLoadInfo);
+            state.EntityManager.SetComponentData(m_GameLoadInfoEntity, gameLoadInfo);
             sceneSectionEntities.Dispose(state.Dependency);
-
-            // Disable the system when everything is loaded
             if (gameLoadInfo.IsLoaded)
             {
                 // Create EnableGoInGame Entity when all the sub-scenes are loaded
-                state.Enabled = false;
-
+                state.EntityManager.SetComponentEnabled<GameLoadInfo>(m_GameLoadInfoEntity, false);
+            }
+            else if (LoadingScreen.Instance != null)
+            {
+                ShouldShowLoadingScreen = true;
+                LoadingScreen.Instance.ShowLoadingScreen(true);
+            }
+            
+            // Disable the system when everything is loaded
+            if (gameLoadInfo.IsLoaded && LoadingScreen.Instance != null && ShouldShowLoadingScreen)
+            {
                 // Disable Loading Screen
-                LoadingScreen.Instance.gameObject.SetActive(false);
+                ShouldShowLoadingScreen = false;
+                LoadingScreen.Instance.ShowLoadingScreen(false);
             }
         }
     }

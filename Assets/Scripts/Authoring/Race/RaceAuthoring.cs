@@ -7,15 +7,15 @@ namespace Dots.Racing
     public class RaceAuthoring : MonoBehaviour
     {
         [Header("Timers")]
-        public int CountDownTimer = 3;
-        public int FinalTimer = 30;
-        public int PlayersReadyTimer = 10;
-        public int IntroRaceTimer = 7;
-        public int LeaderboardTimer = 5;
-        public int WaitToShowLeaderboardTimer = 3;
+        public float CountDownTimer = 3;
+        public float FinalTimer = 30;
+        public float PlayersReadyTimer = 10;
+        public float IntroRaceTimer = 7;
+        public float LeaderboardTimer = 5;
+        public float CelebrationIdleTimer = 0.1f;
         [Header("Laps")]
         public int LapCount = 2;
-        public RaceState InitialRaceState;
+        public RaceState InitialRaceState = RaceState.NotStarted;
     }
 
     public class RaceBaker : Baker<RaceAuthoring>
@@ -29,8 +29,9 @@ namespace Dots.Racing
                 PlayersReadyTimer = authoring.PlayersReadyTimer,
                 IntroRaceTimer = authoring.IntroRaceTimer,
                 LeaderboardTimer = authoring.LeaderboardTimer,
-                WaitToShowLeaderboardTimer = authoring.WaitToShowLeaderboardTimer,
+                CelebrationIdleTimer = authoring.CelebrationIdleTimer,
                 LapCount = authoring.LapCount,
+                CurrentTimer = authoring.CountDownTimer,
             };
             race.SetRaceState(authoring.InitialRaceState);
             AddComponent(race);

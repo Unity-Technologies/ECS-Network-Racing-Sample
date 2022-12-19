@@ -2,8 +2,12 @@ using System;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace Dots.Racing
+namespace Unity.Entities.Racing.Gameplay
 {
+    /// <summary>
+    /// Shows the number of players, 
+    /// ranking and statistics after finishing the race.
+    /// </summary>
     public class LeaderboardPanel : MonoBehaviour
     {
         public static LeaderboardPanel Instance;
@@ -23,7 +27,7 @@ namespace Dots.Racing
         {
             var root = GetComponent<UIDocument>().rootVisualElement;
             m_LeaderboardContainer = root.Q<VisualElement>("leaderboard-container");
-            m_MainPanel = root.Q<VisualElement>("main-panel");
+            m_MainPanel = root.Q<VisualElement>("leaderboard-main-panel");
         }
 
         public void ShowLeaderboard(bool value)

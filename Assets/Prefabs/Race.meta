@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+<<<<<<<< HEAD:demo/Assets/Prefabs/Race.meta
+guid: c70660ea52cedb84eb527f627b8156a2
+folderAsset: yes
+DefaultImporter:
+========
+guid: a61ebbb3b8bf59943932b7b41c5a95c2
+PrefabImporter:
+>>>>>>>> main:demo/Assets/Prefabs/Cars/CarSkin_1.prefab.meta
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

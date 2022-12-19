@@ -6,6 +6,7 @@ using Hash128 = Unity.Entities.Hash128;
 
 namespace Dots.Racing
 {
+#if UNITY_EDITOR
     public class SceneInfoAuthoring : MonoBehaviour
     {
         public SceneType SceneType;
@@ -17,12 +18,13 @@ namespace Dots.Racing
         public override void Bake(SceneInfoAuthoring authoring)
         {
             var guid = new Hash128(AssetDatabase.AssetPathToGUID(AssetDatabase.GetAssetPath(authoring.SceneAsset)));
-            var SceneInfo = new SceneInfo()
+            var sceneInfo = new SceneInfo()
             {
                 SceneType = authoring.SceneType,
                 SceneGuid = guid
             };
-            AddComponent(SceneInfo);
+            AddComponent(sceneInfo);
         }
     }
+#endif
 }

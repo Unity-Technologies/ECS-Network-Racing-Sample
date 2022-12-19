@@ -1,0 +1,30 @@
+.leaderboard-line-label {
+    -unity-font-definition: url('project://database/Assets/Fonts/Rajdhani/Rajdhani-Regular%20SDF.asset?fileID=11400000&guid=e1c1a190303544844aff0c6657c1461b&type=2#Rajdhani-Regular SDF');
+    font-size: 30px;
+    color: rgb(255, 255, 255);
+    -unity-font: url('project://database/Assets/Fonts/Rajdhani/Rajdhani-Regular.ttf?fileID=12800000&guid=30334fc0d67986141a4e0ca1572997c9&type=3#Rajdhani-Regular');
+}
+
+.leaderboard-title {
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 60px;
+    color: rgb(255, 255, 255);
+    -unity-font: url('project://database/Assets/Fonts/Rajdhani/Rajdhani-Bold.ttf?fileID=12800000&guid=48bcc1cee44fa824c86a6bcf2c0be8a2&type=3#Rajdhani-Bold');
+    -unity-font-definition: url('project://database/Assets/Fonts/Rajdhani/Rajdhani-Bold%20SDF.asset?fileID=11400000&guid=79f9abbad64889d4e83b41e981575539&type=2#Rajdhani-Bold SDF');
+}
+
+.leaderboard-panel {
+    flex-grow: 1;
+    background-color: rgba(0, 0, 0, 0);
+    background-image: url('project://database/Assets/Art/Textures/UI/long-panel-v.png?fileID=21300000&guid=2e46985ec317c184aa7b2bb6d577a5e4&type=3#long-panel-v');
+    width: 55%;
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    align-items: center;
+    -unity-background-image-tint-color: rgba(36, 33, 38, 0.9);
+}

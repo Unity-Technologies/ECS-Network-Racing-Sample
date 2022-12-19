@@ -4,8 +4,12 @@ using Unity.Entities;
 using Unity.NetCode;
 using UnityEngine;
 
-namespace Dots.Racing
+namespace Unity.Entities.Racing.Gameplay
 {
+    /// <summary>
+    /// Collects system information metrics
+    /// and send all the data to the Info panel UI
+    /// </summary>
     [BurstCompile]
     [WorldSystemFilter(WorldSystemFilterFlags.ClientSimulation | WorldSystemFilterFlags.ThinClientSimulation)]
     public partial struct UpdateInfoPanel : ISystem

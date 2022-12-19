@@ -12,19 +12,6 @@ namespace Unity.Entities.Racing.Gameplay
 {
     public class VivoxManager : MonoBehaviour
     {
-        public delegate void ChannelTextMessageChangedHandler(string sender, IChannelTextMessage channelTextMessage);
-
-        public delegate void LoginStatusChangedHandler();
-
-        public delegate void ParticipantStatusChangedHandler(string username, ChannelId channel,
-            IParticipant participant);
-
-        public delegate void ParticipantValueChangedHandler(string username, ChannelId channel, bool value);
-
-        public delegate void ParticipantValueUpdatedHandler(string username, ChannelId channel, double value);
-
-        public delegate void RecoveryStateChangedHandler(ConnectionRecoveryState recoveryState);
-
         public enum ChatCapability
         {
             TextOnly,
@@ -32,17 +19,27 @@ namespace Unity.Entities.Racing.Gameplay
             TextAndAudio
         }
 
+        public event ParticipantValueChangedHandler OnSpeechDetectedEvent;
+        public event ParticipantValueUpdatedHandler OnAudioEnergyChangedEvent;
+        public event ChannelTextMessageChangedHandler OnTextMessageLogReceivedEvent;
+        public event LoginStatusChangedHandler OnUserLoggedInEvent;
+        public event LoginStatusChangedHandler OnUserLoggedOutEvent;
+        public event ParticipantStatusChangedHandler OnParticipantAddedEvent;
+        public event ParticipantStatusChangedHandler OnParticipantRemovedEvent;
+        public event RecoveryStateChangedHandler OnRecoveryStateChangedEvent;
+
+        public delegate void ChannelTextMessageChangedHandler(string sender, IChannelTextMessage channelTextMessage);
+        public delegate void LoginStatusChangedHandler();
+        public delegate void ParticipantStatusChangedHandler(string username, ChannelId channel, IParticipant participant);
+        public delegate void ParticipantValueChangedHandler(string username, ChannelId channel, bool value);
+        public delegate void ParticipantValueUpdatedHandler(string username, ChannelId channel, double value);
+        public delegate void RecoveryStateChangedHandler(ConnectionRecoveryState recoveryState);
+
         public ILoginSession LoginSession;
-
         private Account m_Account;
-
-
         public static VivoxManager Instance { get; private set; }
-        public string Channel { get; } = "MultipleUserChannel";
-
+        public string Channel => "MultipleUserChannel";
         public IReadOnlyDictionary<ChannelId, IChannelSession> ActiveChannels => LoginSession?.ChannelSessions;
-
-
         private Client _client => VivoxService.Instance.Client;
         public LoginState LoginState { get; private set; }
         public bool Muted => _client.AudioInputDevices.Muted;
@@ -52,8 +49,9 @@ namespace Unity.Entities.Racing.Gameplay
         {
             if (Instance != this && Instance != null)
             {
-                Debug.LogWarning(
-                    "Multiple VivoxVoiceManager detected in the scene. Only one VivoxVoiceManager can exist at a time. The duplicate VivoxVoiceManager will be destroyed.");
+                Debug.LogWarning("Multiple VivoxVoiceManager detected in the scene. " +
+                                 "Only one VivoxVoiceManager can exist at a time. " +
+                                 "The duplicate VivoxVoiceManager will be destroyed.");
                 Destroy(this);
                 return;
             }
@@ -67,18 +65,20 @@ namespace Unity.Entities.Racing.Gameplay
             // if the Unity project is not linked to a Unity services project. 
             if (string.IsNullOrEmpty(Application.cloudProjectId))
             {
-                Debug.LogWarning(
-                    "To use Unity's dashboard services, you need to link your Unity project to a project ID. To do this, go to Project Settings to select your organization, select your project and then link a project ID. You also need to make sure your organization has access to the required products. Visit https://dashboard.unity3d.com to sign up.");
+                Debug.LogWarning("To use Unity's dashboard services, " +
+                                "you need to link your Unity project to a project ID. " +
+                                "To do this, go to Project Settings to select your organization, " +
+                                "select your project and then link a project ID. " +
+                                "You also need to make sure your organization has access to the required products. " +
+                                "Visit https://dashboard.unity3d.com to sign up.");
                 return;
             }
 
             var options = new InitializationOptions();
             await UnityServices.InitializeAsync(options);
-
 #if AUTH_PACKAGE_PRESENT
         await AuthenticationService.Instance.SignInAnonymouslyAsync();
 #endif
-
             if (UnityServices.State == ServicesInitializationState.Initialized)
             {
                 IsInitiliazed = true;
@@ -96,19 +96,9 @@ namespace Unity.Entities.Racing.Gameplay
 
             if (IsInitiliazed && _client != null)
             {
-                VivoxLog("Uninitializing client.");
                 _client.Uninitialize();
             }
         }
-
-        public event ParticipantValueChangedHandler OnSpeechDetectedEvent;
-        public event ParticipantValueUpdatedHandler OnAudioEnergyChangedEvent;
-        public event ChannelTextMessageChangedHandler OnTextMessageLogReceivedEvent;
-        public event LoginStatusChangedHandler OnUserLoggedInEvent;
-        public event LoginStatusChangedHandler OnUserLoggedOutEvent;
-        public event ParticipantStatusChangedHandler OnParticipantAddedEvent;
-        public event ParticipantStatusChangedHandler OnParticipantRemovedEvent;
-        public event RecoveryStateChangedHandler OnRecoveryStateChangedEvent;
 
         public void SetMute(bool value)
         {
@@ -133,9 +123,8 @@ namespace Unity.Entities.Racing.Gameplay
                 }
                 catch (Exception e)
                 {
-                    // Handle error 
-                    VivoxLogError(nameof(e));
                     // Unbind if we failed to login.
+                    Debug.LogException(e);
                     LoginSession.PropertyChanged -= OnLoginSessionPropertyChanged;
                 }
             });
@@ -156,28 +145,23 @@ namespace Unity.Entities.Racing.Gameplay
 
             var loginSession = (ILoginSession)sender;
             LoginState = loginSession.State;
-            VivoxLog("Detecting login session change");
             switch (LoginState)
             {
                 case LoginState.LoggingIn:
                 {
-                    VivoxLog("Logging in");
                     break;
                 }
                 case LoginState.LoggedIn:
                 {
-                    VivoxLog("Connected to voice server and logged in.");
                     OnUserLoggedInEvent?.Invoke();
                     break;
                 }
                 case LoginState.LoggingOut:
                 {
-                    VivoxLog("Logging out");
                     break;
                 }
                 case LoginState.LoggedOut:
                 {
-                    VivoxLog("Logged out");
                     OnUserLoggedOutEvent?.Invoke();
                     LoginSession.PropertyChanged -= OnLoginSessionPropertyChanged;
                     break;
@@ -217,14 +201,9 @@ namespace Unity.Entities.Racing.Gameplay
                         }
                         catch (Exception e)
                         {
-                            // Handle error 
-                            VivoxLogError($"Could not connect to voice channel: {e.Message}");
+                            Debug.LogException(e);
                         }
                     });
-            }
-            else
-            {
-                VivoxLogError("Cannot join a channel when not logged in.");
             }
         }
 
@@ -269,7 +248,6 @@ namespace Unity.Entities.Racing.Gameplay
 
             if (participant.IsSelf)
             {
-                VivoxLog($"Unsubscribing from: {channelSession.Key.Name}");
                 // Now that we are disconnected, unsubscribe.
                 channelSession.PropertyChanged -= OnChannelPropertyChanged;
                 channelSession.Participants.AfterKeyAdded -= OnParticipantAdded;
@@ -313,7 +291,6 @@ namespace Unity.Entities.Racing.Gameplay
             {
                 case "SpeechDetected":
                 {
-                    VivoxLog($"OnSpeechDetectedEvent: {username} in {channel}.");
                     OnSpeechDetectedEvent?.Invoke(username, channel, valueEventArg.Value.SpeechDetected);
                     break;
                 }
@@ -328,17 +305,12 @@ namespace Unity.Entities.Racing.Gameplay
         private void OnChannelPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
         {
             ValidateArgs(new[] { sender, propertyChangedEventArgs });
-
-            //if (_client == null)
-            //    throw new InvalidClient("Invalid client.");
             var channelSession = (IChannelSession)sender;
 
             // IF the channel has removed audio, make sure all the VAD indicators aren't showing speaking.
             if (propertyChangedEventArgs.PropertyName == "AudioState" &&
                 channelSession.AudioState == ConnectionState.Disconnected)
             {
-                VivoxLog($"Audio disconnected from: {channelSession.Key.Name}");
-
                 foreach (var participant in channelSession.Participants)
                 {
                     OnSpeechDetectedEvent?.Invoke(participant.Account.Name, channelSession.Channel, false);
@@ -351,7 +323,6 @@ namespace Unity.Entities.Racing.Gameplay
                 channelSession.AudioState == ConnectionState.Disconnected &&
                 channelSession.TextState == ConnectionState.Disconnected)
             {
-                VivoxLog($"Unsubscribing from: {channelSession.Key.Name}");
                 // Now that we are disconnected, unsubscribe.
                 channelSession.PropertyChanged -= OnChannelPropertyChanged;
                 channelSession.Participants.AfterKeyAdded -= OnParticipantAdded;
@@ -368,20 +339,8 @@ namespace Unity.Entities.Racing.Gameplay
         private void OnMessageLogRecieved(object sender, QueueItemAddedEventArgs<IChannelTextMessage> textMessage)
         {
             ValidateArgs(new[] { sender, textMessage });
-
             var channelTextMessage = textMessage.Value;
-            VivoxLog(channelTextMessage.Message);
             OnTextMessageLogReceivedEvent?.Invoke(channelTextMessage.Sender.DisplayName, channelTextMessage);
-        }
-
-        private void VivoxLog(string msg)
-        {
-            //Debug.Log("<color=green>VivoxVoice: </color>: " + msg);
-        }
-
-        private void VivoxLogError(string msg)
-        {
-            //Debug.LogError("<color=green>VivoxVoice: </color>: " + msg);
         }
     }
 }

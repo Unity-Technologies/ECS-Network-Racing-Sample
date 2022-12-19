@@ -27,7 +27,6 @@ namespace Dots.Racing
         public float DriveTorque = 50;
         public float MaxDriveTorque = 70;
         public AnimationCurve  DriveTorqueCurve = new();
-        public float BreakTorque = 50f;
         public CollisionCategories BodyCollisionMask;
         
         [Header("Wheels")] 
@@ -120,7 +119,6 @@ namespace Dots.Racing
                     SpringStiffness = vehicleAuthoring.SpringStiffness,
                     DamperStiffness = vehicleAuthoring.DamperStiffness,
                     SpringLength = vehicleAuthoring.RestLength
-
                 };                  
                 //Setup steering 
                 var wheelsBase = GetWheelsBaseDistance(vehicleAuthoring.Wheels);

@@ -6,16 +6,25 @@ using Unity.Transforms;
 
 namespace Unity.Entities.Racing.Common
 {
+    /// <summary>
+    /// Points to the Entities with AudioSource attached
+    /// </summary>
     public struct AudioSourceTag : IComponentData
     {
     }
+
+    /// <summary>
+    /// Stores Volume Data
+    /// </summary>
     public struct VolumeData : IComponentData
     {
         public float Min;
         public float Max;
     }
 
-
+    /// <summary>
+    /// References the components to Calculate volume according to the velocity.
+    /// </summary>
     public readonly partial struct AudioAspect : IAspect
     {
         public readonly Entity Self;

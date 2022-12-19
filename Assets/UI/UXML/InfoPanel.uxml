@@ -5,12 +5,12 @@
             <ui:VisualElement picking-mode="Ignore" class="properties-container">
                 <ui:GroupBox name="players-item" picking-mode="Ignore" class="item">
                     <ui:VisualElement name="icon" class="icon" />
-                    <ui:Label text="Players:" name="player" class="label-info" />
+                    <ui:Label text="PLAYERS:" name="player" class="label-info" />
                     <ui:Label tabindex="-1" name="players-value" class="info-value-label" />
                 </ui:GroupBox>
                 <ui:GroupBox name="ping-item" picking-mode="Ignore" class="item">
                     <ui:VisualElement name="icon" class="icon" style="background-image: url(&apos;project://database/Assets/Art/Textures/UI/Icons/wifi.png?fileID=21300000&amp;guid=d6d4111641774e44698ec6f14ae66457&amp;type=3#wifi&apos;);" />
-                    <ui:Label text="Ping:" name="ping" class="label-info" />
+                    <ui:Label text="PING:" name="ping" class="label-info" />
                     <ui:Label name="ping-value" class="info-value-label" />
                 </ui:GroupBox>
                 <ui:GroupBox name="fps-item" picking-mode="Ignore" class="item">
@@ -20,17 +20,17 @@
                 </ui:GroupBox>
                 <ui:GroupBox name="entities-item" picking-mode="Ignore" class="item">
                     <ui:VisualElement name="icon" class="icon" style="background-image: url(&apos;project://database/Assets/Art/Textures/UI/Icons/token.png?fileID=21300000&amp;guid=2660cf07a1ad6924e9101aca0253845c&amp;type=3#token&apos;);" />
-                    <ui:Label text="Entities:" name="entities" class="label-info" />
+                    <ui:Label text="ENTITIES:" name="entities" class="label-info" />
                     <ui:Label name="entities-value" class="info-value-label" />
                 </ui:GroupBox>
                 <ui:GroupBox name="systems-item" picking-mode="Ignore" class="item">
                     <ui:VisualElement name="icon" class="icon" style="background-image: url(&apos;project://database/Assets/Art/Textures/UI/Icons/monitor.png?fileID=21300000&amp;guid=be9c8033faeb5a14a91e7101124e184e&amp;type=3#monitor&apos;);" />
-                    <ui:Label text="Systems:" name="systems" class="label-info" />
+                    <ui:Label text="SYSTEMS:" name="systems" class="label-info" />
                     <ui:Label name="systems-value" class="info-value-label" />
                 </ui:GroupBox>
             </ui:VisualElement>
         </ui:VisualElement>
-        <ui:Button tabindex="-1" name="back-button" class="back-button">
+        <ui:Button tabindex="-1" name="info-panel-back-button" class="back-button">
             <ui:VisualElement name="back-icon" class="back-icon" />
         </ui:Button>
     </ui:VisualElement>

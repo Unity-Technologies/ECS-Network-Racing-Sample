@@ -1,0 +1,81 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &4930164617200490661
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2774599793062425077, guid: 2344a052332de76469e8726a0fea99a5,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 2774599793062425077, guid: 2344a052332de76469e8726a0fea99a5,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.63
+      objectReference: {fileID: 0}
+    - target: {fileID: 2774599793062425077, guid: 2344a052332de76469e8726a0fea99a5,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.21
+      objectReference: {fileID: 0}
+    - target: {fileID: 2774599793062425077, guid: 2344a052332de76469e8726a0fea99a5,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2.771
+      objectReference: {fileID: 0}
+    - target: {fileID: 2774599793062425077, guid: 2344a052332de76469e8726a0fea99a5,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9004086
+      objectReference: {fileID: 0}
+    - target: {fileID: 2774599793062425077, guid: 2344a052332de76469e8726a0fea99a5,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2774599793062425077, guid: 2344a052332de76469e8726a0fea99a5,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.000000044703484
+      objectReference: {fileID: 0}
+    - target: {fileID: 2774599793062425077, guid: 2344a052332de76469e8726a0fea99a5,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.43504536
+      objectReference: {fileID: 0}
+    - target: {fileID: 2774599793062425077, guid: 2344a052332de76469e8726a0fea99a5,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2774599793062425077, guid: 2344a052332de76469e8726a0fea99a5,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2774599793062425077, guid: 2344a052332de76469e8726a0fea99a5,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 51.576
+      objectReference: {fileID: 0}
+    - target: {fileID: 3299602935023659855, guid: 2344a052332de76469e8726a0fea99a5,
+        type: 3}
+      propertyPath: m_Name
+      value: Antenna_smallSnow
+      objectReference: {fileID: 0}
+    - target: {fileID: 3948098947356314266, guid: 2344a052332de76469e8726a0fea99a5,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: b018b6cc1d74f444ba9e971bc9790cf1, type: 2}
+    m_RemovedComponents:
+    - {fileID: 2408607174276195032, guid: 2344a052332de76469e8726a0fea99a5, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 2344a052332de76469e8726a0fea99a5, type: 3}

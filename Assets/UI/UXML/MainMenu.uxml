@@ -1,16 +1,16 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
     <Style src="project://database/Assets/UI/USS/Common.uss?fileID=7433441132597879392&amp;guid=dafc8585775e7e744a8d023b945260ae&amp;type=3#Common" />
     <Style src="project://database/Assets/UI/USS/MainMenu.uss?fileID=7433441132597879392&amp;guid=7f50fb9fc4040184d9b5b5eb3b8b7d58&amp;type=3#MainMenu" />
-    <ui:VisualElement name="container" class="main-menu-container">
+    <ui:VisualElement name="main-menu-container" class="main-menu-container">
         <ui:VisualElement name="logo" tabindex="-1" class="main-menu-logo" />
         <ui:VisualElement name="login-panel" class="main-menu-login-panel">
             <ui:VisualElement name="login-form" class="main-menu-login-form">
                 <ui:TextField label="NAME" name="name-field" max-length="12" mask-character=" " value="My Name" class="main-menu-text-field" />
                 <ui:VisualElement name="ip-port-group" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-direction: row;">
-                    <ui:TextField label="IP" name="ip-field" max-length="12" mask-character=" " value="127.0.0.1" class="main-menu-text-field" style="flex-grow: 1;" />
+                    <ui:TextField label="IP" name="ip-field" max-length="16" mask-character=" " value="127.0.0.1" class="main-menu-text-field" style="flex-grow: 1;" />
                     <ui:TextField label="Port" name="port-field" max-length="12" mask-character=" " value="7979" class="main-menu-text-field" />
                 </ui:VisualElement>
-                <ui:Button tabindex="1" text="Join" display-tooltip-when-elided="true" name="start-button" class="button" />
+                <ui:Button tabindex="1" text="JOIN" name="main-menu-start-button" class="button" />
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>

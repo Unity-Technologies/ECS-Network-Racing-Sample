@@ -1,0 +1,11 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/USS/Common.uss?fileID=7433441132597879392&amp;guid=dafc8585775e7e744a8d023b945260ae&amp;type=3#Common" />
+    <Style src="project://database/Assets/UI/USS/Leaderboard.uss?fileID=7433441132597879392&amp;guid=39c195c6d46fff148b14e0f394e04f69&amp;type=3#Leaderboard" />
+    <ui:VisualElement picking-mode="Ignore" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
+        <ui:VisualElement name="container" style="background-color: rgba(0, 0, 0, 0); width: 800px; height: 500px; margin-left: auto; margin-right: auto; margin-top: auto; margin-bottom: auto; padding-left: initial; padding-right: initial; padding-top: initial; padding-bottom: initial; max-height: 500px; display: none; background-image: url(&apos;project://database/Assets/Art/Textures/UI/square.png?fileID=21300000&amp;guid=ffc06daf7e82046489f2a8a8ceec4099&amp;type=3#square&apos;); -unity-background-image-tint-color: rgb(36, 33, 38); align-items: center; justify-content: center;">
+            <ui:Label tabindex="-1" text="Label" display-tooltip-when-elided="true" name="title" class="leaderboard-title" style="-unity-text-align: middle-center;" />
+            <ui:Label tabindex="-1" text="Label" display-tooltip-when-elided="true" name="message" class="leaderboard-line-label" style="-unity-text-align: middle-center; white-space: normal; width: 70%;" />
+            <ui:Button text="Button" display-tooltip-when-elided="true" name="button" class="button" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
