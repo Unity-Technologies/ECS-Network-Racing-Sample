@@ -1,38 +1,27 @@
-# DOTS Cars Demo (Name TBD)
+# ECS Network Racing
 
-* Uses dots repo as a Git Submodule. Packages manifest points to the submodule.
-* Requires Unity 2022.2, whatever works with the latest dots master.
-* Requires to be connected to Unity VPN.
-* Current tested editor version is Unity: Unity.DOTS: 2022.2.0a12-dots (Hg: 5675e87fdb3e Git: 3f7fc94bd590f)
+* Requires Unity 2022.2.0b8 or later.
 
-# Unity Downlaoder
-https://beta.unity3d.com/download/5675e87fdb3e/download.htm
+Current tested version 2022.2.1f1
+https://unity.com/releases/editor/whats-new/2022.2.1#release-notes
 
 # Unity Hub URL
-unityhub://2022.2.0a12-dots/5675e87fdb3e
-
-# Cloning
-The DOTS Cars repo uses git submodules (https://git-scm.com/book/en/v2/Git-Tools-Submodules).
-
-Fresh clone:
-```
-git clone git@github.cds.internal.unity3d.com:unity/dots-demo.git --recurse-submodules
-```
-
-If you have a clone before submodules were added or you didn't use `--recurse-submodules`:
-```
-git submodule init
-git submodule update
-```
+unityhub://2022.2.1f1/4fead5835099
 
 # Running the demo
-* Connect to Unity VPN
+
+* Open Multiplayer > Window: PlayMode Tools
+* Select PlayMode Type -> Client Server
 * Open scene "Project/Assets/Scenes/MainMenu.unity"
 * Choose your car for the race.
-* Choose Local if you want to create Client and Server. 
-* When you are in the lobby you can wait for other players or just press the Start button to start the race.
+* When you are in the lobby you can wait for other players or just press the Left Menu button and then Start button to start the race.
 
 # Known Issues
+
+* When using the Editor as Client Only, and running the game from the MainMenu scene, the Auto Connect Address field should be left empty  to avoid a conflict with the MainMenu connect address.
+* Build times are taking much longer than expected. Since all the Shader Variants are being compiled, and not only the ones being used in the project.
+* For the Dedicated Server builds, it is taking shaders and models that are only used in the client, this increases the size of the build. We are working on optimizing the tools to create more optimal Dedicated Server builds.
+* Mobile IL2CPP builds only works with Managed Stripping Level set to Minimal.
 
 
 # Controls
@@ -42,10 +31,6 @@ Keyboard:
   Down Arrow / S: Brake / Reverse
   Left and Right Arrows / A and D: Car Steering
 
-Mobile:
-
-  WIP
-  
 # Features
 
 * Netcode for Entities
@@ -57,7 +42,3 @@ Mobile:
 * Jobs
 * Burst
 * Vivox
-
-# Assets
-
-* IMPORTANT: We are currently using temporal assets to have an idea of the feeling of the game. We don't have permissions or licences to publish the assets in the project.
