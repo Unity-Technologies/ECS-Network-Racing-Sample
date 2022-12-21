@@ -35,7 +35,7 @@ namespace Unity.Entities.Racing.Gameplay
             RotateLoading();
         }
 
-        public void ShowLoadingScreen(bool value, string label = "Loading...")
+        public void ShowLoadingScreen(bool value, string label = "LOADING...")
         {
             m_TextLabel.text = label;
             m_Container.style.display = value ? DisplayStyle.Flex : DisplayStyle.None;

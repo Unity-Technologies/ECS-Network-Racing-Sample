@@ -122,6 +122,7 @@ namespace Unity.Entities.Racing.Gameplay
         {
             if (wheelDriveControls.DriveAmount == 0)
             {
+                wheel.DriveForce = 0;
                 return;
             }
             var wheelTransform = LocalTransformLookup[entity];

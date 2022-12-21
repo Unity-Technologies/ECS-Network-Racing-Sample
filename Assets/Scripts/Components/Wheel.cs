@@ -89,13 +89,11 @@ namespace Unity.Entities.Racing.Common
     {
         public float DriveAmount;
         public float SteerAmount;
-        public bool HandBreak;
 
         public void Reset()
         {
             DriveAmount = 0;
             SteerAmount = 0;
-            HandBreak = false;
         }
     }
 

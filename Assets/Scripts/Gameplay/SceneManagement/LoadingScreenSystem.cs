@@ -13,7 +13,8 @@ namespace Unity.Entities.Racing.Gameplay
     {
         private EntityQuery m_SceneSections;
         private Entity m_GameLoadInfoEntity;
-        private bool ShouldShowLoadingScreen;
+        private bool m_ShouldShowLoadingScreen;
+
         public void OnCreate(ref SystemState state)
         {
             // Query only scene sections that are requested to load or loaded
@@ -22,8 +23,10 @@ namespace Unity.Entities.Racing.Gameplay
                 ComponentType.ReadOnly<RequestSceneLoaded>());
             m_GameLoadInfoEntity = state.EntityManager.CreateEntity(typeof(GameLoadInfo));
             state.RequireForUpdate<GameLoadInfo>();
+            m_ShouldShowLoadingScreen = true;
         }
-        public void OnDestroy(ref SystemState state) 
+
+        public void OnDestroy(ref SystemState state)
         {
         }
 
@@ -38,30 +41,31 @@ namespace Unity.Entities.Racing.Gameplay
                     loadedSceneSections++;
                 }
             }
+
             var gameLoadInfo = new GameLoadInfo
             {
                 TotalSceneSections = sceneSectionEntities.Length,
                 LoadedSceneSections = loadedSceneSections
             };
-            
+
             state.EntityManager.SetComponentData(m_GameLoadInfoEntity, gameLoadInfo);
             sceneSectionEntities.Dispose(state.Dependency);
+            
             if (gameLoadInfo.IsLoaded)
             {
                 // Create EnableGoInGame Entity when all the sub-scenes are loaded
                 state.EntityManager.SetComponentEnabled<GameLoadInfo>(m_GameLoadInfoEntity, false);
             }
-            else if (LoadingScreen.Instance != null)
+            else if (LoadingScreen.Instance != null && m_ShouldShowLoadingScreen)
             {
-                ShouldShowLoadingScreen = true;
                 LoadingScreen.Instance.ShowLoadingScreen(true);
             }
-            
+
             // Disable the system when everything is loaded
-            if (gameLoadInfo.IsLoaded && LoadingScreen.Instance != null && ShouldShowLoadingScreen)
+            if (gameLoadInfo.IsLoaded && LoadingScreen.Instance != null && m_ShouldShowLoadingScreen)
             {
                 // Disable Loading Screen
-                ShouldShowLoadingScreen = false;
+                m_ShouldShowLoadingScreen = false;
                 LoadingScreen.Instance.ShowLoadingScreen(false);
             }
         }

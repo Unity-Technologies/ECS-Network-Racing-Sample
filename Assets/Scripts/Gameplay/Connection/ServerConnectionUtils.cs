@@ -1,10 +1,8 @@
 using System.Linq;
-using System;
 using Unity.Entities.Racing.Common;
 using Unity.NetCode;
 using Unity.Networking.Transport;
 using UnityEngine;
-using UnityEngine.UIElements;
 using System.Net;
 
 namespace Unity.Entities.Racing.Gameplay

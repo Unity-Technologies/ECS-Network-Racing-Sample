@@ -95,6 +95,7 @@ namespace Unity.Entities.Racing.Common
         {
             return math.abs(CarInput.ValueRO.Horizontal) > 0 ||  math.abs(CarInput.ValueRO.Vertical)>0;
         }
+        
         public bool HasValidPosition()
         {
             var isFinite = math.isfinite(m_Transform.LocalPosition);

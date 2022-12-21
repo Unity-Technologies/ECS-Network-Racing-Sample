@@ -1,4 +1,5 @@
 ﻿using Unity.NetCode;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace Unity.Entities.Racing.Gameplay
@@ -47,22 +48,21 @@ namespace Unity.Entities.Racing.Gameplay
 #endif
            
 #if UNITY_EDITOR || !FRONTEND_PLAYER_BUILD
-            if (!isFrontend)
-            {
-                // This will enable auto connect. We only enable auto connect if we are not going through frontend.
-                // The frontend will parse and validate the address before connecting manually.
-                // Using this auto connect feature will deal with the client only connect address from Multiplayer PlayMode Tools
-                AutoConnectPort = 7979;
-
-                // Create the default client and server worlds, depending on build type in a player or the Multiplayer PlayMode Tools in the editor
-                CreateDefaultClientServerWorlds();
-            }
-            else
+            if (isFrontend)
             {
                 // Disable the auto-connect in the frontend. The reset is necessary in the Editor since we can start the demos directly and
                 // (the AutoConnectPort will lose its default value)
                 AutoConnectPort = 0;
                 CreateLocalWorld(defaultWorldName);
+            }
+            else
+            {
+                // This will enable auto connect. We only enable auto connect if we are not going through frontend.
+                // The frontend will parse and validate the address before connecting manually.
+                // Using this auto connect feature will deal with the client only connect address from Multiplayer PlayMode Tools
+                AutoConnectPort = 7979;
+                // Create the default client and server worlds, depending on build type in a player or the Multiplayer PlayMode Tools in the editor
+                CreateDefaultClientServerWorlds();
             }
 #else
             CreateLocalWorld(defaultWorldName);

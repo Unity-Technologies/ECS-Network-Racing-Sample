@@ -12,30 +12,9 @@
     -unity-font: url('project://database/Assets/Fonts/Rajdhani/Rajdhani-Bold.ttf?fileID=12800000&guid=48bcc1cee44fa824c86a6bcf2c0be8a2&type=3#Rajdhani-Bold');
 }
 
-.loading-bar {
-    width: 700px;
-}
-
-.unity-progress-bar__background {
-    background-image: url('project://database/Assets/Art/Textures/UI/scroll-box.png?fileID=21300000&guid=a57f7416a70a6874bbb51fb4bb19af0d&type=3#scroll-box');
-    -unity-background-scale-mode: stretch-to-fill;
-    border-left-width: 0;
-    border-right-width: 0;
-    border-top-width: 0;
-    border-bottom-width: 0;
-    background-color: rgba(0, 0, 0, 0);
-}
-
-.unity-progress-bar__progress {
-    background-image: url('project://database/Assets/Art/Textures/UI/scroll-box.png?fileID=21300000&guid=a57f7416a70a6874bbb51fb4bb19af0d&type=3#scroll-box');
-    -unity-background-scale-mode: stretch-to-fill;
-    -unity-background-image-tint-color: rgb(120, 114, 125);
-    background-color: rgba(0, 0, 0, 0);
-}
-
 .loading-circle {
     background-color: rgba(0, 0, 0, 0);
     background-image: url('project://database/Assets/Art/Textures/UI/loading-circle.png?fileID=21300000&guid=c621fadaf84534a4197c837f12479d4c&type=3#loading-circle');
-    width: 150px;
-    height: 150px;
+    width: 120px;
+    height: 120px;
 }

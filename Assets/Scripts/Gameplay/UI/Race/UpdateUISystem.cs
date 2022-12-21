@@ -1,7 +1,5 @@
 ﻿using Unity.Entities.Racing.Common;
 using Unity.Burst;
-using Unity.Entities;
-using Unity.Entities.Racing.Gameplay;
 using static Unity.Entities.SystemAPI;
 
 namespace Unity.Entities.Racing.Gameplay
@@ -70,6 +68,7 @@ namespace Unity.Entities.Racing.Gameplay
             LeaderboardPanel.Instance.ClearLeaderboard();
             LeaderboardPanel.Instance.ShowLeaderboard(false);
             HUDController.Instance.Finish(false);
+            UIMobileInput.Instance?.Show();
         }
 
         private void ShowReadyToRaceUI()
@@ -79,12 +78,14 @@ namespace Unity.Entities.Racing.Gameplay
                 "THE RACE IS ABOUT TO START, SOON YOU WILL BE MOVED TO THE STARTING POINT");
             HUDController.Instance.ShowLeftMenu(false, false);
             HUDController.Instance.ShowMenuButton(false);
+            UIMobileInput.Instance?.Hide();
         }
 
         private void ShowInRaceUI()
         {
             HUDController.Instance.ShowMenuButton(false);
             HUDController.Instance.ShowRaceInfoPanel(true);
+            UIMobileInput.Instance?.Show();
         }
 
         private void ShowRaceIntroUI()
@@ -92,6 +93,7 @@ namespace Unity.Entities.Racing.Gameplay
             HUDController.Instance.ShowBottomMessage(false);
             HUDController.Instance.ShowCancelButton(false);
             HUDController.Instance.ShowMenuButton(false);
+            UIMobileInput.Instance?.Hide();
         }
 
         private void ShowCountdownUI()
@@ -105,6 +107,7 @@ namespace Unity.Entities.Racing.Gameplay
             TimelineManager.Instance.PlayLeaderboardTimeline();
             HUDController.Instance.Finish(false);
             HUDController.Instance.ShowBottomMessage(false);
+            UIMobileInput.Instance?.Hide();
         }
     }
 

@@ -1,8 +1,6 @@
 using System;
 using System.Collections;
-using System.Linq;
 using Gameplay.UI;
-using Unity.Entities.Racing.Common;
 using Unity.Entities.Racing.Gameplay;
 using Unity.Mathematics;
 using Unity.NetCode;
@@ -13,8 +11,6 @@ namespace Dots.Racing
 {
     public class MainMenu : MonoBehaviour
     {
-        public static MainMenu Instance;
-
         private TextField m_NameField;
         private TextField m_IpField;
         private TextField m_PortField;
@@ -25,24 +21,20 @@ namespace Dots.Racing
         private int m_FocusRingIndex;
         private bool m_InMainMenu = true;
 
-        private void Awake()
-        {
-            if (Instance == null)
-            {
-                Instance = this;
-            }
-        }
-
         private void OnEnable()
         {
             var root = GetComponent<UIDocument>().rootVisualElement;
             m_MainMenuPanel = root.Q<VisualElement>("main-menu-container");
             m_NameField = root.Q<TextField>("name-field");
+#if (UNITY_IPHONE || UNITY_ANDROID) && !UNITY_EDITOR
+            m_NameField.value = "Player";
+#else
             m_NameField.value = Environment.UserName.ToUpper();
+#endif
 
             m_IpField = root.Q<TextField>("ip-field");
             m_PortField = root.Q<TextField>("port-field");
-            
+
             m_JoinButton = root.Q<Button>("main-menu-start-button");
             m_JoinButton.clicked += OnJoinButtonClicked;
 
@@ -63,12 +55,12 @@ namespace Dots.Racing
                 m_JoinButton.text = "START CLIENT & SERVER";
                 m_IpField.style.display = DisplayStyle.None;
                 m_PortField.style.display = DisplayStyle.None;
-                
+
                 // Set the focus ring manually
                 m_FocusRing = new VisualElement[] {m_NameField, m_JoinButton};
             }
-            
-            
+
+
             // Set focus to the name text field
             m_NameField.Focus();
             StartCoroutine(UpdateInput());
@@ -90,27 +82,26 @@ namespace Dots.Racing
 
             // Assign Player Name
             PlayerInfoController.Instance.LocalPlayerName = m_NameField.value;
-            
+
             // Disable Main Menu
             m_MainMenuPanel.style.display = DisplayStyle.None;
-            
+
             // Switch camera
             if (MainMenuCameraSwitcher.Instance != null)
             {
                 MainMenuCameraSwitcher.Instance.ShowCarSelectionCamera();
                 CarSelectionUI.Instance.ShowCarSelection(true);
             }
+
             // Stop checking input in Main Menu
             StopCoroutine(UpdateInput());
             m_InMainMenu = false;
-            
+
             // Set Player Info for Connection
             PlayerInfoController.Instance.SetConnectionInfo(m_IpField.value, m_PortField.value);
-
             PlayerAudioManager.Instance.PlayClick();
         }
 
-       
 
         private IEnumerator UpdateInput()
         {
@@ -139,8 +130,10 @@ namespace Dots.Racing
 
                     yield return new WaitForSeconds(0.25f);
                 }
+
                 yield return null;
             }
+
             yield return null;
         }
 

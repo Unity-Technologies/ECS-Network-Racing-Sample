@@ -97,7 +97,7 @@ namespace Unity.Entities.Racing.Gameplay
             if (!ServerConnectionUtils.IsTryingToConnect)
                 return;
 
-            LoadingScreen.Instance.ShowLoadingScreen(true, "Connecting...");
+            LoadingScreen.Instance.ShowLoadingScreen(true, "CONNECTING...");
             var timeout = GetSingleton<TimeOutServer>();
             if (timeout.Value > 0)
             {

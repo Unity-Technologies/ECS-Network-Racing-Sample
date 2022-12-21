@@ -75,6 +75,14 @@ namespace Unity.Entities.Racing.Gameplay
                 vertical += Input.GetAxis("DriveTriggers");
                 vertical += Input.GetAxis("LeftStickY");
                 vertical += Input.GetAxis("DPadY");
+                
+                if (UIMobileInput.Instance != null)
+                {
+                    horizontal += UIMobileInput.Instance.Horizontal;
+                    vertical += UIMobileInput.Instance.Vertical;
+                }
+
+                horizontal = math.clamp(horizontal, -1, 1);
                 vertical = math.clamp(vertical, -1, 1);
 
                 input.ValueRW.Horizontal = horizontal;
