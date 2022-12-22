@@ -26,10 +26,10 @@ namespace Dots.Racing
             var root = GetComponent<UIDocument>().rootVisualElement;
             m_MainMenuPanel = root.Q<VisualElement>("main-menu-container");
             m_NameField = root.Q<TextField>("name-field");
-#if (UNITY_IPHONE || UNITY_ANDROID) && !UNITY_EDITOR
             m_NameField.value = "Player";
-#else
-            m_NameField.value = Environment.UserName.ToUpper();
+#if (!UNITY_IPHONE || !UNITY_ANDROID)
+            if (!string.IsNullOrEmpty(Environment.UserName))
+                m_NameField.value = Environment.UserName.ToUpper();
 #endif
 
             m_IpField = root.Q<TextField>("ip-field");
