@@ -3,13 +3,13 @@
 ![ECSNetworkRacingHeader](https://user-images.githubusercontent.com/3436237/209012220-f888baf2-568b-4c06-bda2-8146333c76d6.jpg)
 
 * Requires LFS, please clone the repository using LFS, do not download as a ZIP.
-* Requires Unity 2022.2.0b8 or later.
+* Requires Unity 2022.2.9f1 or later.
 
-Current tested version 2022.2.8f1
-https://unity.com/releases/editor/whats-new/2022.2.8#release-notes
+Current tested version 2022.2.9f1
+https://unity.com/releases/editor/whats-new/2022.2.9#release-notes
 
 # Unity Hub URL
-unityhub://2022.2.8f1/996aee41dc57
+unityhub://2022.2.9f1/1cc571a6ec95
 
 # Running the demo
 
