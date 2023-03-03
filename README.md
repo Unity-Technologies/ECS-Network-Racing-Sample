@@ -5,11 +5,11 @@
 * Requires LFS, please clone the repository using LFS, do not download as a ZIP.
 * Requires Unity 2022.2.0b8 or later.
 
-Current tested version 2022.2.1f1
-https://unity.com/releases/editor/whats-new/2022.2.1#release-notes
+Current tested version 2022.2.8f1
+https://unity.com/releases/editor/whats-new/2022.2.8#release-notes
 
 # Unity Hub URL
-unityhub://2022.2.1f1/4fead5835099
+unityhub://2022.2.8f1/996aee41dc57
 
 # Running the demo
 

@@ -1,17 +1,3 @@
-%YAML 1.1
-%TAG !u! tag:unity3d.com,2011:
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c509dbaa7b6f416409e3195321a2187e, type: 3}
-  m_Name: LayerPalette
-  m_EditorClassIdentifier: 
-  PaletteLayers:
-  - {fileID: 8574412962073106934, guid: 128cbd3c2fd30cb43aabd9111a3258ba, type: 2}
-  - {fileID: 8574412962073106934, guid: c997c17aa360cb749a27932fe3bdfcce, type: 2}
+version https://git-lfs.github.com/spec/v1
+oid sha256:889f767a0cb1cfecf2a64e58308d8b44cd3ecb7f2fdbb0e383409aa94875712b
+size 584
