@@ -27,9 +27,11 @@ namespace Unity.Entities.Racing.Common
     /// </summary>
     public readonly partial struct CheckPointAspect : IAspect
     {
-        public readonly TransformAspect Transform;
+        readonly RefRO<LocalTransform> m_LocalTransform;
         readonly RefRO<CheckPoint> m_CheckPoint;
         public int CheckPointId => m_CheckPoint.ValueRO.Id;
+        public float3 LocalPosition => m_LocalTransform.ValueRO.Position;
+        public quaternion LocalRotation => m_LocalTransform.ValueRO.Rotation;
     }
 
     /// <summary>
@@ -37,8 +39,14 @@ namespace Unity.Entities.Racing.Common
     /// </summary>
     public readonly partial struct CheckPointLocatorAspect : IAspect
     {
-        public readonly TransformAspect Transform;
+        readonly RefRW<LocalTransform> m_LocalTransform;
         readonly RefRO<CheckPointLocator> m_CheckPointLocator;
         public float3 GetResetPosition => m_CheckPointLocator.ValueRO.ResetPosition;
+
+        public void SetLocalTransform(float3 position, quaternion rotation)
+        {
+            m_LocalTransform.ValueRW.Position = position;
+            m_LocalTransform.ValueRW.Rotation = rotation;
+        }
     }
 }

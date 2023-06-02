@@ -1,19 +1,19 @@
 ﻿using Unity.Entities.Racing.Common;
-using Unity.Entities;
 using UnityEngine;
 
-namespace Dots.Racing
+namespace Unity.Entities.Racing.Authoring
 {
     public class CheckPointTriggerAuthoring : MonoBehaviour
     {
         public int Id = 1;
-    }
 
-    public class CheckPointBaker : Baker<CheckPointTriggerAuthoring>
-    {
-        public override void Bake(CheckPointTriggerAuthoring authoring)
+        private class Baker : Baker<CheckPointTriggerAuthoring>
         {
-            AddComponent(new CheckPoint {Id = authoring.Id});
+            public override void Bake(CheckPointTriggerAuthoring authoring)
+            {
+                var entity = GetEntity(authoring.gameObject, TransformUsageFlags.Dynamic);
+                AddComponent(entity, new CheckPoint { Id = authoring.Id });
+            }
         }
     }
 }

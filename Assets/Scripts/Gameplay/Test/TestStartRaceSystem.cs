@@ -12,12 +12,8 @@ namespace Unity.Entities.Racing.Gameplay
     {
         public void OnCreate(ref SystemState state)
         {
-            state.RequireForUpdate<NetworkIdComponent>();
+            state.RequireForUpdate<NetworkId>();
             state.RequireForUpdate<Race>();
-        }
-
-        public void OnDestroy(ref SystemState state)
-        {
         }
 
         public void OnUpdate(ref SystemState state)
@@ -25,7 +21,7 @@ namespace Unity.Entities.Racing.Gameplay
             var race = GetSingleton<Race>();
             if (race.State is RaceState.StartingRaceAutomatically) // TODO: replace with component tag
             {
-                if (TryGetSingleton<NetworkIdComponent>(out var carNetworkId))
+                if (TryGetSingleton<NetworkId>(out var carNetworkId))
                 {
                     foreach (var car in Query<PlayerAspect>())
                     {
@@ -33,7 +29,7 @@ namespace Unity.Entities.Racing.Gameplay
                         {
                             state.Enabled = false;
                             state.EntityManager.CreateEntity(typeof(PlayersReadyRPC),
-                                typeof(SendRpcCommandRequestComponent));
+                                typeof(SendRpcCommandRequest));
                         }
                     }
                 }

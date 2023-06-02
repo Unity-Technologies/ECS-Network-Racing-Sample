@@ -17,10 +17,6 @@ namespace Unity.Entities.Racing.Gameplay
             state.RequireForUpdate<Race>();
         }
 
-        public void OnDestroy(ref SystemState state)
-        {
-        }
-
         public void OnUpdate(ref SystemState state)
         {
             var race = GetSingleton<Race>();

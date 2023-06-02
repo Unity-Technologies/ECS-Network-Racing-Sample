@@ -2,7 +2,7 @@
     <Style src="project://database/Assets/UI/USS/Common.uss?fileID=7433441132597879392&amp;guid=dafc8585775e7e744a8d023b945260ae&amp;type=3#Common" />
     <Style src="project://database/Assets/UI/USS/CarSelection.uss?fileID=7433441132597879392&amp;guid=c796aa57f1861374eb19bdc235db03ac&amp;type=3#CarSelection" />
     <ui:VisualElement name="car-selection-container" tabindex="-1" class="full-screen-container" style="display: none;">
-        <ui:VisualElement name="car-selection-left-menu" tabindex="-1" class="left-menu">
+        <ui:VisualElement name="car-selection-left-menu" tabindex="-1" class="left-menu" style="-unity-background-image-tint-color: rgba(36, 33, 38, 0.98);">
             <ui:Label tabindex="-1" text="CAR SELECTION" name="car-selection-title" class="car-selection-horizontal-title" />
             <ui:VisualElement name="skin-container" class="skin-container">
                 <ui:Button tabindex="0" name="skin-1" class="skin-selector" style="background-image: url(&apos;project://database/Assets/Art/Textures/UI/CarSelection/car-1.jpg?fileID=21300000&amp;guid=a5131ed89514c4449add67054ea91aa8&amp;type=3#car-1&apos;);">
@@ -55,7 +55,7 @@
                 </ui:Button>
             </ui:VisualElement>
         </ui:VisualElement>
-        <ui:Button tabindex="-1" name="car-selection-start-button" focusable="false" class="button" style="position: absolute; right: 100px; bottom: 20px;">
+        <ui:Button tabindex="-1" name="car-selection-start-button" focusable="false" class="button" style="position: absolute; right: 20px; bottom: 20px;">
             <ui:VisualElement name="car-selection-start-button-fill" tabindex="-1" class="hold-button-fill" style="width: 0;" />
             <ui:Label tabindex="-1" text="PLAY" name="car-selection-start-button-label" class="button-label" style="-unity-font: url(&apos;project://database/Assets/Fonts/Rajdhani/Rajdhani-Bold.ttf?fileID=12800000&amp;guid=48bcc1cee44fa824c86a6bcf2c0be8a2&amp;type=3#Rajdhani-Bold&apos;); -unity-font-definition: url(&apos;project://database/Assets/Fonts/Rajdhani/Rajdhani-Bold%20SDF.asset?fileID=11400000&amp;guid=79f9abbad64889d4e83b41e981575539&amp;type=2#Rajdhani-Bold SDF&apos;);" />
             <ui:VisualElement name="car-selection-start-button-icon" tabindex="1" class="button-icon" style="background-image: url(&apos;project://database/Assets/Art/Textures/UI/ps-x-icon.png?fileID=21300000&amp;guid=0b7182b119a464548b93fe81bf55b070&amp;type=3#ps-x-icon&apos;);" />

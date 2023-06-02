@@ -18,12 +18,12 @@ namespace Unity.Entities.Racing.Gameplay
     {
         [ReadOnly] public AABB Bounds;
 
-        private void Execute(in ResetTransform resetTransform, ref TransformAspect transformAspect)
+        private void Execute(in ResetTransform resetTransform, ref LocalTransform localTransform)
         {
-            if (!Bounds.Contains(transformAspect.WorldPosition))
+            if (!Bounds.Contains(localTransform.Position))
             {
-                transformAspect.WorldPosition = resetTransform.Translation;
-                transformAspect.WorldRotation = resetTransform.Rotation;
+                localTransform.Position = resetTransform.Translation;
+                localTransform.Rotation = resetTransform.Rotation;
             }
         }
     }
@@ -32,7 +32,7 @@ namespace Unity.Entities.Racing.Gameplay
     [WithAll(typeof(Simulate))]
     public partial struct VehicleFlipChecker : IJobEntity
     {
-        private void Execute(ref PlayerAspect playerAspect)
+        private void Execute(PlayerAspect playerAspect)
         {
             var distanceSq = math.distancesq(playerAspect.LocalToWorld.Up, math.up());
 
@@ -46,7 +46,6 @@ namespace Unity.Entities.Racing.Gameplay
         }
     }
 
-    [BurstCompile]
     [WorldSystemFilter(WorldSystemFilterFlags.ServerSimulation)]
     public partial struct CheckLevelBoundsSystem : ISystem
     {
@@ -55,10 +54,7 @@ namespace Unity.Entities.Racing.Gameplay
             state.RequireForUpdate<LevelBounds>();
         }
 
-        public void OnDestroy(ref SystemState state)
-        {
-        }
-
+        [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
             var levelBounds = GetSingleton<LevelBounds>();

@@ -1,5 +1,4 @@
 using System;
-using Unity.Entities;
 using Unity.Mathematics;
 using Unity.NetCode;
 using Unity.Transforms;
@@ -20,13 +19,10 @@ namespace Unity.Entities.Racing.Common
         public Entity VisualMesh;
         public float RotationAngle;
         public float GripFactor;
-        public bool NeedsUpdate;
         [GhostField(Quantization = 10000)] public float SteeringAngle;
         [GhostField(Quantization = 10000)] public float DriveForce;
         [GhostField(Quantization = 10000)] public float SidewaysForce;
         public BlobAssetReference<AnimationCurveBlob> DriveTorqueCurve;
-
-        public bool IsRear => Placement is WheelPlacement.RearLeft or WheelPlacement.RearRight;
 
         public void Reset()
         {
@@ -187,7 +183,7 @@ namespace Unity.Entities.Racing.Common
     /// </summary>
     public readonly partial struct WheelDebugAspect : IAspect
     {
-        public readonly TransformAspect Transform;
+        public readonly RefRW<LocalTransform> LocalTransform;
         readonly RefRO<Wheel> m_Wheel;
         readonly RefRO<Suspension> m_Suspension;
         readonly RefRO<WheelHitData> m_WheelHitData;

@@ -9,20 +9,21 @@ namespace Unity.Entities.Racing.Authoring
         public GameObject WheelFL;
         public GameObject WheelRR;
         public GameObject WheelRL;
-    }
-    
-    public class WheelsReferenceBaker : Baker<WheelsReferenceAuthoring>
-    {
-        public override void Bake(WheelsReferenceAuthoring referenceAuthoring)
+        
+        private class Baker : Baker<WheelsReferenceAuthoring>
         {
-            AddComponent(new VisualWheels
+            public override void Bake(WheelsReferenceAuthoring referenceAuthoring)
             {
-                WheelFR = GetEntity(referenceAuthoring.WheelFR),
-                WheelFL = GetEntity(referenceAuthoring.WheelFL),
-                WheelRR = GetEntity(referenceAuthoring.WheelRR),
-                WheelRL = GetEntity(referenceAuthoring.WheelRL)
-            });
+                var entity = GetEntity(referenceAuthoring.gameObject, TransformUsageFlags.Dynamic);
+                AddComponent(entity, new VisualWheels
+                {
+                    WheelFR = GetEntity(referenceAuthoring.WheelFR, TransformUsageFlags.Dynamic),
+                    WheelFL = GetEntity(referenceAuthoring.WheelFL, TransformUsageFlags.Dynamic),
+                    WheelRR = GetEntity(referenceAuthoring.WheelRR, TransformUsageFlags.Dynamic),
+                    WheelRL = GetEntity(referenceAuthoring.WheelRL, TransformUsageFlags.Dynamic)
+                });
             
+            }
         }
     }
 }

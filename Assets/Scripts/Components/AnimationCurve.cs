@@ -9,14 +9,14 @@ namespace Unity.Entities.Racing.Common
     /// </summary>
     public struct AnimationCurveBlob
     {
-        BlobArray<float> Keys;
-        float Length;
-        float KeyCount;
+        private BlobArray<float> m_Keys;
+        private float m_Length;
+        private float m_KeyCount;
 
         // When t exceeds the curve time, repeat it
         public float CalculateNormalizedTime(float t)
         {
-            float normalizedT = t * Length;
+            var normalizedT = t * m_Length;
             return normalizedT - math.floor(normalizedT);
         }
 
@@ -26,38 +26,36 @@ namespace Unity.Entities.Racing.Common
             t = math.clamp(t, 0, 1);
 
             // Find index and interpolation value in the array
-            float sampleT = t * KeyCount;
+            var sampleT = t * m_KeyCount;
             var sampleTFloor = math.floor(sampleT);
 
-            float interp = sampleT - sampleTFloor;
-            var index = (int)math.clamp(sampleTFloor, 0, KeyCount - 1);
+            var interpolation = sampleT - sampleTFloor;
+            var index = (int)math.clamp(sampleTFloor, 0, m_KeyCount - 1);
 
-            return math.lerp(Keys[index], Keys[index + 1], interp);
+            return math.lerp(m_Keys[index], m_Keys[index + 1], interpolation);
         }
 
         public static BlobAssetReference<AnimationCurveBlob> CreateBlob(AnimationCurve curve, Allocator allocator,
             Allocator allocatorForTemp = Allocator.TempJob)
         {
-            using (var blob = new BlobBuilder(allocatorForTemp))
+            using var blob = new BlobBuilder(allocatorForTemp);
+            ref var anim = ref blob.ConstructRoot<AnimationCurveBlob>();
+            int keyCount = 20;
+
+            var endTime = curve[curve.length - 1].time;
+            anim.m_Length = 1.0F / endTime;
+            anim.m_KeyCount = keyCount;
+
+            var array = blob.Allocate(ref anim.m_Keys, keyCount + 1);
+            for (var i = 0; i < keyCount; i++)
             {
-                ref var anim = ref blob.ConstructRoot<AnimationCurveBlob>();
-                int keyCount = 20;
-
-                var endTime = curve[curve.length - 1].time;
-                anim.Length = 1.0F / endTime;
-                anim.KeyCount = keyCount;
-
-                var array = blob.Allocate(ref anim.Keys, keyCount + 1);
-                for (int i = 0; i < keyCount; i++)
-                {
-                    var t = (float)i / (keyCount - 1) * endTime;
-                    array[i] = curve.Evaluate(t);
-                }
-
-                array[keyCount] = array[keyCount - 1];
-
-                return blob.CreateBlobAssetReference<AnimationCurveBlob>(allocator);
+                var t = (float)i / (keyCount - 1) * endTime;
+                array[i] = curve.Evaluate(t);
             }
+
+            array[keyCount] = array[keyCount - 1];
+
+            return blob.CreateBlobAssetReference<AnimationCurveBlob>(allocator);
         }
     }
 }

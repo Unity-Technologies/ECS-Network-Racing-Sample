@@ -8,7 +8,6 @@ namespace Unity.Entities.Racing.Gameplay
     /// <summary>
     /// Loads and Unloads Subscenes according to the game state
     /// </summary>
-    [BurstCompile]
     [WorldSystemFilter(WorldSystemFilterFlags.ClientSimulation | WorldSystemFilterFlags.ThinClientSimulation)]
     public partial struct GameSceneLoader : ISystem
     {
@@ -68,10 +67,6 @@ namespace Unity.Entities.Racing.Gameplay
                     SceneSystem.UnloadScene(state.WorldUnmanaged, sceneInfo.SceneGuid);
                 }
             }
-        }
-
-        public void OnDestroy(ref SystemState state)
-        {
         }
     }
 }

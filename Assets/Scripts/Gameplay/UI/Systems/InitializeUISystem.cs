@@ -1,5 +1,4 @@
 using Unity.Entities.Racing.Common;
-using Unity.Entities;
 using Unity.NetCode;
 using static Unity.Entities.SystemAPI;
 
@@ -15,11 +14,7 @@ namespace Unity.Entities.Racing.Gameplay
 
         public void OnCreate(ref SystemState state)
         {
-            state.RequireForUpdate<NetworkIdComponent>();
-        }
-
-        public void OnDestroy(ref SystemState state)
-        {
+            state.RequireForUpdate<NetworkId>();
         }
 
         public void OnUpdate(ref SystemState state)
@@ -31,24 +26,24 @@ namespace Unity.Entities.Racing.Gameplay
                 return;
 
             var entityManager = state.EntityManager;
-            var networkId = GetSingleton<NetworkIdComponent>().Value;
+            var networkId = GetSingleton<NetworkId>().Value;
 
             HUDController.CancelStartButton.clicked += () =>
             {
                 PlayerAudioManager.Instance.PlayClick();
-                entityManager.CreateEntity(typeof(CancelPlayerReadyRPC), typeof(SendRpcCommandRequestComponent));
+                entityManager.CreateEntity(typeof(CancelPlayerReadyRPC), typeof(SendRpcCommandRequest));
             };
 
             HUDController.ResetCarButton.clicked += () =>
             {
-                var requestEntity = entityManager.CreateEntity(typeof(SendRpcCommandRequestComponent));
+                var requestEntity = entityManager.CreateEntity(typeof(SendRpcCommandRequest));
                 entityManager.AddComponentData(requestEntity, new ResetCarRPC {Id = networkId});
                 PlayerAudioManager.Instance.PlayClick();
             };
             
             HUDController.StartRaceButton.clicked += () =>
             {
-                entityManager.CreateEntity(typeof(PlayersReadyRPC), typeof(SendRpcCommandRequestComponent));
+                entityManager.CreateEntity(typeof(PlayersReadyRPC), typeof(SendRpcCommandRequest));
                 PlayerAudioManager.Instance.PlayClick();
             };
 

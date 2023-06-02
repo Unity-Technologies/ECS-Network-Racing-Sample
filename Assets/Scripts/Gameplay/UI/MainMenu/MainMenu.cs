@@ -1,13 +1,11 @@
 using System;
 using System.Collections;
-using Gameplay.UI;
-using Unity.Entities.Racing.Gameplay;
 using Unity.Mathematics;
 using Unity.NetCode;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace Dots.Racing
+namespace Unity.Entities.Racing.Gameplay
 {
     public class MainMenu : MonoBehaviour
     {

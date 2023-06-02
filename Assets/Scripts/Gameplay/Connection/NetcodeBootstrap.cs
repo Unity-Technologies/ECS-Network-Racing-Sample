@@ -1,5 +1,4 @@
 ﻿using Unity.NetCode;
-using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace Unity.Entities.Racing.Gameplay
@@ -29,25 +28,19 @@ namespace Unity.Entities.Racing.Gameplay
         {
 #if UNITY_EDITOR
             // If we are in the editor, we check if the loaded scene is "MainMenu",
-            // if we are in a player we assume it is in the frontend if FRONTEND_PLAYER_BUILD
-            // is set, otherwise we assume it is a single level.
-            // The define FRONTEND_PLAYER_BUILD needs to be set in the build config for the frontend player.
+            // if we are in a player we assume it is in the frontend
             var sceneName = SceneManager.GetActiveScene().name;
             var isFrontend = sceneName == "MainMenu";
-            
+
             // If we have Server Only in Editor we skip to the MainScene
             if (RequestedPlayType == PlayType.Server && isFrontend)
             {
                 AutoConnectPort = 7979;
-                CreateDefaultClientServerWorlds();
+                CreateServerWorld("Server");
                 SceneManager.LoadScene("Main");
+                return true;
             }
 
-#elif !FRONTEND_PLAYER_BUILD
-            var isFrontend = false;
-#endif
-           
-#if UNITY_EDITOR || !FRONTEND_PLAYER_BUILD
             if (isFrontend)
             {
                 // Disable the auto-connect in the frontend. The reset is necessary in the Editor since we can start the demos directly and
@@ -64,6 +57,9 @@ namespace Unity.Entities.Racing.Gameplay
                 // Create the default client and server worlds, depending on build type in a player or the Multiplayer PlayMode Tools in the editor
                 CreateDefaultClientServerWorlds();
             }
+#elif UNITY_SERVER
+            AutoConnectPort = 7979;
+            CreateServerWorld("Server");
 #else
             CreateLocalWorld(defaultWorldName);
 #endif

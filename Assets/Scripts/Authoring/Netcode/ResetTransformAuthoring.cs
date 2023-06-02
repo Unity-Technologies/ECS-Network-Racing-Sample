@@ -1,21 +1,22 @@
 using Unity.Entities.Racing.Common;
-using Unity.Entities;
 using UnityEngine;
 
-namespace Dots.Racing
+namespace Unity.Entities.Racing.Authoring
 {
-    public class ResetTransformAuthoring : MonoBehaviour { }
-
-    public class ResetTransformBaker : Baker<ResetTransformAuthoring>
+    public class ResetTransformAuthoring : MonoBehaviour
     {
-        public override void Bake(ResetTransformAuthoring authoring)
+        private class Baker : Baker<ResetTransformAuthoring>
         {
-            var transform = authoring.transform;
-            AddComponent(new ResetTransform
+            public override void Bake(ResetTransformAuthoring authoring)
             {
-                Translation = transform.localPosition,
-                Rotation = transform.rotation
-            });
+                var entity = GetEntity(authoring.gameObject, TransformUsageFlags.WorldSpace);
+                var transform = authoring.transform;
+                AddComponent(entity, new ResetTransform
+                {
+                    Translation = transform.localPosition,
+                    Rotation = transform.rotation
+                });
+            }
         }
     }
 }

@@ -1,4 +1,3 @@
-using Unity.Entities;
 using Unity.Entities.Racing.Common;
 using Unity.Transforms;
 using UnityEngine;

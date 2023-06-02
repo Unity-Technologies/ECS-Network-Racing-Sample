@@ -10,7 +10,6 @@ namespace Unity.Entities.Racing.Gameplay
     /// <summary>
     /// Restarts the server when all players got disconnected.
     /// </summary>
-    [BurstCompile]
     public partial struct ResetServerSystem : ISystem
     {
         private EntityQuery m_query;
@@ -24,8 +23,6 @@ namespace Unity.Entities.Racing.Gameplay
             m_networkStreamQuery = state.GetEntityQuery(ComponentType.ReadOnly<NetworkStreamConnection>());
             state.RequireForUpdate(m_query);
         }
-
-        public void OnDestroy(ref SystemState state) { }
 
         [BurstCompile]
         public void OnUpdate(ref SystemState state)
@@ -62,10 +59,6 @@ namespace Unity.Entities.Racing.Gameplay
             m_LocalUserQuery = state.GetEntityQuery(ComponentType.ReadOnly<LocalUser>());
         }
 
-        public void OnDestroy(ref SystemState state)
-        {
-        }
-
         public void OnStartRunning(ref SystemState state)
         {
             ResetTimeout();
@@ -89,7 +82,7 @@ namespace Unity.Entities.Racing.Gameplay
         public void OnStopRunning(ref SystemState state)
         {
             LoadingScreen.Instance.ShowLoadingScreen(false);
-            Debug.Log($"connection completed at: {state.WorldUnmanaged.Time.ElapsedTime}");
+            Debug.Log($"Connection completed at: {state.WorldUnmanaged.Time.ElapsedTime}");
         }
 
         public void OnUpdate(ref SystemState state)

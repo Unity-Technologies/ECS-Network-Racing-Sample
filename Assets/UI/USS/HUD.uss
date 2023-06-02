@@ -73,7 +73,6 @@
 .bottom-panel {
     flex-grow: 1;
     position: absolute;
-    bottom: 10px;
     flex-direction: row;
     align-items: center;
     justify-content: center;
@@ -85,6 +84,7 @@
     padding-right: 30px;
     padding-top: 10px;
     padding-bottom: 10px;
+    bottom: 10px;
 }
 
 .bottom-message {

@@ -41,7 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3023433396663086157}
   - component: {fileID: 8047786361642113852}
-  - component: {fileID: 1403842023700529609}
+  - component: {fileID: 6451417964592133314}
   m_Layer: 0
   m_Name: Pine_A
   m_TagString: Untagged
@@ -95,8 +95,8 @@ LODGroup:
     renderers:
     - renderer: {fileID: 4116794191508068702}
   m_Enabled: 1
---- !u!65 &1403842023700529609
-BoxCollider:
+--- !u!136 &6451417964592133314
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -113,9 +113,11 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 6.282051, z: 1}
-  m_Center: {x: 0, y: 2.6410255, z: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 12
+  m_Direction: 1
+  m_Center: {x: 0, y: 5, z: 0}
 --- !u!1 &3923590717123692241
 GameObject:
   m_ObjectHideFlags: 0

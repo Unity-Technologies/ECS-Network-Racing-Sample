@@ -2,12 +2,12 @@
     <Style src="project://database/Assets/UI/USS/MobileControls.uss?fileID=7433441132597879392&amp;guid=b84ba7b9207dfd54ba42e559ddfb1347&amp;type=3#MobileControls" />
     <ui:VisualElement name="mobile-input" picking-mode="Ignore" class="full-screen-container" style="width: 100%; height: 100%;">
         <ui:VisualElement name="left-panel" class="left-panel">
-            <ui:Button name="left-button" class="circle-button mobile-control-button" style="width: 250px; height: 250px;" />
-            <ui:Button name="right-button" class="circle-button mobile-control-button" style="background-image: url(&apos;project://database/Assets/Art/Textures/UI/HUD/mobile-controls.png?fileID=-1767847013&amp;guid=6776acfd078d9544cbb255d9bdf99964&amp;type=3#right-arrow&apos;); width: 250px; height: 250px;" />
+            <ui:Button name="left-button" class="circle-button mobile-control-button" style="width: 200px; height: 200px;" />
+            <ui:Button name="right-button" class="circle-button mobile-control-button" style="background-image: url(&apos;project://database/Assets/Art/Textures/UI/HUD/mobile-controls.png?fileID=-1767847013&amp;guid=6776acfd078d9544cbb255d9bdf99964&amp;type=3#right-arrow&apos;); width: 200px; height: 200px;" />
         </ui:VisualElement>
         <ui:VisualElement name="right-panel" class="right-panel">
-            <ui:Button name="brake-button" class="circle-button mobile-control-button" style="background-image: url(&apos;project://database/Assets/Art/Textures/UI/HUD/mobile-controls.png?fileID=-254101703&amp;guid=6776acfd078d9544cbb255d9bdf99964&amp;type=3#brake-pedal&apos;); width: 230px; height: 230px;" />
-            <ui:Button name="throttle-button" class="circle-button mobile-control-button" style="background-image: url(&apos;project://database/Assets/Art/Textures/UI/HUD/mobile-controls.png?fileID=-1101200224&amp;guid=6776acfd078d9544cbb255d9bdf99964&amp;type=3#gas-pedal&apos;); width: 230px; height: 520px;" />
+            <ui:Button name="brake-button" class="circle-button mobile-control-button" style="background-image: url(&apos;project://database/Assets/Art/Textures/UI/HUD/mobile-controls.png?fileID=-254101703&amp;guid=6776acfd078d9544cbb255d9bdf99964&amp;type=3#brake-pedal&apos;); width: 175px; height: 175px;" />
+            <ui:Button name="throttle-button" class="circle-button mobile-control-button" style="background-image: url(&apos;project://database/Assets/Art/Textures/UI/HUD/mobile-controls.png?fileID=-1101200224&amp;guid=6776acfd078d9544cbb255d9bdf99964&amp;type=3#gas-pedal&apos;); width: 185px; height: 400px;" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

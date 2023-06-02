@@ -1,5 +1,4 @@
 ﻿using Unity.Collections;
-
 using Unity.NetCode;
 
 namespace Unity.Entities.Racing.Common

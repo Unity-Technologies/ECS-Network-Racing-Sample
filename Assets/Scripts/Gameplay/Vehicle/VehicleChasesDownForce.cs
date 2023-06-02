@@ -20,7 +20,7 @@ namespace Unity.Entities.Racing.Gameplay
         public PhysicsWorld PhysicsWorld;
 
         private void Execute(Entity entity, in PhysicsMass mass, in VehicleChassis vehicleChassis,
-            in TransformAspect transform)
+            in LocalTransform localTransform)
         {
             var index = PhysicsWorld.GetRigidBodyIndex(entity);
             if (index == -1 || index >= PhysicsWorld.NumDynamicBodies)
@@ -31,9 +31,9 @@ namespace Unity.Entities.Racing.Gameplay
             var filter = PhysicsWorld.GetCollisionFilter(index);
             filter.CollidesWith = (uint)vehicleChassis.CollisionMask;
 
-            var start = transform.LocalPosition - mass.CenterOfMass * 5; // TODO: Expose as authoring field
-            // FIXME: transform.up is not up to date here
-            var end = transform.LocalPosition - mass.CenterOfMass - transform.Up;
+            var start = localTransform.Position - mass.CenterOfMass * 5; // TODO: Expose as authoring field
+            // FIXME: localTransform.up is not up to date here
+            var end = localTransform.Position - mass.CenterOfMass - localTransform.Up();
             if (!math.isfinite(end).x)
             {
                 return;
@@ -46,31 +46,20 @@ namespace Unity.Entities.Racing.Gameplay
                 Filter = filter
             };
 
-            if (PhysicsWorld.CollisionWorld.CastRay(input, out var result))
+            if (PhysicsWorld.CollisionWorld.CastRay(input, out _))
             {
                 return;
             }
 
-            var downforce = vehicleChassis.DownForce * -transform.Up;
-            PhysicsWorld.ApplyImpulse(index, downforce, transform.LocalPosition);
+            var downforce = vehicleChassis.DownForce * -localTransform.Up();
+            PhysicsWorld.ApplyImpulse(index, downforce, localTransform.Position);
         }
     }
 
-    [BurstCompile]
     [UpdateInGroup(typeof(PhysicsSimulationGroup))]
     //[WorldSystemFilter(WorldSystemFilterFlags.ServerSimulation)]
     public partial struct ChasesDownforceSystem : ISystem
     {
-        [BurstCompile]
-        public void OnCreate(ref SystemState state)
-        {
-        }
-
-        [BurstCompile]
-        public void OnDestroy(ref SystemState state)
-        {
-        }
-
         [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
@@ -80,7 +69,6 @@ namespace Unity.Entities.Racing.Gameplay
                 PhysicsWorld = physicsWorld
             };
             state.Dependency = downforceJob.Schedule(state.Dependency);
-            //state.Dependency.Complete();
         }
     }
 }

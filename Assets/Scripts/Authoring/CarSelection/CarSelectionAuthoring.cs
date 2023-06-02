@@ -1,9 +1,8 @@
 using System;
-using Unity.Entities;
 using Unity.Entities.Racing.Common;
 using UnityEngine;
 
-namespace Dots.Racing
+namespace Unity.Entities.Racing.Authoring
 {
     [Serializable]
     public struct CarSelectionSkin
@@ -16,24 +15,25 @@ namespace Dots.Racing
         [Header("Spawn Point")]
         public Transform SkinPosition;
         public CarSelectionSkin[] CarSkins;
-    }
 
-    public class CarSelectionBaker : Baker<CarSelectionAuthoring>
-    {
-        public override void Bake(CarSelectionAuthoring authoring)
+        private class Baker : Baker<CarSelectionAuthoring>
         {
-            AddComponent(new CarSelection
+            public override void Bake(CarSelectionAuthoring authoring)
             {
-                SkinPosition = authoring.SkinPosition.position,
-                SkinRotation = authoring.SkinPosition.rotation
-            });
+                var entity = GetEntity(authoring.gameObject, TransformUsageFlags.Dynamic);
+                AddComponent(entity, new CarSelection
+                {
+                    SkinPosition = authoring.SkinPosition.position,
+                    SkinRotation = authoring.SkinPosition.rotation
+                });
             
-            AddComponent<CarSelectionUpdate>();
+                AddComponent<CarSelectionUpdate>(entity);
             
-            var skinBuffer = AddBuffer<CarSelectionSkinData>();
-            foreach (var carSkin in authoring.CarSkins)
-            {
-                skinBuffer.Add(new CarSelectionSkinData {Prefab = GetEntity(carSkin.Prefab)});
+                var skinBuffer = AddBuffer<CarSelectionSkinData>(entity);
+                foreach (var carSkin in authoring.CarSkins)
+                {
+                    skinBuffer.Add(new CarSelectionSkinData {Prefab = GetEntity(carSkin.Prefab, TransformUsageFlags.Renderable)});
+                }
             }
         }
     }

@@ -214,11 +214,11 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 08d22016a0104e54ba9a1585221dfee4,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 6281199266523807897}
+      addedObject: {fileID: 5795852371001404089}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 08d22016a0104e54ba9a1585221dfee4,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 5795852371001404089}
+      addedObject: {fileID: 973834261034732600}
   m_SourcePrefab: {fileID: 100100000, guid: 08d22016a0104e54ba9a1585221dfee4, type: 3}
 --- !u!4 &3617804414167461905 stripped
 Transform:
@@ -232,149 +232,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 3873021527531706362}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &6281199266523807897
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4142983310286187179}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b275e5f92732148048d7b77e264ac30e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ShapeType: 0
-  m_PrimitiveCenter:
-    x: 0.29450703
-    y: 0.08991337
-    z: -0.5987673
-  m_PrimitiveSize:
-    x: 4.4497166
-    y: 8.172073
-    z: 4.3978014
-  m_PrimitiveOrientation:
-    Value:
-      x: -0
-      y: 0
-      z: 0
-    RotationOrder: 4
-  m_Capsule:
-    Height: 8.172073
-    Radius: 2.2248583
-    Axis: 1
-  m_Cylinder:
-    Height: 8.172073
-    Radius: 2.2248583
-    Axis: 1
-  m_CylinderSideCount: 20
-  m_SphereRadius: 4.0860367
-  m_MinimumSkinnedVertexWeight: 0.1
-  m_ConvexHullGenerationParameters:
-    m_SimplificationTolerance: 0.122581095
-    m_BevelRadius: 0.05
-    m_MinimumAngle: 2.5000002
-  m_CustomMesh: {fileID: 0}
-  m_ForceUnique: 0
-  m_Material:
-    m_SupportsTemplate: 1
-    m_Template: {fileID: 0}
-    m_CollisionResponse:
-      m_Override: 0
-      m_Value: 0
-    m_Friction:
-      m_Override: 0
-      m_Value:
-        Value: 0.5
-        CombineMode: 0
-    m_Restitution:
-      m_Override: 0
-      m_Value:
-        Value: 0
-        CombineMode: 2
-    m_BelongsToCategories:
-      m_Override: 0
-      m_Value:
-        Category00: 1
-        Category01: 1
-        Category02: 1
-        Category03: 1
-        Category04: 1
-        Category05: 1
-        Category06: 1
-        Category07: 1
-        Category08: 1
-        Category09: 1
-        Category10: 1
-        Category11: 1
-        Category12: 1
-        Category13: 1
-        Category14: 1
-        Category15: 1
-        Category16: 1
-        Category17: 1
-        Category18: 1
-        Category19: 1
-        Category20: 1
-        Category21: 1
-        Category22: 1
-        Category23: 1
-        Category24: 1
-        Category25: 1
-        Category26: 1
-        Category27: 1
-        Category28: 1
-        Category29: 1
-        Category30: 1
-        Category31: 1
-    m_CollidesWithCategories:
-      m_Override: 0
-      m_Value:
-        Category00: 1
-        Category01: 1
-        Category02: 1
-        Category03: 1
-        Category04: 1
-        Category05: 1
-        Category06: 1
-        Category07: 1
-        Category08: 1
-        Category09: 1
-        Category10: 1
-        Category11: 1
-        Category12: 1
-        Category13: 1
-        Category14: 1
-        Category15: 1
-        Category16: 1
-        Category17: 1
-        Category18: 1
-        Category19: 1
-        Category20: 1
-        Category21: 1
-        Category22: 1
-        Category23: 1
-        Category24: 1
-        Category25: 1
-        Category26: 1
-        Category27: 1
-        Category28: 1
-        Category29: 1
-        Category30: 1
-        Category31: 1
-    m_CustomMaterialTags:
-      m_Override: 0
-      m_Value:
-        Tag00: 0
-        Tag01: 0
-        Tag02: 0
-        Tag03: 0
-        Tag04: 0
-        Tag05: 0
-        Tag06: 0
-        Tag07: 0
-    m_SerializedVersion: 1
-  m_SerializedVersion: 1
 --- !u!205 &5795852371001404089
 LODGroup:
   m_ObjectHideFlags: 0
@@ -402,6 +259,27 @@ LODGroup:
     renderers:
     - renderer: {fileID: 5340422500195116185}
   m_Enabled: 1
+--- !u!65 &973834261034732600
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4142983310286187179}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 4.344628, y: 8.025177, z: 4.3008113}
+  m_Center: {x: 0.27019906, y: 0.10953975, z: -0.64263606}
 --- !u!1001 &6763676950197221405
 PrefabInstance:
   m_ObjectHideFlags: 0

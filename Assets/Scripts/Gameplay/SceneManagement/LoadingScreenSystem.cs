@@ -7,7 +7,6 @@ namespace Unity.Entities.Racing.Gameplay
     /// <summary>
     /// Update the GameLoadInfo singleton with loaded sections number
     /// </summary>
-    [BurstCompile]
     [WorldSystemFilter(WorldSystemFilterFlags.ClientSimulation | WorldSystemFilterFlags.ServerSimulation)]
     public partial struct LoadingScreenSystem : ISystem
     {
@@ -24,10 +23,6 @@ namespace Unity.Entities.Racing.Gameplay
             m_GameLoadInfoEntity = state.EntityManager.CreateEntity(typeof(GameLoadInfo));
             state.RequireForUpdate<GameLoadInfo>();
             m_ShouldShowLoadingScreen = true;
-        }
-
-        public void OnDestroy(ref SystemState state)
-        {
         }
 
         public void OnUpdate(ref SystemState state)
@@ -50,7 +45,7 @@ namespace Unity.Entities.Racing.Gameplay
 
             state.EntityManager.SetComponentData(m_GameLoadInfoEntity, gameLoadInfo);
             sceneSectionEntities.Dispose(state.Dependency);
-            
+
             if (gameLoadInfo.IsLoaded)
             {
                 // Create EnableGoInGame Entity when all the sub-scenes are loaded

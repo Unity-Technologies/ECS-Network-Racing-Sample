@@ -11,34 +11,30 @@ namespace Unity.Entities.Racing.Gameplay
     /// <summary>
     /// Disable all physics of the wheels to teleport the players
     /// </summary>
-
     [BurstCompile]
     [WithAll(typeof(Simulate))]
     [WithAll(typeof(VehicleChassis))]
     public partial struct DisableSmoothingJob : IJobEntity
     {
-        private void Execute(ref PhysicsGraphicalSmoothing physicsGraphicalSmoothing, in PlayerAspect playerAspect)
+        private void Execute(ref PhysicsGraphicalSmoothing physicsGraphicalSmoothing, PlayerAspect playerAspect)
         {
             if (playerAspect.Reset.Transform)
                 physicsGraphicalSmoothing.ApplySmoothing = 0;
         }
     }
-    
+
     [BurstCompile]
     [WithAll(typeof(Simulate))]
     public partial struct TeleportPlayersJob : IJobEntity
     {
-        private void Execute(ref PlayerAspect player)
+        private void Execute(PlayerAspect player)
         {
             if (!player.Reset.Transform)
             {
                 return;
             }
 
-            player.Transform.WorldPosition = player.Reset.TargetPosition;
-            player.Transform.WorldRotation = player.Reset.TargetRotation;
-            player.ResetVelocity();
-            player.SetPlayerTransformReady();
+            player.ResetPlayer();
         }
     }
 
@@ -62,18 +58,9 @@ namespace Unity.Entities.Racing.Gameplay
         }
     }
 
-    [BurstCompile]
     [UpdateAfter(typeof(TeleportCarSystem))]
     public partial struct ResetWheelsSystem : ISystem
     {
-        public void OnCreate(ref SystemState state)
-        {
-        }
-
-        public void OnDestroy(ref SystemState state)
-        {
-        }
-
         [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
@@ -94,17 +81,12 @@ namespace Unity.Entities.Racing.Gameplay
         }
     }
 
-    [BurstCompile]
     [UpdateInGroup(typeof(TransformSystemGroup))]
     public partial struct DisableSmoothingSystem : ISystem
     {
         public void OnCreate(ref SystemState state)
         {
             state.RequireForUpdate<Race>();
-        }
-
-        public void OnDestroy(ref SystemState state)
-        {
         }
 
         [BurstCompile]
@@ -115,18 +97,10 @@ namespace Unity.Entities.Racing.Gameplay
         }
     }
 
-    [BurstCompile]
     [UpdateBefore(typeof(TransformSystemGroup))]
     public partial struct TeleportCarSystem : ISystem
     {
-        public void OnCreate(ref SystemState state)
-        {
-        }
-
-        public void OnDestroy(ref SystemState state)
-        {
-        }
-
+        [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
             var teleportPlayersJob = new TeleportPlayersJob();
@@ -135,7 +109,6 @@ namespace Unity.Entities.Racing.Gameplay
         }
     }
 
-    [BurstCompile]
     [UpdateBefore(typeof(TeleportCarSystem))]
     [WorldSystemFilter(WorldSystemFilterFlags.ServerSimulation)]
     public partial struct ResetCarSystem : ISystem
@@ -145,11 +118,9 @@ namespace Unity.Entities.Racing.Gameplay
         public void OnCreate(ref SystemState state)
         {
             m_ResetCarQuery = state.GetEntityQuery(ComponentType.ReadOnly<ResetCarRPC>(),
-                ComponentType.ReadOnly<ReceiveRpcCommandRequestComponent>());
+                ComponentType.ReadOnly<ReceiveRpcCommandRequest>());
             state.RequireForUpdate(m_ResetCarQuery);
         }
-
-        public void OnDestroy(ref SystemState state) { }
 
         [BurstCompile]
         public void OnUpdate(ref SystemState state)
@@ -169,7 +140,4 @@ namespace Unity.Entities.Racing.Gameplay
             state.EntityManager.DestroyEntity(m_ResetCarQuery);
         }
     }
-
-    
-
 }

@@ -62,7 +62,6 @@ namespace Unity.Entities.Racing.Gameplay
         }
     }
 
-    [BurstCompile]
     [UpdateInGroup(typeof(PhysicsSimulationGroup))]
     [UpdateAfter(typeof(WheelsForcesSystem))]
     public partial struct AntiRollBarSystem : ISystem
@@ -76,10 +75,7 @@ namespace Unity.Entities.Racing.Gameplay
             WheelHitFromEntity = state.GetComponentLookup<WheelHitData>(true);
         }
 
-        public void OnDestroy(ref SystemState state)
-        {
-        }
-
+        [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
             SuspensionFromEntity.Update(ref state);
@@ -92,7 +88,6 @@ namespace Unity.Entities.Racing.Gameplay
                 WheelHitFromEntity = WheelHitFromEntity
             };
             state.Dependency = antiRollBarJob.Schedule(state.Dependency);
-            //state.Dependency.Complete();
         }
     }
 }

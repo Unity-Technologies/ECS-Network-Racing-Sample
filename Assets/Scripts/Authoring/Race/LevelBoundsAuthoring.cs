@@ -1,9 +1,8 @@
 using Unity.Entities.Racing.Common;
-using Unity.Entities;
 using Unity.Mathematics;
 using UnityEngine;
 
-namespace Dots.Racing
+namespace Unity.Entities.Racing.Authoring
 {
     public class LevelBoundsAuthoring : MonoBehaviour
     {
@@ -13,19 +12,19 @@ namespace Dots.Racing
         {
             Gizmos.DrawWireCube(Bounds.center, Bounds.size);
         }
-    }
 
-    public class LevelBoundsBaker : Baker<LevelBoundsAuthoring>
-    {
-        public override void Bake(LevelBoundsAuthoring authoring)
+        private class Baker : Baker<LevelBoundsAuthoring>
         {
-            var bounds = new AABB
+            public override void Bake(LevelBoundsAuthoring authoring)
             {
-                Center = authoring.Bounds.center,
-                Extents = authoring.Bounds.extents
-            };
-            AddComponent(new LevelBounds(){Value = bounds});
+                var entity = GetEntity(authoring.gameObject, TransformUsageFlags.None);
+                var bounds = new AABB
+                {
+                    Center = authoring.Bounds.center,
+                    Extents = authoring.Bounds.extents
+                };
+                AddComponent(entity, new LevelBounds() { Value = bounds });
+            }
         }
     }
-
 }

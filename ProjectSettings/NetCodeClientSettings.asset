@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FilterSettings:
     ExcludedBakingSystemAssemblies: []
-  AdditionalScriptingDefines:
-  - FRONTEND_PLAYER_BUILD
+  AdditionalScriptingDefines: []
+  ClientTarget: 1

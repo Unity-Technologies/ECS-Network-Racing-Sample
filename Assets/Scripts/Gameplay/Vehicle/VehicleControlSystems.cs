@@ -160,20 +160,11 @@ namespace Unity.Entities.Racing.Gameplay
         }
     }
 
-    [BurstCompile]
     [UpdateInGroup(typeof(PhysicsSimulationGroup))]
     [UpdateBefore(typeof(WheelsForcesSystem))]
     [UpdateBefore(typeof(WheelForcesApplySystem))]
     public partial struct WheelRaycastSystem : ISystem
     {
-        public void OnCreate(ref SystemState state)
-        {
-        }
-
-        public void OnDestroy(ref SystemState state)
-        {
-        }
-
         [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
@@ -181,14 +172,12 @@ namespace Unity.Entities.Racing.Gameplay
             var wheelRaycastJob = new WheelRaycastJob
             {
                 PhysicsWorld = physicsWorld,
-                LocalTransformLookup = SystemAPI.GetComponentLookup<LocalTransform>(true)
+                LocalTransformLookup = GetComponentLookup<LocalTransform>(true)
             };
             state.Dependency = wheelRaycastJob.Schedule(state.Dependency);
-            //state.CompleteDependency();
         }
     }
 
-    [BurstCompile]
     [UpdateInGroup(typeof(PhysicsSimulationGroup))]
     public partial struct WheelsForcesSystem : ISystem
     {
@@ -197,14 +186,10 @@ namespace Unity.Entities.Racing.Gameplay
             state.RequireForUpdate<Race>();
         }
 
-        public void OnDestroy(ref SystemState state)
-        {
-        }
-
         [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
-            var localTransformLookup = SystemAPI.GetComponentLookup<LocalTransform>(true);
+            var localTransformLookup = GetComponentLookup<LocalTransform>(true);
             var suspensionForceJob = new SuspensionForceJob()
             {
                 LocalTransformLookup = localTransformLookup
@@ -221,12 +206,9 @@ namespace Unity.Entities.Racing.Gameplay
                 LocalTransformLookup = localTransformLookup
             };
             state.Dependency = sidewaysForceJob.ScheduleParallel(state.Dependency);
-            //state.CompleteDependency();
         }
     }
 
-
-    [BurstCompile]
     [UpdateInGroup(typeof(PhysicsSimulationGroup))]
     [UpdateAfter(typeof(WheelsForcesSystem))]
     public partial struct WheelForcesApplySystem : ISystem
@@ -236,10 +218,6 @@ namespace Unity.Entities.Racing.Gameplay
             state.RequireForUpdate<Race>();
         }
 
-        public void OnDestroy(ref SystemState state)
-        {
-        }
-
         [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
@@ -247,7 +225,7 @@ namespace Unity.Entities.Racing.Gameplay
             var wheelForcesJob = new WheelForcesJob
             {
                 PhysicsWorld = physicsWorld,
-                LocalTransformLookup = SystemAPI.GetComponentLookup<LocalTransform>(true)
+                LocalTransformLookup = GetComponentLookup<LocalTransform>(true)
             };
             state.Dependency = wheelForcesJob.Schedule(state.Dependency);
         }

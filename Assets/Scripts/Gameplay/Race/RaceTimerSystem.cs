@@ -59,7 +59,6 @@ namespace Unity.Entities.Racing.Gameplay
     /// <summary>
     /// Runs the job to update and evaluate the game's timer.
     /// </summary>
-    [BurstCompile]
     [WorldSystemFilter(WorldSystemFilterFlags.ServerSimulation)]
     public partial struct UpdateTimerSystem : ISystem
     {
@@ -68,10 +67,7 @@ namespace Unity.Entities.Racing.Gameplay
             state.RequireForUpdate<Race>();
         }
 
-        public void OnDestroy(ref SystemState state)
-        {
-        }
-
+        [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
             var updateTimerJob = new UpdateTimerJob
