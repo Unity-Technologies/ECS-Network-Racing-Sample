@@ -1,20 +1,19 @@
 ﻿using Unity.Entities.Racing.Common;
-using Unity.Entities;
 using UnityEngine;
 
-namespace Dots.Racing
+namespace Unity.Entities.Racing.Authoring
 {
-    public class TimeoutServerAuthoring : MonoBehaviour 
+    public class TimeoutServerAuthoring : MonoBehaviour
     {
         public float TimeOutSeconds = 10f;
-    }
 
-    public class TimeoutServerBaker : Baker<TimeoutServerAuthoring>
-    {
-        public override void Bake(TimeoutServerAuthoring authoring)
+        private class Baker : Baker<TimeoutServerAuthoring>
         {
-            var timeoutServer = new TimeOutServer { Value = authoring.TimeOutSeconds };
-            AddComponent(timeoutServer);
+            public override void Bake(TimeoutServerAuthoring authoring)
+            {
+                var entity = GetEntity(authoring.gameObject, TransformUsageFlags.None);
+                AddComponent(entity, new TimeOutServer { Value = authoring.TimeOutSeconds });
+            }
         }
     }
 }

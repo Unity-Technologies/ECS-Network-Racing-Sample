@@ -58,6 +58,7 @@ namespace Unity.Entities.Racing.Gameplay
 
             Instance = this;
             IsInitiliazed = false;
+            DontDestroyOnLoad(this);
         }
 
         private async void Start()
@@ -77,7 +78,7 @@ namespace Unity.Entities.Racing.Gameplay
             var options = new InitializationOptions();
             await UnityServices.InitializeAsync(options);
 #if AUTH_PACKAGE_PRESENT
-        await AuthenticationService.Instance.SignInAnonymouslyAsync();
+            await AuthenticationService.Instance.SignInAnonymouslyAsync();
 #endif
             if (UnityServices.State == ServicesInitializationState.Initialized)
             {

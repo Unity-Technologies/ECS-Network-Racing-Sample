@@ -53,10 +53,12 @@ namespace Unity.Entities.Racing.Common
             if (State == RaceState.ReadyToRace)
                 State = RaceState.NotStarted;
         }
+        
         public void StartRace()
         {
             State = RaceState.StartingRace;
         }
+        
         public void SetRaceState(RaceState state)
         {
             State = state;

@@ -17,9 +17,9 @@ namespace Unity.Entities.Racing.Gameplay
         public NativeArray<SortableProgress> SortableProgresses;
 
         private void Execute([EntityIndexInQuery] int index, Entity entity, in LapProgress progress,
-            in TransformAspect transformAspect)
+            in LocalTransform localTransform)
         {
-            var distance = math.distancesq(progress.LastCheckPointPosition, transformAspect.WorldPosition);
+            var distance = math.distancesq(progress.LastCheckPointPosition, localTransform.Position);
             SortableProgresses[index] = new SortableProgress
             {
                 Distance = distance,
@@ -115,7 +115,6 @@ namespace Unity.Entities.Racing.Gameplay
     /// <summary>
     /// Updates all player progress data based on the check points.
     /// </summary>
-    [BurstCompile]
     [WorldSystemFilter(WorldSystemFilterFlags.ServerSimulation)]
     public partial struct UpdatePlayerProgressSystem : ISystem, ISystemStartStop
     {
@@ -158,16 +157,11 @@ namespace Unity.Entities.Racing.Gameplay
         public void OnStopRunning(ref SystemState state)
         {
         }
-
-        public void OnDestroy(ref SystemState state)
-        {
-        }
     }
 
     /// <summary>
     /// Sets the rank for each player.
     /// </summary>
-    [BurstCompile]
     [WorldSystemFilter(WorldSystemFilterFlags.ServerSimulation)]
     public partial struct UpdatePlayerRankSystem : ISystem
     {
@@ -176,10 +170,6 @@ namespace Unity.Entities.Racing.Gameplay
         {
             m_PlayersQuery = state.GetEntityQuery(ComponentType.ReadOnly<Player>());
             state.RequireForUpdate<LapProgress>();
-        }
-
-        public void OnDestroy(ref SystemState state)
-        {
         }
 
         [BurstCompile]

@@ -171,9 +171,12 @@ namespace Unity.Entities.Racing.Gameplay
                 return;
 
             var instance = Instantiate(AudioSourcePrefab);
-            instance.name = "UI - AudioSource";
+            instance.name = "Music - AudioSource";
             MusicAudioSource = InstantiateAudioSource(instance, Lobby,true);
             MusicAudioSource.outputAudioMixerGroup = MusicChannel;
+            MusicAudioSource.bypassEffects = true;
+            MusicAudioSource.bypassListenerEffects = true;
+            MusicAudioSource.bypassReverbZones = true;
             MusicAudioSource.Play();
             SceneManager.MoveGameObjectToScene(instance, m_AdditiveScene);
         }
@@ -184,9 +187,12 @@ namespace Unity.Entities.Racing.Gameplay
                 return;
 
             var instance = Instantiate(AudioSourcePrefab);
-            instance.name = "Music - AudioSource";
+            instance.name = "UI - AudioSource";
             UIAudioSource = InstantiateAudioSource(instance, Click, true);
             UIAudioSource.outputAudioMixerGroup = UIChannel;
+            UIAudioSource.bypassReverbZones = true;
+            UIAudioSource.bypassListenerEffects = true;
+            UIAudioSource.bypassEffects = true;
             UIAudioSource.loop = false;
             SceneManager.MoveGameObjectToScene(instance, m_AdditiveScene);
         }

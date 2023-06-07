@@ -1,15 +1,44 @@
 using System;
-using Unity.Entities;
 using UnityEngine;
 using Unity.Entities.Racing.Common;
 
-namespace Dots.Racing
+namespace Unity.Entities.Racing.Authoring
 {
     public class NetcodeSpawnerAuthoring : MonoBehaviour
     {
-        // public GameObject CarBase;
         public SkinAuthoring[] SkinPrefabs;
         public SpawnPointAuthoring[] SpawnPoints;
+        
+        private class Baker : Baker<NetcodeSpawnerAuthoring>
+        {
+            public override void Bake(NetcodeSpawnerAuthoring authoring)
+            {
+                var entity = GetEntity(authoring.gameObject, TransformUsageFlags.None);
+                AddComponent<PlayerSpawner>(entity);
+
+                var skins = AddBuffer<SkinElement>(entity);
+                foreach (var skin in authoring.SkinPrefabs)
+                {
+                    skins.Add(new SkinElement
+                    {
+                        VisualEntity = GetEntity(skin.SkinPrefab, TransformUsageFlags.Renderable), 
+                        BaseType = GetEntity(skin.BaseType, TransformUsageFlags.None)
+                    });
+                }
+
+                var spawnPoints = AddBuffer<SpawnPoint>(entity);
+                foreach (var spawnPoint in authoring.SpawnPoints)
+                {
+                    spawnPoints.Add(new SpawnPoint
+                    {
+                        TrackPosition = spawnPoint.TrackSpawnPoint.position,
+                        TrackRotation = spawnPoint.TrackSpawnPoint.rotation,
+                        LobbyPosition = spawnPoint.LobbySpawnPoint.position,
+                        LobbyRotation = spawnPoint.LobbySpawnPoint.rotation,
+                    });
+                }
+            }
+        }
     }
 
     [Serializable]
@@ -24,35 +53,5 @@ namespace Dots.Racing
     {
         public GameObject SkinPrefab;
         public GameObject BaseType;
-    }
-
-    public class NetcodeSpawnerBaker : Baker<NetcodeSpawnerAuthoring>
-    {
-        public override void Bake(NetcodeSpawnerAuthoring authoring)
-        {
-            AddComponent(new PlayerSpawner());
-
-            var skins = AddBuffer<SkinElement>();
-            foreach (var skin in authoring.SkinPrefabs)
-            {
-                skins.Add(new SkinElement
-                {
-                    VisualEntity = GetEntity(skin.SkinPrefab), 
-                    BaseType = GetEntity(skin.BaseType)
-                });
-            }
-
-            var spawnPoints = AddBuffer<SpawnPoint>();
-            foreach (var spawnPoint in authoring.SpawnPoints)
-            {
-                spawnPoints.Add(new SpawnPoint
-                {
-                    TrackPosition = spawnPoint.TrackSpawnPoint.position,
-                    TrackRotation = spawnPoint.TrackSpawnPoint.rotation,
-                    LobbyPosition = spawnPoint.LobbySpawnPoint.position,
-                    LobbyRotation = spawnPoint.LobbySpawnPoint.rotation,
-                });
-            }
-        }
     }
 }

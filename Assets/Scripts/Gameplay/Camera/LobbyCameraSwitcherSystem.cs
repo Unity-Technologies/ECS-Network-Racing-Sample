@@ -7,7 +7,6 @@ namespace Unity.Entities.Racing.Gameplay
     /// <summary>
     /// Creates camera transition for Lobby
     /// </summary>
-    [BurstCompile]
     [WorldSystemFilter(WorldSystemFilterFlags.ClientSimulation)]
     public partial struct LobbyCameraSwitcherSystem : ISystem
     {
@@ -15,10 +14,6 @@ namespace Unity.Entities.Racing.Gameplay
         {
             state.RequireForUpdate<LocalUser>();
             state.RequireForUpdate<CarInput>();
-        }
-
-        public void OnDestroy(ref SystemState state)
-        {
         }
 
         public void OnUpdate(ref SystemState state)

@@ -1,5 +1,4 @@
-﻿using Gameplay.UI;
-using Unity.Burst;
+﻿using Unity.Burst;
 using Unity.Entities.Racing.Common;
 using Unity.Transforms;
 using UnityEngine.UIElements;
@@ -17,10 +16,6 @@ namespace Unity.Entities.Racing.Gameplay
         public void OnCreate(ref SystemState state)
         {
             state.RequireForUpdate<CarSelection>();
-        }
-
-        public void OnDestroy(ref SystemState state)
-        {
         }
 
         public void OnUpdate(ref SystemState state)
@@ -68,7 +63,6 @@ namespace Unity.Entities.Racing.Gameplay
     /// Destroy the previous skin if there is
     /// and instantiate the new prefab skin.
     /// </summary>
-    [BurstCompile]
     public partial struct UpdateCarSelectionSystem : ISystem
     {
         public void OnCreate(ref SystemState state)
@@ -77,10 +71,7 @@ namespace Unity.Entities.Racing.Gameplay
             state.RequireForUpdate<CarSelectionUpdate>();
         }
 
-        public void OnDestroy(ref SystemState state)
-        {
-        }
-
+        [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
             var carSelectionUpdate = GetSingleton<CarSelectionUpdate>();

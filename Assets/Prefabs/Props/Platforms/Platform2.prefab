@@ -277,10 +277,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rock3Snow
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 70960768115595781, guid: 97ee425f9efae1147a5d8c114e800dcb, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 9003876152831061875, guid: 97ee425f9efae1147a5d8c114e800dcb,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8198826896748271771}
   m_SourcePrefab: {fileID: 100100000, guid: 97ee425f9efae1147a5d8c114e800dcb, type: 3}
 --- !u!4 &3602854522836016873 stripped
 Transform:
@@ -288,6 +293,33 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 5062054902258707232}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &4230069399857169491 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9003876152831061875, guid: 97ee425f9efae1147a5d8c114e800dcb,
+    type: 3}
+  m_PrefabInstance: {fileID: 5062054902258707232}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &8198826896748271771
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4230069399857169491}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 3.2283444, y: 3.8961802, z: 4.079584}
+  m_Center: {x: 0.04090327, y: 0.33384043, z: -0.09437531}
 --- !u!1001 &5062054902275784913
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -1,8 +1,7 @@
-﻿using Unity.Entities.Racing.Gameplay;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace Dots.Racing
+namespace Unity.Entities.Racing.Gameplay
 {
     public class AudioUI : MonoBehaviour
     {

@@ -1,16 +1,17 @@
-using Unity.Entities;
 using UnityEngine;
 using Unity.Entities.Racing.Common;
 
-namespace Dots.Racing
+namespace Unity.Entities.Racing.Authoring
 {
-    public class AutoConnectAuthoring : MonoBehaviour { }
-
-    public class AutoConnectBaker : Baker<AutoConnectAuthoring>
+    public class AutoConnectAuthoring : MonoBehaviour
     {
-        public override void Bake(AutoConnectAuthoring authoring)
+        private class Baker : Baker<AutoConnectAuthoring>
         {
-            AddComponent<AutoConnect>();
+            public override void Bake(AutoConnectAuthoring authoring)
+            {
+                var entity = GetEntity(authoring.gameObject, TransformUsageFlags.None);
+                AddComponent<AutoConnect>(entity);
+            }
         }
     }
 }

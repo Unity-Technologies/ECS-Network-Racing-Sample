@@ -1,6 +1,5 @@
 using Unity.Burst;
 using Unity.Collections;
-using Unity.Entities;
 using Unity.Entities.Racing.Common;
 using Unity.NetCode;
 using UnityEngine;
@@ -11,7 +10,6 @@ namespace Unity.Entities.Racing.Gameplay
     /// <summary>
     ///  Place any established network connection in-game so ghost snapshot sync can start
     /// </summary>
-    [BurstCompile]
     [WorldSystemFilter(WorldSystemFilterFlags.ClientSimulation |
                        WorldSystemFilterFlags.ServerSimulation |
                        WorldSystemFilterFlags.ThinClientSimulation)]
@@ -36,10 +34,6 @@ namespace Unity.Entities.Racing.Gameplay
 
             commandBuffer.Playback(state.EntityManager);
             commandBuffer.Dispose();
-        }
-
-        public void OnDestroy(ref SystemState state)
-        {
         }
     }
 }

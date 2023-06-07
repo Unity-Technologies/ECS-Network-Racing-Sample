@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Diagnostics;
 using Unity.Burst;
 using Unity.Collections;
 using Unity.Entities.Racing.Common;
@@ -10,7 +9,6 @@ namespace Unity.Entities.Racing.Gameplay
     /// <summary>
     /// Show Leaderboard and pass to Lobby
     /// </summary>
-    [BurstCompile]
     [WorldSystemFilter(WorldSystemFilterFlags.ServerSimulation)]
     [UpdateAfter(typeof(UpdateTimerSystem))]
     public partial struct ClearLeaderboard : ISystem
@@ -18,10 +16,6 @@ namespace Unity.Entities.Racing.Gameplay
         public void OnCreate(ref SystemState state)
         {
             state.RequireForUpdate<Race>();
-        }
-
-        public void OnDestroy(ref SystemState state)
-        {
         }
 
         [BurstCompile]
@@ -61,7 +55,6 @@ namespace Unity.Entities.Racing.Gameplay
     /// <summary>
     /// Fills the Leaderboard Data for each player that finishes the race
     /// </summary>
-    [BurstCompile]
     [UpdateAfter(typeof(RaceFinishSystem))]
     [UpdateBefore(typeof(WaitToShowLeaderboard))]
     [WorldSystemFilter(WorldSystemFilterFlags.ServerSimulation)]
@@ -70,10 +63,6 @@ namespace Unity.Entities.Racing.Gameplay
         public void OnCreate(ref SystemState state)
         {
             state.RequireForUpdate<Race>();
-        }
-
-        public void OnDestroy(ref SystemState state)
-        {
         }
 
         [BurstCompile]
@@ -135,7 +124,7 @@ namespace Unity.Entities.Racing.Gameplay
                 }
             }
 
-            leaderboard.AsNativeArray().Sort(new SortableLeadboardComparer());
+            leaderboard.AsNativeArray().Sort(new SortableLeaderboardComparer());
         }
     }
 
@@ -143,7 +132,7 @@ namespace Unity.Entities.Racing.Gameplay
     /// Sort the Native Array based on Rank value
     /// </summary>
     [BurstCompile]
-    public struct SortableLeadboardComparer : IComparer<LeaderboardData>
+    public struct SortableLeaderboardComparer : IComparer<LeaderboardData>
     {
         public int Compare(LeaderboardData x, LeaderboardData y)
         {
@@ -155,7 +144,6 @@ namespace Unity.Entities.Racing.Gameplay
     /// Shows the leaderboard after the countdown has finished
     /// Then change race state to show the leaderboard.
     /// </summary>
-    [BurstCompile]
     [UpdateAfter(typeof(UpdateTimerSystem))]
     [WorldSystemFilter(WorldSystemFilterFlags.ServerSimulation)]
     public partial struct WaitToShowLeaderboard : ISystem
@@ -165,10 +153,7 @@ namespace Unity.Entities.Racing.Gameplay
             state.RequireForUpdate<Race>();
         }
 
-        public void OnDestroy(ref SystemState state)
-        {
-        }
-
+        [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
             var race = GetSingletonRW<Race>().ValueRW;

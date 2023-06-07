@@ -303,19 +303,11 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 101f06caba87f8c459a7c41907eeb021,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 4412244907346407382}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 101f06caba87f8c459a7c41907eeb021,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1277559462431956765}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 101f06caba87f8c459a7c41907eeb021,
-        type: 3}
-      insertIndex: -1
       addedObject: {fileID: 9003448944352979178}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 101f06caba87f8c459a7c41907eeb021,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 3082244714180822608}
+      addedObject: {fileID: 8997978149068448959}
   m_SourcePrefab: {fileID: 100100000, guid: 101f06caba87f8c459a7c41907eeb021, type: 3}
 --- !u!23 &2433106521288911241 stripped
 MeshRenderer:
@@ -335,200 +327,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 3892716313084048653}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &4412244907346407382
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4234752599027550300}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b275e5f92732148048d7b77e264ac30e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ShapeType: 0
-  m_PrimitiveCenter:
-    x: -0.0013012886
-    y: 0.040849477
-    z: 0.009236336
-  m_PrimitiveSize:
-    x: 8.008661
-    y: 0.8430169
-    z: 21.560158
-  m_PrimitiveOrientation:
-    Value:
-      x: -0
-      y: 0
-      z: 0
-    RotationOrder: 4
-  m_Capsule:
-    Height: 21.560158
-    Radius: 4.0043306
-    Axis: 2
-  m_Cylinder:
-    Height: 21.560158
-    Radius: 4.0043306
-    Axis: 2
-  m_CylinderSideCount: 20
-  m_SphereRadius: 10.780079
-  m_MinimumSkinnedVertexWeight: 0.1
-  m_ConvexHullGenerationParameters:
-    m_SimplificationTolerance: 0.32340235
-    m_BevelRadius: 0.2
-    m_MinimumAngle: 2.5000002
-  m_CustomMesh: {fileID: 0}
-  m_ForceUnique: 0
-  m_Material:
-    m_SupportsTemplate: 1
-    m_Template: {fileID: 0}
-    m_CollisionResponse:
-      m_Override: 0
-      m_Value: 0
-    m_Friction:
-      m_Override: 0
-      m_Value:
-        Value: 0.5
-        CombineMode: 0
-    m_Restitution:
-      m_Override: 0
-      m_Value:
-        Value: 0
-        CombineMode: 2
-    m_BelongsToCategories:
-      m_Override: 0
-      m_Value:
-        Category00: 1
-        Category01: 1
-        Category02: 1
-        Category03: 1
-        Category04: 1
-        Category05: 1
-        Category06: 1
-        Category07: 1
-        Category08: 1
-        Category09: 1
-        Category10: 1
-        Category11: 1
-        Category12: 1
-        Category13: 1
-        Category14: 1
-        Category15: 1
-        Category16: 1
-        Category17: 1
-        Category18: 1
-        Category19: 1
-        Category20: 1
-        Category21: 1
-        Category22: 1
-        Category23: 1
-        Category24: 1
-        Category25: 1
-        Category26: 1
-        Category27: 1
-        Category28: 1
-        Category29: 1
-        Category30: 1
-        Category31: 1
-    m_CollidesWithCategories:
-      m_Override: 0
-      m_Value:
-        Category00: 1
-        Category01: 1
-        Category02: 1
-        Category03: 1
-        Category04: 1
-        Category05: 1
-        Category06: 1
-        Category07: 1
-        Category08: 1
-        Category09: 1
-        Category10: 1
-        Category11: 1
-        Category12: 1
-        Category13: 1
-        Category14: 1
-        Category15: 1
-        Category16: 1
-        Category17: 1
-        Category18: 1
-        Category19: 1
-        Category20: 1
-        Category21: 1
-        Category22: 1
-        Category23: 1
-        Category24: 1
-        Category25: 1
-        Category26: 1
-        Category27: 1
-        Category28: 1
-        Category29: 1
-        Category30: 1
-        Category31: 1
-    m_CustomMaterialTags:
-      m_Override: 0
-      m_Value:
-        Tag00: 0
-        Tag01: 0
-        Tag02: 0
-        Tag03: 0
-        Tag04: 0
-        Tag05: 0
-        Tag06: 0
-        Tag07: 0
-    m_SerializedVersion: 1
-  m_SerializedVersion: 1
---- !u!114 &1277559462431956765
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4234752599027550300}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ccea9ea98e38942e0b0938c27ed1903e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_MotionType: 2
-  m_Smoothing: 0
-  m_Mass: 1
-  m_LinearDamping: 0.01
-  m_AngularDamping: 0.05
-  m_InitialLinearVelocity:
-    x: 0
-    y: 0
-    z: 0
-  m_InitialAngularVelocity:
-    x: 0
-    y: 0
-    z: 0
-  m_GravityFactor: 1
-  m_OverrideDefaultMassDistribution: 0
-  m_CenterOfMass:
-    x: 0
-    y: 0
-    z: 0
-  m_Orientation:
-    Value:
-      x: 0
-      y: 0
-      z: 0
-    RotationOrder: 4
-  m_InertiaTensor:
-    x: 0.4
-    y: 0.4
-    z: 0.4
-  m_WorldIndex: 0
-  m_CustomTags:
-    Tag00: 0
-    Tag01: 0
-    Tag02: 0
-    Tag03: 0
-    Tag04: 0
-    Tag05: 0
-    Tag06: 0
-    Tag07: 0
 --- !u!205 &9003448944352979178
 LODGroup:
   m_ObjectHideFlags: 0
@@ -556,8 +354,8 @@ LODGroup:
     renderers:
     - renderer: {fileID: 2596841222386364097}
   m_Enabled: 1
---- !u!64 &3082244714180822608
-MeshCollider:
+--- !u!65 &8997978149068448959
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -574,7 +372,6 @@ MeshCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -7388844677266060299, guid: 101f06caba87f8c459a7c41907eeb021, type: 3}
+  serializedVersion: 3
+  m_Size: {x: 8.065545, y: 0.89038426, z: 21.602268}
+  m_Center: {x: 0.0017771721, y: 0.0382953, z: 0.009235859}

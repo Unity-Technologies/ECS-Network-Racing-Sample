@@ -1,5 +1,4 @@
-﻿using Dots.Racing;
-using Unity.Burst;
+﻿using Unity.Burst;
 using Unity.Entities.Racing.Common;
 using static Unity.Entities.SystemAPI;
 
@@ -8,15 +7,10 @@ namespace Unity.Entities.Racing.Gameplay
     /// <summary>
     /// Update the Player Audio Sources position and volume
     /// </summary>
-    [BurstCompile]
     [UpdateAfter(typeof(UpdateCameraTargetSystem))]
     [WorldSystemFilter(WorldSystemFilterFlags.ClientSimulation | WorldSystemFilterFlags.ThinClientSimulation)]
     public partial struct UpdateAudioSourceSystem : ISystem
     {
-        public void OnCreate(ref SystemState state)
-        {
-        }
-
         public void OnDestroy(ref SystemState state)
         {
             foreach (var car in Query<PlayerAspect>().WithAll<AudioSourceTag>())
@@ -55,19 +49,10 @@ namespace Unity.Entities.Racing.Gameplay
     /// <summary>
     /// Update music clips
     /// </summary>
-    [BurstCompile]
     [UpdateAfter(typeof(UpdateCameraTargetSystem))]
     [WorldSystemFilter(WorldSystemFilterFlags.ClientSimulation | WorldSystemFilterFlags.ThinClientSimulation)]
     public partial struct UpdateMusicSourceSystem : ISystem
     {
-        public void OnCreate(ref SystemState state)
-        {
-        }
-
-        public void OnDestroy(ref SystemState state)
-        { 
-        }
-
         public void OnUpdate(ref SystemState state)
         {
             if (PlayerAudioManager.Instance == null)
@@ -109,15 +94,10 @@ namespace Unity.Entities.Racing.Gameplay
     /// <summary>
     /// Update the Player Audio Sources position and volume
     /// </summary>
-    [BurstCompile]
     [UpdateAfter(typeof(UpdateCameraTargetSystem))]
     [WorldSystemFilter(WorldSystemFilterFlags.ClientSimulation | WorldSystemFilterFlags.ThinClientSimulation)]
     public partial struct UpdateUIAudioSourceSystem : ISystem
     {
-        public void OnCreate(ref SystemState state)
-        {
-        }
-
         public void OnDestroy(ref SystemState state)
         {
             foreach (var car in Query<PlayerAspect>().WithAll<AudioSourceTag>())

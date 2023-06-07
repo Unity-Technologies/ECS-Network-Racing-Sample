@@ -10,11 +10,10 @@ namespace Unity.Entities.Racing.Gameplay
     /// Instantiates a player skin entity prefab.
     /// </summary>
     [WorldSystemFilter(WorldSystemFilterFlags.ClientSimulation | WorldSystemFilterFlags.ThinClientSimulation)]
-    [BurstCompile]
     public partial struct SetPlayerSkinSystem : ISystem
     {
         private EntityQuery m_CarWithoutSkinQuery;
-
+        
         public void OnCreate(ref SystemState state)
         {
             state.RequireForUpdate<SkinElement>();
@@ -32,10 +31,7 @@ namespace Unity.Entities.Racing.Gameplay
             state.RequireForUpdate(m_CarWithoutSkinQuery);
         }
 
-        public void OnDestroy(ref SystemState state)
-        {
-        }
-
+        [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
             var commandBuffer = new EntityCommandBuffer(Allocator.Temp);
@@ -59,21 +55,18 @@ namespace Unity.Entities.Racing.Gameplay
     /// Instantiate the entity prefab wheels for the skin.
     /// </summary>
     [WorldSystemFilter(WorldSystemFilterFlags.ClientSimulation | WorldSystemFilterFlags.ThinClientSimulation)]
-    [BurstCompile]
     public partial struct SetWheelVisualSystem : ISystem
     {
         private ComponentLookup<VisualWheels> m_VisualWheelsLookup;
 
+        [BurstCompile]
         public void OnCreate(ref SystemState state)
         {
             m_VisualWheelsLookup = state.GetComponentLookup<VisualWheels>();
             state.RequireForUpdate<Skin>();
         }
 
-        public void OnDestroy(ref SystemState state)
-        {
-        }
-
+        [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
             m_VisualWheelsLookup.Update(ref state);

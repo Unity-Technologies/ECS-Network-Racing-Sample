@@ -1,6 +1,5 @@
 using Unity.Entities.Racing.Common;
 using Unity.Burst;
-using Unity.Entities;
 using Unity.NetCode;
 using UnityEngine;
 
@@ -17,7 +16,7 @@ namespace Unity.Entities.Racing.Gameplay
         private EntityQuery m_NumberOfPlayersQuery;
         private EntityQuery m_NetworkIDComponentQuery;
 
-        private NetworkSnapshotAckComponent m_PingData;
+        private NetworkSnapshotAck m_PingData;
 
         #region UpdateFPS
 
@@ -50,11 +49,7 @@ namespace Unity.Entities.Racing.Gameplay
             m_DeltaTime = 0.0F;
             m_FPS = 0.0F;
             m_NumberOfPlayersQuery = state.GetEntityQuery(ComponentType.ReadOnly<LapProgress>());
-            m_NetworkIDComponentQuery = state.GetEntityQuery(ComponentType.ReadOnly<NetworkIdComponent>());
-        }
-
-        public void OnDestroy(ref SystemState state)
-        {
+            m_NetworkIDComponentQuery = state.GetEntityQuery(ComponentType.ReadOnly<NetworkId>());
         }
 
         private float UpdateFPS()
@@ -77,13 +72,13 @@ namespace Unity.Entities.Racing.Gameplay
             if (!state.EntityManager.Exists(playerEntity))
                 return;
 
-            var owner = state.EntityManager.GetComponentData<GhostOwnerComponent>(playerEntity);
+            var owner = state.EntityManager.GetComponentData<GhostOwner>(playerEntity);
             var networkIdEntities = m_NetworkIDComponentQuery.ToEntityArray(state.WorldUpdateAllocator);
             foreach (var entity in networkIdEntities)
             {
-                var networkIdComponent = state.EntityManager.GetComponentData<NetworkIdComponent>(entity);
+                var networkIdComponent = state.EntityManager.GetComponentData<NetworkId>(entity);
                 if (owner.NetworkId == networkIdComponent.Value)
-                    m_PingData = state.EntityManager.GetComponentData<NetworkSnapshotAckComponent>(entity);
+                    m_PingData = state.EntityManager.GetComponentData<NetworkSnapshotAck>(entity);
             }
 
             if (m_DeltaTime + Time.unscaledDeltaTime > 1.0 / m_UpdateRateSeconds)

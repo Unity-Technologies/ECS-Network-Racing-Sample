@@ -104,6 +104,14 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 8513249402987049439}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b43bf88923dd0754884921d77eca86bb,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4310695467143441054}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b43bf88923dd0754884921d77eca86bb,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3959218396193185350}
   m_SourcePrefab: {fileID: 100100000, guid: b43bf88923dd0754884921d77eca86bb, type: 3}
 --- !u!1 &81796554249954283 stripped
 GameObject:
@@ -138,6 +146,48 @@ LODGroup:
     renderers:
     - renderer: {fileID: 9035880684485544056}
   m_Enabled: 1
+--- !u!65 &4310695467143441054
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 81796554249954283}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 4.270977, y: 6.4006276, z: 10.476272}
+  m_Center: {x: 10.368185, y: -0.080827475, z: 5.185128}
+--- !u!65 &3959218396193185350
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 81796554249954283}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 4.270977, y: 6.4006276, z: 10.476272}
+  m_Center: {x: -10.29, y: -0.080827475, z: 5.185128}
 --- !u!4 &750211235212638545 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: b43bf88923dd0754884921d77eca86bb,

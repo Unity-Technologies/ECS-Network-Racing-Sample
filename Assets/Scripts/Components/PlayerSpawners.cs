@@ -43,7 +43,7 @@ namespace Unity.Entities.Racing.Common
     {
         public readonly Entity Self;
         readonly RefRO<SpawnPlayerRequest> m_SpawnRequest;
-        readonly RefRO<ReceiveRpcCommandRequestComponent> m_ReceiveRpcRequest;
+        readonly RefRO<ReceiveRpcCommandRequest> m_ReceiveRpcRequest;
         public int Id => m_SpawnRequest.ValueRO.Id;
         public FixedString64Bytes Name => m_SpawnRequest.ValueRO.Name;
         public Entity SourceConnection => m_ReceiveRpcRequest.ValueRO.SourceConnection;

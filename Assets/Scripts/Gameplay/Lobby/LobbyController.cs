@@ -8,7 +8,6 @@ namespace Unity.Entities.Racing.Gameplay
     /// <summary>
     /// Evaluates current race state and set player state
     /// </summary>
-    [BurstCompile]
     [WorldSystemFilter(WorldSystemFilterFlags.ServerSimulation)]
     public partial struct SetPlayerReadySystem : ISystem
     {
@@ -17,13 +16,9 @@ namespace Unity.Entities.Racing.Gameplay
         public void OnCreate(ref SystemState state)
         {
             m_PlayerReadyQuery = state.GetEntityQuery(ComponentType.ReadOnly<PlayersReadyRPC>(),
-                ComponentType.ReadOnly<ReceiveRpcCommandRequestComponent>());
+                ComponentType.ReadOnly<ReceiveRpcCommandRequest>());
             state.RequireForUpdate(m_PlayerReadyQuery);
             state.RequireForUpdate<Race>();
-        }
-
-        public void OnDestroy(ref SystemState state)
-        {
         }
 
         [BurstCompile]
@@ -52,7 +47,6 @@ namespace Unity.Entities.Racing.Gameplay
     /// Evaluates the timer for going from lobby to race
     /// Set state for race component.
     /// </summary>
-    [BurstCompile]
     [WorldSystemFilter(WorldSystemFilterFlags.ServerSimulation)]
     [UpdateAfter(typeof(UpdateTimerSystem))]
     public partial struct LobbyToRaceCountdownSystem : ISystem
@@ -61,8 +55,6 @@ namespace Unity.Entities.Racing.Gameplay
         {
             state.RequireForUpdate<Race>();
         }
-
-        public void OnDestroy(ref SystemState state) { }
 
         [BurstCompile]
         public void OnUpdate(ref SystemState state)
@@ -93,7 +85,6 @@ namespace Unity.Entities.Racing.Gameplay
     /// Returns the state from Race to Lobby 
     /// That cancels going to the race
     /// </summary>
-    [BurstCompile]
     [WorldSystemFilter(WorldSystemFilterFlags.ServerSimulation)]
     public partial struct CancelPlayersReady : ISystem
     {
@@ -102,13 +93,9 @@ namespace Unity.Entities.Racing.Gameplay
         public void OnCreate(ref SystemState state)
         {
             m_CancelPlayerReadyQuery = state.GetEntityQuery(ComponentType.ReadOnly<CancelPlayerReadyRPC>(),
-                ComponentType.ReadOnly<ReceiveRpcCommandRequestComponent>());
+                ComponentType.ReadOnly<ReceiveRpcCommandRequest>());
             state.RequireForUpdate(m_CancelPlayerReadyQuery);
             state.RequireForUpdate<Race>();
-        }
-
-        public void OnDestroy(ref SystemState state)
-        {
         }
 
         [BurstCompile]
@@ -133,7 +120,6 @@ namespace Unity.Entities.Racing.Gameplay
     /// <summary>
     /// Moves the cars after race has finished to the Lobby.
     /// </summary>
-    [BurstCompile]
     [WorldSystemFilter(WorldSystemFilterFlags.ServerSimulation)]
     public partial struct TeleportPlayerToLobbySystem : ISystem
     {
@@ -142,10 +128,7 @@ namespace Unity.Entities.Racing.Gameplay
             state.RequireForUpdate<Race>();
         }
 
-        public void OnDestroy(ref SystemState state)
-        {
-        }
-
+        [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
             var race = GetSingleton<Race>();

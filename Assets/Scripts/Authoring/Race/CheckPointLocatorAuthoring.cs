@@ -1,21 +1,21 @@
-using Dots.Racing;
 using Unity.Entities.Racing.Common;
 using UnityEngine;
-using Unity.Entities;
 
-namespace Dots.Racing
+namespace Unity.Entities.Racing.Authoring
 {
-    public class CheckPointLocatorAuthoring : MonoBehaviour { }
-
-    public class CheckPointLocatorBaker : Baker<CheckPointLocatorAuthoring>
+    public class CheckPointLocatorAuthoring : MonoBehaviour
     {
-        public override void Bake(CheckPointLocatorAuthoring authoring)
+        private class Baker : Baker<CheckPointLocatorAuthoring>
         {
-            var checkPointLocator = new CheckPointLocator()
+            public override void Bake(CheckPointLocatorAuthoring authoring)
             {
-                ResetPosition = authoring.transform.position
-            };
-            AddComponent(checkPointLocator);
+                var entity = GetEntity(authoring.gameObject, TransformUsageFlags.Dynamic);
+                var checkPointLocator = new CheckPointLocator
+                {
+                    ResetPosition = authoring.transform.position
+                };
+                AddComponent(entity, checkPointLocator);
+            }
         }
     }
 }

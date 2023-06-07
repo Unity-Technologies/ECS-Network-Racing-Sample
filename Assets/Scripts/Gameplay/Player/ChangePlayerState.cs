@@ -1,6 +1,5 @@
 ﻿using Unity.Entities.Racing.Common;
 using Unity.Burst;
-using Unity.Entities;
 
 namespace Unity.Entities.Racing.Gameplay
 {

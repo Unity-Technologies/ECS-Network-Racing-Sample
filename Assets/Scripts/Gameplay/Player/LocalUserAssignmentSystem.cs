@@ -2,6 +2,7 @@
 using Unity.Collections;
 using Unity.Entities.Racing.Common;
 using Unity.NetCode;
+using UnityEngine;
 using static Unity.Entities.SystemAPI;
 
 namespace Unity.Entities.Racing.Gameplay
@@ -9,24 +10,19 @@ namespace Unity.Entities.Racing.Gameplay
     /// <summary>
     /// Adds Local User component to filter it.
     /// </summary>
-    [BurstCompile]
     [WorldSystemFilter(WorldSystemFilterFlags.ClientSimulation | WorldSystemFilterFlags.ThinClientSimulation)]
     public partial struct LocalUserAssignmentSystem : ISystem
     {
         [BurstCompile]
         public void OnCreate(ref SystemState state)
         {
-            state.RequireForUpdate<NetworkIdComponent>();
-        }
-
-        public void OnDestroy(ref SystemState state)
-        {
+            state.RequireForUpdate<NetworkId>();
         }
 
         [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
-            var id = GetSingleton<NetworkIdComponent>();
+            var id = GetSingleton<NetworkId>();
             var ecb = new EntityCommandBuffer(Allocator.TempJob);
             foreach (var player in Query<PlayerAspect>().WithNone<LocalUser>())
             {

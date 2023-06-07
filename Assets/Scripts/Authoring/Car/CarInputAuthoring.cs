@@ -1,16 +1,17 @@
 ﻿using Unity.Entities.Racing.Common;
-using Unity.Entities;
 using UnityEngine;
 
-namespace Dots.Racing
+namespace Unity.Entities.Racing.Authoring
 {
-    public class CarInputAuthoring : MonoBehaviour { }
-    
-    public class CarInputBaker : Baker<CarInputAuthoring>
+    public class CarInputAuthoring : MonoBehaviour
     {
-        public override void Bake(CarInputAuthoring authoring)
+        private class Baker : Baker<CarInputAuthoring>
         {
-            AddComponent<CarInput>();
+            public override void Bake(CarInputAuthoring authoring)
+            {
+                var entity = GetEntity(authoring.gameObject, TransformUsageFlags.None);
+                AddComponent<CarInput>(entity);
+            }
         }
     }
 }

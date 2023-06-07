@@ -1,6 +1,6 @@
-using Dots.Racing;
 using Unity.Burst;
 using Unity.Entities.Racing.Common;
+using UnityEngine;
 using static Unity.Entities.SystemAPI;
 
 namespace Unity.Entities.Racing.Gameplay
@@ -10,8 +10,8 @@ namespace Unity.Entities.Racing.Gameplay
     /// Place cars at each starting point
     /// Set race state.
     /// </summary>
-    [BurstCompile]
     [UpdateAfter(typeof(UpdateTimerSystem))]
+    [UpdateBefore(typeof(LobbyToRaceCountdownSystem))]
     [WorldSystemFilter(WorldSystemFilterFlags.ServerSimulation)]
     public partial struct RaceIntroSystem : ISystem
     {
@@ -21,19 +21,13 @@ namespace Unity.Entities.Racing.Gameplay
             state.RequireForUpdate<SpawnPoint>(); // TODO: Separate lobby and race spawn points
         }
 
-        public void OnDestroy(ref SystemState state)
-        {
-        }
-
         [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
             var race = GetSingletonRW<Race>().ValueRW;
 
             if (!race.IsRaceStarting)
-            {
                 return;
-            }
 
             // we move the cars to the starting point
             var spawnPointBuffer = GetSingletonBuffer<SpawnPoint>();
@@ -45,7 +39,7 @@ namespace Unity.Entities.Racing.Gameplay
                 player.ResetVehicle();
                 player.ResetLapProgress();
             }
-
+            
             if (race.TimerFinished)
             {
                 race.SetRaceState(RaceState.CountDown);
@@ -76,7 +70,6 @@ namespace Unity.Entities.Racing.Gameplay
     /// <summary>
     /// Change the state for the race when countdown has finished
     /// </summary>
-    [BurstCompile]
     [UpdateBefore(typeof(RaceIntroSystem))]
     [UpdateAfter(typeof(UpdateTimerSystem))]
     [WorldSystemFilter(WorldSystemFilterFlags.ServerSimulation)]
@@ -85,10 +78,6 @@ namespace Unity.Entities.Racing.Gameplay
         public void OnCreate(ref SystemState state)
         {
             state.RequireForUpdate<Race>();
-        }
-
-        public void OnDestroy(ref SystemState state)
-        {
         }
 
         [BurstCompile]
@@ -122,7 +111,6 @@ namespace Unity.Entities.Racing.Gameplay
     /// <summary>
     /// Handles the events when the Player Finishes the race
     /// </summary>
-    [BurstCompile]
     [WorldSystemFilter(WorldSystemFilterFlags.ServerSimulation)]
     [UpdateBefore(typeof(UpdateTimerSystem))]
     public partial struct RacePlayerMonitorSystem : ISystem
@@ -130,10 +118,6 @@ namespace Unity.Entities.Racing.Gameplay
         public void OnCreate(ref SystemState state)
         {
             state.RequireForUpdate<Race>();
-        }
-
-        public void OnDestroy(ref SystemState state)
-        {
         }
 
         [BurstCompile]
@@ -168,7 +152,6 @@ namespace Unity.Entities.Racing.Gameplay
     /// <summary>
     /// Update Finish Timers in the Server
     /// </summary>
-    [BurstCompile]
     [WorldSystemFilter(WorldSystemFilterFlags.ServerSimulation)]
     [UpdateAfter(typeof(UpdateTimerSystem))]
     public partial struct RaceFinishSystem : ISystem
@@ -176,10 +159,6 @@ namespace Unity.Entities.Racing.Gameplay
         public void OnCreate(ref SystemState state)
         {
             state.RequireForUpdate<Race>();
-        }
-
-        public void OnDestroy(ref SystemState state)
-        {
         }
 
         [BurstCompile]
@@ -211,7 +190,6 @@ namespace Unity.Entities.Racing.Gameplay
     /// Update the car's timer celebration idle.
     /// Set the car's state to Finish if timer is over.
     /// </summary>
-    [BurstCompile]
     [WorldSystemFilter(WorldSystemFilterFlags.ServerSimulation)]
     [UpdateAfter(typeof(UpdateTimerSystem))]
     public partial struct PlayerCelebrationSystem : ISystem
@@ -219,10 +197,6 @@ namespace Unity.Entities.Racing.Gameplay
         public void OnCreate(ref SystemState state)
         {
             state.RequireForUpdate<Race>();
-        }
-
-        public void OnDestroy(ref SystemState state)
-        {
         }
 
         [BurstCompile]

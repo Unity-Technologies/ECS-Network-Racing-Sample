@@ -1,16 +1,17 @@
 ﻿using Unity.Entities.Racing.Common;
-using Unity.Entities;
 using UnityEngine;
 
-namespace Dots.Racing
+namespace Unity.Entities.Racing.Authoring
 {
-    public class PlayerAuthoring : MonoBehaviour { }
-
-    public class PlayerBaker : Baker<PlayerAuthoring>
+    public class PlayerAuthoring : MonoBehaviour
     {
-        public override void Bake(PlayerAuthoring authoring)
+        private class Baker : Baker<PlayerAuthoring>
         {
-            AddComponent<Player>();
+            public override void Bake(PlayerAuthoring authoring)
+            {
+                var entity = GetEntity(authoring.gameObject, TransformUsageFlags.None);
+                AddComponent<Player>(entity);
+            }
         }
     }
 }

@@ -21,12 +21,12 @@
 
 .mobile-control-button {
     background-image: url('project://database/Assets/Art/Textures/UI/HUD/mobile-controls.png?fileID=-662789227&guid=6776acfd078d9544cbb255d9bdf99964&type=3#left-arrow');
-    margin: 10px;
     padding: 0;
     background-color: rgba(188, 188, 188, 0);
     -unity-background-image-tint-color: rgba(255, 255, 255, 0.5);
     border-width: 0;
     -unity-background-scale-mode: scale-to-fit;
+    margin: 20px;
 }
 
 .mobile-control-button:active {

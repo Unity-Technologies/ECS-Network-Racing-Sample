@@ -5,6 +5,8 @@ using Unity.Physics;
 using Unity.Properties;
 using Unity.Transforms;
 
+#pragma warning disable CS0414
+
 namespace Unity.Entities.Racing.Common
 {
     /// <summary>
@@ -49,7 +51,7 @@ namespace Unity.Entities.Racing.Common
         Race,
         CelebrationIdle,
         Finished,
-        Leaderboard,
+        Leaderboard
     }
 
     /// <summary>
@@ -72,7 +74,6 @@ namespace Unity.Entities.Racing.Common
         public bool StartingRace => State == PlayerState.StartingRace;
         public bool InRace => State == PlayerState.Race;
         public bool HasFinished => State == PlayerState.Finished;
-
         public bool IsCelebrating => State == PlayerState.CelebrationIdle;
     }
 
@@ -81,8 +82,8 @@ namespace Unity.Entities.Racing.Common
     /// </summary>
     public readonly partial struct LocalPlayerAspect : IAspect
     {
-        public readonly RefRW<CarInput> CarInput;
-        private readonly TransformAspect m_Transform;
+        private readonly RefRW<CarInput> CarInput;
+        private readonly RefRO<LocalTransform> m_LocalTransform;
         private readonly RefRO<LapProgress> m_LapProgress;
         private readonly RefRW<Player> m_Player;
         private readonly RefRW<LocalUser> m_LocalUser;
@@ -90,15 +91,15 @@ namespace Unity.Entities.Racing.Common
         public Player Player => m_Player.ValueRO;
         public LapProgress LapProgress => m_LapProgress.ValueRO;
         public LocalToWorld LocalToWorld => m_LocalToWorld.ValueRO;
-        
+
         public bool HasAnyInput()
         {
-            return math.abs(CarInput.ValueRO.Horizontal) > 0 ||  math.abs(CarInput.ValueRO.Vertical)>0;
+            return math.abs(CarInput.ValueRO.Horizontal) > 0 || math.abs(CarInput.ValueRO.Vertical) > 0;
         }
-        
+
         public bool HasValidPosition()
         {
-            var isFinite = math.isfinite(m_Transform.LocalPosition);
+            var isFinite = math.isfinite(m_LocalTransform.ValueRO.Position);
             return isFinite.x && isFinite.y && isFinite.z;
         }
     }
@@ -109,9 +110,9 @@ namespace Unity.Entities.Racing.Common
     public readonly partial struct PlayerAspect : IAspect
     {
         public readonly Entity Self;
-        public readonly TransformAspect Transform;
+        readonly RefRW<LocalTransform> m_LocalTransform;
         readonly RefRO<LocalToWorld> m_LocalToWorld;
-        readonly RefRO<GhostOwnerComponent> m_GhostOwner;
+        readonly RefRO<GhostOwner> m_GhostOwner;
         readonly RefRO<Rank> m_Rank;
         readonly RefRO<PlayerName> m_Name;
         readonly RefRW<Player> m_Player;
@@ -119,18 +120,28 @@ namespace Unity.Entities.Racing.Common
         readonly RefRW<LapProgress> m_LapProgress;
         readonly RefRW<PhysicsVelocity> m_Velocity;
         readonly RefRW<Reset> m_Reset;
-        
+
         public int NetworkId => m_GhostOwner.ValueRO.NetworkId;
         public int Rank => m_Rank.ValueRO.Value;
         public FixedString64Bytes Name => m_Name.ValueRO.Name;
-
         public bool IsCelebrating => Player.IsCelebrating && LapProgress.CelebrationIdleDelay > 0;
         public bool FinishedCelebration => Player.IsCelebrating && LapProgress.CelebrationIdleDelay <= 0;
-
         public bool HasArrived => (Player.IsCelebrating || Player.HasFinished) && LapProgress.HasArrived;
 
-        [CreateProperty]
-        public LapProgress LapProgress => m_LapProgress.ValueRO;
+        [CreateProperty] public LapProgress LapProgress => m_LapProgress.ValueRO;
+        public Player Player => m_Player.ValueRO;
+        public Skin Skin => m_Skin.ValueRO;
+        public PhysicsVelocity Velocity => m_Velocity.ValueRO;
+        public Reset Reset => m_Reset.ValueRO;
+        public LocalToWorld LocalToWorld => m_LocalToWorld.ValueRO;
+
+        public void ResetPlayer()
+        {
+            m_LocalTransform.ValueRW.Position = Reset.TargetPosition;
+            m_LocalTransform.ValueRW.Rotation = Reset.TargetRotation;
+            ResetVelocity();
+            SetPlayerTransformReady();
+        }
 
         public void AddedToLeaderboard()
         {
@@ -141,6 +152,7 @@ namespace Unity.Entities.Racing.Common
         {
             m_LapProgress.ValueRW.Reset();
         }
+
         public void ResetCheckpoint()
         {
             m_LapProgress.ValueRW.CurrentCheckPoint = 0;
@@ -155,22 +167,18 @@ namespace Unity.Entities.Racing.Common
         {
             m_LapProgress.ValueRW.CurrentLap++;
         }
+
         public void RestLapCount()
         {
             m_LapProgress.ValueRW.CurrentLap = 0;
         }
 
-        public void ReduceCelebrationTimer(float value) 
+        public void ReduceCelebrationTimer(float value)
         {
             m_LapProgress.ValueRW.CelebrationIdleDelay -= value;
         }
-        public Player Player => m_Player.ValueRO;
-        public Skin Skin => m_Skin.ValueRO;
-        public PhysicsVelocity Velocity => m_Velocity.ValueRO;
-        public Reset Reset => m_Reset.ValueRO;
-        public LocalToWorld LocalToWorld => m_LocalToWorld.ValueRO;
-        
-        public void UpdateSkin (bool value = false)
+
+        public void UpdateSkin(bool value = false)
         {
             m_Skin.ValueRW.NeedUpdate = value;
         }
@@ -182,7 +190,7 @@ namespace Unity.Entities.Racing.Common
             m_LapProgress.ValueRW.ArrivalTime = elapseTime;
         }
 
-        public void SetFinishedRace() 
+        public void SetFinishedRace()
         {
             m_Player.ValueRW.State = PlayerState.Finished;
         }
@@ -209,6 +217,7 @@ namespace Unity.Entities.Racing.Common
         {
             m_Reset.ValueRW.Transform = false;
         }
+
         public void SetPlayerWheelsReady()
         {
             m_Reset.ValueRW.Wheels = false;

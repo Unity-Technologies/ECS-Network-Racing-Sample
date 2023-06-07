@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
-using Unity.Entities.Racing.Gameplay;
 using Unity.Mathematics;
 using Unity.NetCode;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace Gameplay.UI
+namespace Unity.Entities.Racing.Gameplay
 {
     /// <summary>
     /// Creates the list of skins
@@ -88,8 +87,11 @@ namespace Gameplay.UI
             PlayerAudioManager.Instance.PlayClick();
             ShowCarSelection(false);
 
+#if AUTH_PACKAGE_PRESENT
+                VivoxManager.Instance.Login(PlayerInfoController.Instance.LocalPlayerName);
+#endif
+
             // Connect to Server of Create Client & Server
-// #if UNITY_EDITOR
             if (ClientServerBootstrap.RequestedPlayType == ClientServerBootstrap.PlayType.ClientAndServer)
             {
                 ServerConnectionUtils.StartClientServer(PlayerInfoController.Instance.Port);
@@ -99,12 +101,6 @@ namespace Gameplay.UI
                 ServerConnectionUtils.ConnectToServer(PlayerInfoController.Instance.Ip,
                     PlayerInfoController.Instance.Port);
             }
-// #elif UNITY_CLIENT
-//             ServerConnectionUtils.ConnectToServer(PlayerInfoController.Instance.Ip, PlayerInfoController.Instance.Port);
-// #else
-//             // Client and Server
-//             ServerConnectionUtils.StartClientServer(PlayerInfoController.Instance.Port);
-// #endif
         }
 
         private void Update()

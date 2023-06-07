@@ -47,7 +47,7 @@ namespace Unity.Entities.Racing.Gameplay
 
             // Update Lap Progress
             var triggerCheckPoint = CheckPointLookup[triggerEntity];
-            var lapProgress = LapProgressLookup.GetRefRW(dynamicEntity, false);
+            var lapProgress = LapProgressLookup.GetRefRW(dynamicEntity);
             var currentCheckPointId = triggerCheckPoint.Id;
 
             if (lapProgress.ValueRO.NextPointId == currentCheckPointId)
@@ -61,7 +61,6 @@ namespace Unity.Entities.Racing.Gameplay
     /// <summary>
     /// Runs the job to evaluate the player and checkpoint collision
     /// </summary>
-    [BurstCompile]
     [RequireMatchingQueriesForUpdate]
     [UpdateInGroup(typeof(PhysicsSystemGroup))]
     [WorldSystemFilter(WorldSystemFilterFlags.ServerSimulation)]
@@ -96,10 +95,7 @@ namespace Unity.Entities.Racing.Gameplay
             m_Handles = new ComponentDataHandles(ref state);
         }
 
-        public void OnDestroy(ref SystemState state)
-        {
-        }
-
+        [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
             var simulationSingleton = SystemAPI.GetSingleton<SimulationSingleton>();

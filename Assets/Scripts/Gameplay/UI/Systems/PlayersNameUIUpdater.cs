@@ -15,14 +15,6 @@ namespace Unity.Entities.Racing.Gameplay
     [UpdateAfter(typeof(LocalUserAssignmentSystem))]
     public partial struct PlayersNameUIUpdater : ISystem
     {
-        public void OnCreate(ref SystemState state)
-        {
-        }
-
-        public void OnDestroy(ref SystemState state)
-        {
-        }
-
         public void OnUpdate(ref SystemState state)
         {
             if (PlayerInfoController.Instance == null)

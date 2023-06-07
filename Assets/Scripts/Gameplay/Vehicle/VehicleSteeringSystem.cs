@@ -17,7 +17,7 @@ namespace Unity.Entities.Racing.Gameplay
         public float DeltaTime;
 
         private void Execute(in Steering steering, in WheelDriveControls wheelDriveControls,
-            ref TransformAspect transformAspect, ref Wheel wheel)
+            ref LocalTransform localTransform, ref Wheel wheel)
         {
             float steeringAngle;
             var steeringAmount = wheelDriveControls.SteerAmount;
@@ -39,24 +39,15 @@ namespace Unity.Entities.Racing.Gameplay
             wheel.SteeringAngle = steeringAngle;
 
             var targetRotation = quaternion.AxisAngle(math.up(), steeringAngle);
-            transformAspect.LocalRotation = math.slerp(transformAspect.LocalRotation, targetRotation,
+            localTransform.Rotation = math.slerp(localTransform.Rotation, targetRotation,
                 steering.SteeringTime * DeltaTime);
         }
     }
 
-    [BurstCompile]
     [UpdateInGroup(typeof(BeforePhysicsSystemGroup))]
     [UpdateAfter(typeof(ProcessVehicleWheelsInputSystem))]
     public partial struct WheelSteeringSystem : ISystem
     {
-        public void OnCreate(ref SystemState state)
-        {
-        }
-
-        public void OnDestroy(ref SystemState state)
-        {
-        }
-
         [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {

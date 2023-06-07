@@ -13,9 +13,10 @@ namespace Unity.Entities.Racing.Gameplay
     /// <summary>
     /// Smooth the forces between ghost and client.
     /// </summary>
-    [BurstCompile]
     [WorldSystemFilter(WorldSystemFilterFlags.ClientSimulation)]
     [CreateAfter(typeof(GhostPredictionSmoothingSystem))]
+    [BurstCompile]
+
     public unsafe partial struct VehicleSmoothingSystem : ISystem
     {
         public void OnCreate(ref SystemState state)
@@ -56,9 +57,8 @@ namespace Unity.Entities.Racing.Gameplay
         {
             ref var current = ref UnsafeUtility.AsRef<PhysicsVelocity>((void*)currentData);
             ref var previous = ref UnsafeUtility.AsRef<PhysicsVelocity>((void*)previousData);
-            var delta = 0.7f;
-            current.Angular = math.lerp(current.Angular, previous.Angular, delta);
-            current.Linear = math.lerp(current.Linear, previous.Linear, delta);
+            current.Angular = math.lerp(current.Angular, previous.Angular, 0.7f);
+            current.Linear = math.lerp(current.Linear, previous.Linear, 0.7f);
         }
 
         [BurstCompile(DisableDirectCall = true)]
@@ -67,14 +67,6 @@ namespace Unity.Entities.Racing.Gameplay
             ref var current = ref UnsafeUtility.AsRef<WheelHitData>((void*)currentData);
             ref var previous = ref UnsafeUtility.AsRef<WheelHitData>((void*)previousData);
             current.Lerp(previous, 0.7f);
-        }
-
-        public void OnUpdate(ref SystemState state)
-        {
-        }
-
-        public void OnDestroy(ref SystemState state)
-        {
         }
     }
 }

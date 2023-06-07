@@ -16,7 +16,7 @@ namespace Unity.Entities.Racing.Gameplay
         [NativeDisableContainerSafetyRestriction]
         public ComponentLookup<LocalTransform> LocalTransformLookup;
 
-        private void Execute(ref Wheel wheel, in Suspension suspension, in TransformAspect transform,
+        private void Execute(ref Wheel wheel, in Suspension suspension, in LocalTransform localTransform,
             in WheelHitData wheelHitData)
         {
             if (!LocalTransformLookup.HasComponent(wheel.VisualMesh))
@@ -25,8 +25,8 @@ namespace Unity.Entities.Racing.Gameplay
             }
 
             var springLength = wheelHitData.HasHit ? suspension.SpringLength : suspension.RestLength;
-            // FIXME: transform.Up is not correct at this point, use chassis local up
-            var position = transform.LocalPosition - springLength * transform.Up;
+            // FIXME: localTransform.Up is not correct at this point, use chassis local up
+            var position = localTransform.Position - springLength * localTransform.Up();
             wheel.RotationAngle += wheel.DriveForce;
             wheel.RotationAngle %= 360;
             var rotation = math.mul(
@@ -41,7 +41,6 @@ namespace Unity.Entities.Racing.Gameplay
         }
     }
 
-    [BurstCompile]
     [WorldSystemFilter(WorldSystemFilterFlags.ClientSimulation | WorldSystemFilterFlags.ThinClientSimulation)]
     [UpdateBefore(typeof(TransformSystemGroup))]
     public partial struct UpdateWheelVisualsSystem : ISystem
@@ -51,10 +50,6 @@ namespace Unity.Entities.Racing.Gameplay
         public void OnCreate(ref SystemState state)
         {
             m_LocalTransformLookup = state.GetComponentLookup<LocalTransform>();
-        }
-
-        public void OnDestroy(ref SystemState state)
-        {
         }
 
         [BurstCompile]

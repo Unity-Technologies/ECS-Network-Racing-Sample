@@ -122,10 +122,10 @@ TextureImporter:
       name: gas-pedal
       rect:
         serializedVersion: 2
-        x: 36
-        y: 186
-        width: 137
-        height: 319
+        x: 27
+        y: 181
+        width: 150
+        height: 325
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -143,10 +143,10 @@ TextureImporter:
       name: left-arrow
       rect:
         serializedVersion: 2
-        x: 236
-        y: 263
-        width: 236
-        height: 234
+        x: 231
+        y: 259
+        width: 242
+        height: 242
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -164,10 +164,10 @@ TextureImporter:
       name: brake-pedal
       rect:
         serializedVersion: 2
-        x: 36
-        y: 22
-        width: 137
-        height: 136
+        x: 28
+        y: 19
+        width: 147
+        height: 142
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -185,10 +185,10 @@ TextureImporter:
       name: right-arrow
       rect:
         serializedVersion: 2
-        x: 236
-        y: 22
-        width: 236
-        height: 234
+        x: 231
+        y: 17
+        width: 242
+        height: 242
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}

@@ -45,18 +45,14 @@ namespace Unity.Entities.Racing.Gameplay
         public void OnCreate(ref SystemState state)
         {
             state.RequireForUpdate<CarInput>();
-            state.RequireForUpdate<NetworkIdComponent>();
+            state.RequireForUpdate<NetworkId>();
         }
-
-        public void OnDestroy(ref SystemState state)
-        {
-        }
-
+        
         public void OnUpdate(ref SystemState state)
         {
-            var networkId = GetSingleton<NetworkIdComponent>().Value;
+            var networkId = GetSingleton<NetworkId>().Value;
 
-            foreach (var (input, owner) in Query<RefRW<CarInput>, RefRO<GhostOwnerComponent>>())
+            foreach (var (input, owner) in Query<RefRW<CarInput>, RefRO<GhostOwner>>())
             {
                 if (owner.ValueRO.NetworkId != networkId)
                 {
@@ -101,10 +97,6 @@ namespace Unity.Entities.Racing.Gameplay
         {
             m_CarInputs = state.GetComponentLookup<CarInput>(true);
             state.RequireForUpdate<Race>();
-        }
-
-        public void OnDestroy(ref SystemState state)
-        {
         }
 
         [BurstCompile]

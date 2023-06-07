@@ -15,11 +15,7 @@ namespace Unity.Entities.Racing.Gameplay
         {
             state.RequireForUpdate<NetworkStreamInGame>();
         }
-
-        public void OnDestroy(ref SystemState state)
-        {
-        }
-
+        
         public void OnUpdate(ref SystemState state)
         {
             var name = PlayerInfoController.Instance.LocalPlayerName;
@@ -28,7 +24,7 @@ namespace Unity.Entities.Racing.Gameplay
                 name = "Player";
             }
             
-            var requestSpawnEntity = state.EntityManager.CreateEntity(typeof(SendRpcCommandRequestComponent));
+            var requestSpawnEntity = state.EntityManager.CreateEntity(typeof(SendRpcCommandRequest));
             state.EntityManager.AddComponentData(requestSpawnEntity,
                 new SpawnPlayerRequest
                 {
@@ -43,7 +39,6 @@ namespace Unity.Entities.Racing.Gameplay
     /// <summary>
     /// Gets the connection and spawn the player
     /// </summary>
-    [BurstCompile]
     [WorldSystemFilter(WorldSystemFilterFlags.ServerSimulation)]
     [UpdateInGroup(typeof(GhostSimulationSystemGroup))]
     public partial struct PlayerSpawnSystem : ISystem
@@ -57,10 +52,6 @@ namespace Unity.Entities.Racing.Gameplay
             state.RequireForUpdate<PlayerSpawner>();
         }
 
-        public void OnDestroy(ref SystemState state)
-        {
-        }
-
         [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
@@ -72,7 +63,7 @@ namespace Unity.Entities.Racing.Gameplay
                 commandBuffer.DestroyEntity(request.Self);
 
                 var entityNetwork = request.SourceConnection;
-                var networkId = state.EntityManager.GetComponentData<NetworkIdComponent>(entityNetwork);
+                var networkId = state.EntityManager.GetComponentData<NetworkId>(entityNetwork);
                 Debug.Log($"Spawning player for connection {networkId.Value}");
 
                 // Instantiate the Car Base for this skin
@@ -80,7 +71,7 @@ namespace Unity.Entities.Racing.Gameplay
 
                 // The network ID owner must be set on the ghost owner component on the players
                 // this is used internally for example to set up the CommandTarget properly
-                commandBuffer.SetComponent(player, new GhostOwnerComponent {NetworkId = networkId.Value});
+                commandBuffer.SetComponent(player, new GhostOwner {NetworkId = networkId.Value});
                 var name = request.Name;
                 name = name == "" ? $"Player{networkId.Value}" : name;
                 commandBuffer.SetComponent(player, new PlayerName {Name = name});
