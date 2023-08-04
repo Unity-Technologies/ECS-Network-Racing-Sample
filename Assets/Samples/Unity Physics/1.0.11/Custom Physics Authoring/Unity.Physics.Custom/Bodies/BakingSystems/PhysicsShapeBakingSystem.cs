@@ -114,7 +114,6 @@ namespace Unity.Physics.Authoring
                     });
                     AddComponent<PhysicsRootBaked>(entity);
                     AddComponent<PhysicsCollider>(entity);
-                    AddBuffer<PhysicsColliderKeyEntityPair>(entity);
                 }
             }
 
