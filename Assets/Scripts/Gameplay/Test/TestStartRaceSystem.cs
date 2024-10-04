@@ -23,9 +23,12 @@ namespace Unity.Entities.Racing.Gameplay
             {
                 if (TryGetSingleton<NetworkId>(out var carNetworkId))
                 {
-                    foreach (var car in Query<PlayerAspect>())
+                    foreach (var ghostOwner in Query<RefRO<GhostOwner>>()
+                                 .WithAll<Player>()
+                                 .WithAll<Rank>()
+                                 .WithAll<GhostOwner>())
                     {
-                        if (car.NetworkId == carNetworkId.Value)
+                        if (ghostOwner.ValueRO.NetworkId == carNetworkId.Value)
                         {
                             state.Enabled = false;
                             state.EntityManager.CreateEntity(typeof(PlayersReadyRPC),

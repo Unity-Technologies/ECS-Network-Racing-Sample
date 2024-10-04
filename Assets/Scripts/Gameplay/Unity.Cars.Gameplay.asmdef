@@ -18,10 +18,9 @@
         "Unity.Services.Authentication",
         "Unity.Services.Core",
         "Unity.Mathematics.Extensions",
+        "Unity.Cinemachine",
         "Unity.TextMeshPro",
-        "Cinemachine",
         "Unity.Services.Vivox",
-        "VivoxUnity",
         "Unity.Cars.Authoring"
     ],
     "includePlatforms": [],

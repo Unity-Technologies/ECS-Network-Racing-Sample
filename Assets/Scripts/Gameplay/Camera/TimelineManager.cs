@@ -1,4 +1,4 @@
-using Cinemachine;
+using Unity.Cinemachine;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Playables;
@@ -12,7 +12,7 @@ namespace Unity.Entities.Racing.Gameplay
     {
         public static TimelineManager Instance;
         public PlayableDirector CountdownDirector;
-        public CinemachineVirtualCamera[] FinishCameras;
+        public CinemachineCamera[] FinishCameras;
         public PlayableDirector LeaderboardDirector;
         private int m_CurrentCameraIndex;
 

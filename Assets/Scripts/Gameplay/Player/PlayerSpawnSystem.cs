@@ -58,21 +58,22 @@ namespace Unity.Entities.Racing.Gameplay
             var commandBuffer = new EntityCommandBuffer(Allocator.TempJob);
             var spawnPointBuffer = GetSingletonBuffer<SpawnPoint>(true);
             var skinBuffer = GetSingletonBuffer<SkinElement>(true);
-            foreach (var request in Query<SpawnPlayerRequestAspect>())
+            foreach (var (request,receiveRpcCommandRequest, entity)
+                     in Query<RefRO<SpawnPlayerRequest>, RefRO<ReceiveRpcCommandRequest>>().WithEntityAccess())
             {
-                commandBuffer.DestroyEntity(request.Self);
+                commandBuffer.DestroyEntity(entity);
 
-                var entityNetwork = request.SourceConnection;
+                var entityNetwork = receiveRpcCommandRequest.ValueRO.SourceConnection;
                 var networkId = state.EntityManager.GetComponentData<NetworkId>(entityNetwork);
                 Debug.Log($"Spawning player for connection {networkId.Value}");
 
                 // Instantiate the Car Base for this skin
-                var player = commandBuffer.Instantiate(skinBuffer[request.Id].BaseType);
+                var player = commandBuffer.Instantiate(skinBuffer[request.ValueRO.Id].BaseType);
 
                 // The network ID owner must be set on the ghost owner component on the players
                 // this is used internally for example to set up the CommandTarget properly
                 commandBuffer.SetComponent(player, new GhostOwner {NetworkId = networkId.Value});
-                var name = request.Name;
+                var name = request.ValueRO.Name;
                 name = name == "" ? $"Player{networkId.Value}" : name;
                 commandBuffer.SetComponent(player, new PlayerName {Name = name});
                 commandBuffer.SetComponent(player, new Player {State = PlayerState.Lobby});
@@ -102,7 +103,7 @@ namespace Unity.Entities.Racing.Gameplay
                 });
                 commandBuffer.SetComponent(player, new Skin
                 {
-                    Id = request.Id
+                    Id = request.ValueRO. Id
                 });
 
                 // Add the player to the linked entity group on the connection so it is destroyed

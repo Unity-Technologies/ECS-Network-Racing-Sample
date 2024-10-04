@@ -2,6 +2,7 @@ using Unity.Burst;
 using Unity.Collections;
 using Unity.Entities.Racing.Common;
 using Unity.Mathematics;
+using Unity.NetCode;
 using Unity.Transforms;
 using static Unity.Entities.SystemAPI;
 
@@ -30,18 +31,21 @@ namespace Unity.Entities.Racing.Gameplay
 
     [BurstCompile]
     [WithAll(typeof(Simulate))]
+    [WithAll(typeof(GhostOwner))]
+    [WithAll(typeof(Player))]
+    [WithAll(typeof(Rank))]
     public partial struct VehicleFlipChecker : IJobEntity
     {
-        private void Execute(PlayerAspect playerAspect)
+        private void Execute(in LocalToWorld localToWorld, ref Reset reset)
         {
-            var distanceSq = math.distancesq(playerAspect.LocalToWorld.Up, math.up());
+            var distanceSq = math.distancesq(localToWorld.Up, math.up());
 
             // Flip the vehicle if it's up side down
             if (distanceSq > 3.9f)
             {
-                var targetRotation = math.mul(playerAspect.LocalToWorld.Rotation, quaternion.RotateZ(math.PI));
-                playerAspect.SetTargetTransform(playerAspect.LocalToWorld.Position, targetRotation);
-                playerAspect.ResetVehicle();
+                var targetRotation = math.mul(localToWorld.Rotation, quaternion.RotateZ(math.PI));
+                reset.SetTargetTransform(localToWorld.Position, targetRotation);
+                reset.ResetVehicle();
             }
         }
     }
@@ -58,11 +62,15 @@ namespace Unity.Entities.Racing.Gameplay
         public void OnUpdate(ref SystemState state)
         {
             var levelBounds = GetSingleton<LevelBounds>();
-            foreach (var player in Query<PlayerAspect>())
+            foreach (var (localToWorld, reset) 
+                     in Query<RefRO<LocalToWorld>, RefRW<Reset>>()
+                         .WithAll<GhostOwner>()
+                         .WithAll<Player>()
+                         .WithAll<Rank>())
             {
-                if (!levelBounds.Value.Contains(player.LocalToWorld.Position))
+                if (!levelBounds.Value.Contains(localToWorld.ValueRO.Position))
                 {
-                    player.ResetVehicle();
+                    reset.ValueRW.ResetVehicle();
                 }
             }
 

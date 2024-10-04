@@ -56,6 +56,7 @@ namespace Unity.Entities.Racing.Gameplay
 
                 // Set the focus ring manually
                 m_FocusRing = new VisualElement[] {m_NameField, m_JoinButton};
+                m_NameField.AddToClassList("text-align-center");
             }
 
 

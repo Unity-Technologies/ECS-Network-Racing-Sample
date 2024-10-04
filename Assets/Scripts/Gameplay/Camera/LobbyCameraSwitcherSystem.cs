@@ -1,5 +1,6 @@
 ﻿using Unity.Burst;
 using Unity.Entities.Racing.Common;
+using Unity.Mathematics;
 using static Unity.Entities.SystemAPI;
 
 namespace Unity.Entities.Racing.Gameplay
@@ -18,14 +19,16 @@ namespace Unity.Entities.Racing.Gameplay
 
         public void OnUpdate(ref SystemState state)
         {
-            foreach (var localPlayer in Query<LocalPlayerAspect>())
+            foreach (var (carInput, player) 
+                     in Query<RefRO<CarInput>, RefRO<Player>>().WithAll<LocalUser>())
             {
-                if (localPlayer.Player.State != PlayerState.Lobby)
+                if (player.ValueRO.State != PlayerState.Lobby)
                 {
                     return;
                 }
 
-                if (localPlayer.HasAnyInput() && CameraSwitcher.Instance != null)
+                var hasAnyInput = math.abs(carInput.ValueRO.Horizontal) > 0 || math.abs(carInput.ValueRO.Vertical) > 0;
+                if (hasAnyInput && CameraSwitcher.Instance != null)
                 {
                     CameraSwitcher.Instance.ShowBackCamera();
                     state.Enabled = false;

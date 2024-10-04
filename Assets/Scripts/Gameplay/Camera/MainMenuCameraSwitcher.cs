@@ -1,4 +1,4 @@
-using Cinemachine;
+using Unity.Cinemachine;
 using UnityEngine;
 
 namespace Unity.Entities.Racing.Gameplay
@@ -7,8 +7,8 @@ namespace Unity.Entities.Racing.Gameplay
     {
         public static MainMenuCameraSwitcher Instance;
 
-        [SerializeField] private CinemachineVirtualCamera mainCamera;
-        [SerializeField] private CinemachineVirtualCamera carSelectionCamera;
+        [SerializeField] private CinemachineCamera m_MainCamera;
+        [SerializeField] private CinemachineCamera m_CarSelectionCamera;
 
         private void Awake()
         {
@@ -20,8 +20,8 @@ namespace Unity.Entities.Racing.Gameplay
 
         public void ShowCarSelectionCamera()
         {
-            carSelectionCamera.Priority = 10;
-            mainCamera.Priority = 6;
+            m_CarSelectionCamera.Priority = 10;
+            m_MainCamera.Priority = 6;
         }
     }
 }

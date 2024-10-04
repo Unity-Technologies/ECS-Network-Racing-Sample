@@ -141,13 +141,16 @@ namespace Unity.Entities.Racing.Gameplay
 
             var spawnPointBuffer = GetSingletonBuffer<SpawnPoint>();
             var index = 0;
-            foreach (var car in Query<PlayerAspect>())
+            foreach (var (car, reset) 
+                     in Query<RefRO<Player>, RefRW<Reset>>()
+                         .WithAll<GhostOwner>()
+                         .WithAll<Player>()
+                         .WithAll<Rank>())
             {
-                if (car.Player.HasFinished)
+                if (car.ValueRO.HasFinished)
                 {
-                    car.ResetVehicle();
-                    car.SetTargetTransform(spawnPointBuffer[index].LobbyPosition,
-                        spawnPointBuffer[index].LobbyRotation);
+                    reset.ValueRW.ResetVehicle();
+                    reset.ValueRW.SetTargetTransform(spawnPointBuffer[index].LobbyPosition, spawnPointBuffer[index].LobbyRotation);
                 }
                 index++;
             }

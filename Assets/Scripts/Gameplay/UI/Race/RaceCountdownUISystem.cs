@@ -15,16 +15,16 @@ namespace Unity.Entities.Racing.Gameplay
 
         public void OnUpdate(ref SystemState state)
         {
-            foreach (var localPlayer in Query<LocalPlayerAspect>())
+            foreach (var localPlayer in Query<RefRO<Player>>().WithAll<LocalUser>())
             {
-                if (localPlayer.Player.State == m_LastState)
+                if (localPlayer.ValueRO.State == m_LastState)
                 {
                     return;
                 }
 
-                if (!localPlayer.Player.StartingRace)
+                if (!localPlayer.ValueRO.StartingRace)
                 {
-                    m_LastState = localPlayer.Player.State;
+                    m_LastState = localPlayer.ValueRO.State;
                     return;
                 }
 
@@ -38,7 +38,7 @@ namespace Unity.Entities.Racing.Gameplay
                     TimelineManager.Instance.PlayCountdownTimeline();
                 }
 
-                m_LastState = localPlayer.Player.State;
+                m_LastState = localPlayer.ValueRO.State;
             }
         }
     }

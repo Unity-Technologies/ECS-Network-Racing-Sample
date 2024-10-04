@@ -88,7 +88,7 @@ namespace Unity.Entities.Racing.Gameplay
             ShowCarSelection(false);
 
 #if AUTH_PACKAGE_PRESENT
-                VivoxManager.Instance.Login(PlayerInfoController.Instance.LocalPlayerName);
+                VivoxManager.Instance?.Session?.Login(PlayerInfoController.Instance.LocalPlayerName);
 #endif
 
             // Connect to Server of Create Client & Server

@@ -1,4 +1,5 @@
 using Unity.Entities.Racing.Common;
+using Unity.Mathematics;
 using Unity.Transforms;
 using UnityEngine;
 using static Unity.Entities.SystemAPI;
@@ -27,14 +28,17 @@ namespace Unity.Entities.Racing.Gameplay
 
         protected override void OnUpdate()
         {
-            foreach (var localPlayer in Query<LocalPlayerAspect>())
+            foreach (var (transform, localToWorld) 
+                     in Query<RefRO<LocalTransform>, RefRO<LocalToWorld>>().WithAll<LocalUser>())
             {
-                if (!localPlayer.HasValidPosition())
+                var isFinite = math.isfinite(transform.ValueRO.Position);
+                var hasValidPosition = isFinite.x && isFinite.y && isFinite.z;
+                if (!hasValidPosition)
                 {
                     return;
                 }
-                m_CameraTarget.position = localPlayer.LocalToWorld.Position;
-                m_CameraTarget.rotation = localPlayer.LocalToWorld.Rotation;
+                m_CameraTarget.position = localToWorld.ValueRO.Position;
+                m_CameraTarget.rotation = localToWorld.ValueRO.Rotation;
             }
         }
     }

@@ -1,4 +1,4 @@
-using Cinemachine;
+using Unity.Cinemachine;
 using UnityEngine;
 
 namespace Unity.Entities.Racing.Gameplay
@@ -10,8 +10,8 @@ namespace Unity.Entities.Racing.Gameplay
     {
         public static CameraSwitcher Instance;
 
-        [SerializeField] private CinemachineVirtualCamera mainCamera;
-        [SerializeField] private CinemachineVirtualCamera frontCamera;
+        [SerializeField] private CinemachineCamera mainCamera;
+        [SerializeField] private CinemachineCamera frontCamera;
 
         private void Awake()
         {

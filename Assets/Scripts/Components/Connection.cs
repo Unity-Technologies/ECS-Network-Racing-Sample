@@ -18,16 +18,4 @@ namespace Unity.Entities.Racing.Common
     {
         public double Value;
     }
-
-    /// <summary>
-    /// Stores the network global components to track the connection
-    /// </summary>
-    public readonly partial struct NetworkIdAspect : IAspect
-    {
-        public readonly Entity Self;
-        readonly RefRO<NetworkId> m_NetworkId;
-        readonly RefRO<NetworkSnapshotAck> m_NetworkSnapshot;
-        public int Id => m_NetworkId.ValueRO.Value;
-        public int EstimatedRTT => (int) m_NetworkSnapshot.ValueRO.EstimatedRTT;
-    }
 }

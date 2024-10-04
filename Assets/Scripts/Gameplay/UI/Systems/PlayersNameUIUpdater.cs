@@ -1,6 +1,8 @@
 using Unity.Entities.Racing.Common;
 using Unity.Burst;
 using Unity.Collections;
+using Unity.NetCode;
+using Unity.Transforms;
 using static Unity.Entities.SystemAPI;
 
 namespace Unity.Entities.Racing.Gameplay
@@ -21,16 +23,20 @@ namespace Unity.Entities.Racing.Gameplay
                 return;
 
             var ecb = new EntityCommandBuffer(Allocator.TempJob);
-            foreach (var player in Query<PlayerNameAspect>().WithNone<PlayerNameTag, LocalUser>())
+            foreach (var (playerName, entity) in Query<RefRO<PlayerName>>()
+                         .WithNone<PlayerNameTag, LocalUser>().WithEntityAccess())
             {
-                var name = player.Name.ToString();
-                PlayerInfoController.Instance.CreateNameTag(name, player.Self);
-                ecb.AddComponent<PlayerNameTag>(player.Self);
+                var name = playerName.ValueRO.Name.ToString();
+                PlayerInfoController.Instance.CreateNameTag(name, entity);
+                ecb.AddComponent<PlayerNameTag>(entity);
             }
 
-            foreach (var car in Query<PlayerAspect>())
+            foreach (var (localToWorld, entity) in Query<RefRO<LocalToWorld>>()
+                         .WithAll<Player>()
+                         .WithAll<Rank>()
+                         .WithAll<GhostOwner>().WithEntityAccess())
             {
-                PlayerInfoController.Instance.UpdateNamePosition(car.Self, car.LocalToWorld.Position);
+                PlayerInfoController.Instance.UpdateNamePosition(entity, localToWorld.ValueRO.Position);
             }
 
             PlayerInfoController.Instance.RefreshNameTags(state.EntityManager);

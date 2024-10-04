@@ -7,7 +7,7 @@
 
 .main-menu-logo {
     background-color: rgba(0, 0, 0, 0);
-    background-image: url('project://database/Assets/Art/Textures/UI/ecs-racing-logo.png?fileID=21300000&guid=291950e14ae83b742a46ff1f04fcb799&type=3#ecs-racing-logo');
+    background-image: url("project://database/Assets/Art/Textures/UI/ecs-racing-logo.png?fileID=21300000&guid=b2df950cf7440634d845a66674069569&type=3#ecs-racing-logo");
     -unity-background-scale-mode: scale-and-crop;
     height: 220px;
     width: 1024px;
@@ -16,16 +16,19 @@
 
 .main-menu-login-panel {
     align-items: center;
-    background-image: url('project://database/Assets/Art/Textures/UI/base-grunge-1.png?fileID=21300000&guid=c153b787f41b4824ab7d45f1affef909&type=3#base-grunge-1');
-    -unity-background-image-tint-color: rgba(36, 33, 38, 0.98);
-    -unity-background-scale-mode: scale-to-fit;
+    background-image: url("project://database/Assets/Art/Textures/UI/square.png?fileID=21300000&guid=ffc06daf7e82046489f2a8a8ceec4099&type=3#square");
+    -unity-background-image-tint-color: rgba(36, 33, 38, 0.94);
+    -unity-background-scale-mode: scale-and-crop;
     justify-content: center;
-    height: 500px;
-    width: 850px;
+    width: 800px;
+    padding-top: 50px;
+    padding-right: 50px;
+    padding-bottom: 50px;
+    padding-left: 50px;
 }
 
 .main-menu-login-form {
-    width: 80%;
+    width: 100%;
 }
 
 .main-menu-text-field {
@@ -37,6 +40,15 @@
 
 .main-menu-text-field > .unity-label {
     color: rgb(255, 255, 255);
-    -unity-font: url('project://database/Assets/Fonts/Rajdhani/Rajdhani-Medium.ttf?fileID=12800000&guid=eb6e60153d0c2cb4a87a1905db351b76&type=3#Rajdhani-Medium');
-    -unity-font-definition: url('project://database/Assets/Fonts/Rajdhani/Rajdhani-Medium%20SDF.asset?fileID=11400000&guid=836ab2ef968125b4e89f57a4e3087518&type=2#Rajdhani-Medium SDF');
+    width:100%;
+    -unity-font: url("project://database/Assets/Fonts/Rajdhani/Rajdhani-Medium.ttf?fileID=12800000&guid=eb6e60153d0c2cb4a87a1905db351b76&type=3#Rajdhani-Medium");
+    -unity-font-definition: url("project://database/Assets/Fonts/Rajdhani/Rajdhani-Medium%20SDF.asset?fileID=11400000&guid=836ab2ef968125b4e89f57a4e3087518&type=2#Rajdhani-Medium SDF");
+}
+
+.main-menu-text-field > .unity-text-field__input {
+    width: 100%;
+}
+
+.text-align-center, .text-align-center > Label, .text-align-center > .unity-text-field__input{
+    -unity-text-align: middle-center;
 }

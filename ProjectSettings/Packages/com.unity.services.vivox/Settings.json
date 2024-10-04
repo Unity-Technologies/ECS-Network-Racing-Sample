@@ -4,22 +4,22 @@
             {
                 "type": "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
                 "key": "tokenKey",
-                "value": "{\"m_Value\":\"hmzmT2dK9mWuItSLNDQvYscV0Pb8FiNW\"}"
+                "value": "{\"m_Value\":\"\"}"
             },
             {
                 "type": "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
                 "key": "tokenIssuer",
-                "value": "{\"m_Value\":\"57729-ecs_r-32173-udash\"}"
+                "value": "{\"m_Value\":\"\"}"
             },
             {
                 "type": "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
                 "key": "server",
-                "value": "{\"m_Value\":\"https://unity.vivox.com/appconfig/57729-ecs_r-32173-udash\"}"
+                "value": "{\"m_Value\":\"\"}"
             },
             {
                 "type": "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
                 "key": "domain",
-                "value": "{\"m_Value\":\"mtu1xp.vivox.com\"}"
+                "value": "{\"m_Value\":\"\"}"
             },
             {
                 "type": "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",

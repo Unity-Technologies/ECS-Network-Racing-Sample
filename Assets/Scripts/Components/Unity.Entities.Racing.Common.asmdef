@@ -13,8 +13,8 @@
         "Unity.Scenes",
         "Unity.Cars.Utils",
         "Unity.NetCode.Physics",
+        "Unity.Cinemachine",
         "Unity.Mathematics.Extensions",
-        "Cinemachine",
         "Unity.Networking.Transport"
     ],
     "includePlatforms": [],

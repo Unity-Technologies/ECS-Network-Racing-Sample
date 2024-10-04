@@ -18,7 +18,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &7902116566794982822
 Transform:
@@ -27,13 +27,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 306977140926550415}
+  serializedVersion: 2
   m_LocalRotation: {x: 0.000000053902813, y: 0.00000008940697, z: 0.7071072, w: -0.7071065}
   m_LocalPosition: {x: -2.7499988, y: 0, z: 0.19999996}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 485766106909550241}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 90}
 --- !u!33 &7188313829398434545
 MeshFilter:
@@ -63,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b875c319458e6fe4dad10fddde63f517, type: 2}
+  - {fileID: 2100000, guid: b93eb2b4a47bda84d830257c92290417, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -151,12 +151,12 @@ MonoBehaviour:
   m_ShapeType: 31
   m_PrimitiveCenter:
     x: 0.000000029802322
-    y: 0.4999996
-    z: 0.009999998
+    y: 0.50000024
+    z: 0.01
   m_PrimitiveSize:
-    x: 0.50000024
-    y: 1.0000005
-    z: 0.020000026
+    x: 0.5000002
+    y: 1.0000002
+    z: 0.02
   m_PrimitiveOrientation:
     Value:
       x: -0
@@ -164,21 +164,22 @@ MonoBehaviour:
       z: 0
     RotationOrder: 4
   m_Capsule:
-    Height: 0.020000026
-    Radius: 0.50000024
+    Height: 0.02
+    Radius: 0.5000001
     Axis: 2
   m_Cylinder:
-    Height: 0.020000026
-    Radius: 0.50000024
+    Height: 0.02
+    Radius: 0.5000001
     Axis: 2
   m_CylinderSideCount: 20
-  m_SphereRadius: 0.50000024
+  m_SphereRadius: 0.5000001
   m_MinimumSkinnedVertexWeight: 0.1
   m_ConvexHullGenerationParameters:
-    m_SimplificationTolerance: 0.015000007
+    m_SimplificationTolerance: 0.015000003
     m_BevelRadius: 0.05
     m_MinimumAngle: 2.5000002
-  m_CustomMesh: {fileID: 0}
+  m_CustomMesh: {fileID: -9138781032840880979, guid: 9383870e894632242b0e376a59a50cb2,
+    type: 3}
   m_ForceUnique: 0
   m_Material:
     m_SupportsTemplate: 1
@@ -189,7 +190,7 @@ MonoBehaviour:
     m_Friction:
       m_Override: 0
       m_Value:
-        Value: 0.5
+        Value: 0.8
         CombineMode: 0
     m_Restitution:
       m_Override: 0
@@ -297,7 +298,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &6200044278546816399
 Transform:
@@ -306,13 +307,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1382679181472814666}
+  serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 1.2499914, z: 0.19999954}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 485766106909550241}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: -180}
 --- !u!33 &1421234428178905624
 MeshFilter:
@@ -342,7 +343,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b875c319458e6fe4dad10fddde63f517, type: 2}
+  - {fileID: 2100000, guid: b93eb2b4a47bda84d830257c92290417, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -429,13 +430,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ShapeType: 31
   m_PrimitiveCenter:
-    x: -0.7499994
-    y: 0.9999985
-    z: -0.09000011
+    x: -0.74999946
+    y: 0.9999983
+    z: -0.08999998
   m_PrimitiveSize:
-    x: 1.9999993
-    y: 1.9999969
-    z: 0.22000012
+    x: 1.9999987
+    y: 1.9999964
+    z: 0.21999998
   m_PrimitiveOrientation:
     Value:
       x: -0
@@ -443,21 +444,22 @@ MonoBehaviour:
       z: 0
     RotationOrder: 4
   m_Capsule:
-    Height: 0.22000012
-    Radius: 0.99999964
+    Height: 0.21999998
+    Radius: 0.99999934
     Axis: 2
   m_Cylinder:
-    Height: 0.22000012
-    Radius: 0.99999964
+    Height: 0.21999998
+    Radius: 0.99999934
     Axis: 2
   m_CylinderSideCount: 20
-  m_SphereRadius: 0.99999964
+  m_SphereRadius: 0.99999934
   m_MinimumSkinnedVertexWeight: 0.1
   m_ConvexHullGenerationParameters:
-    m_SimplificationTolerance: 0.029999984
+    m_SimplificationTolerance: 0.029999979
     m_BevelRadius: 0.05
     m_MinimumAngle: 2.5000002
-  m_CustomMesh: {fileID: 0}
+  m_CustomMesh: {fileID: 3593906724780337643, guid: 238a8735dcfec094b96ef84fa28db7cb,
+    type: 3}
   m_ForceUnique: 0
   m_Material:
     m_SupportsTemplate: 1
@@ -468,7 +470,7 @@ MonoBehaviour:
     m_Friction:
       m_Override: 0
       m_Value:
-        Value: 0.5
+        Value: 0.8
         CombineMode: 0
     m_Restitution:
       m_Override: 0
@@ -576,7 +578,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &6229478383448836180
 Transform:
@@ -585,13 +587,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1861949268972747690}
+  serializedVersion: 2
   m_LocalRotation: {x: 0.000000053902813, y: 0.00000008940697, z: 0.7071072, w: -0.7071065}
   m_LocalPosition: {x: 1.7499962, y: -2.499998, z: 0.20749968}
   m_LocalScale: {x: -1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 485766106909550241}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 90}
 --- !u!33 &850693301422987700
 MeshFilter:
@@ -621,7 +623,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b875c319458e6fe4dad10fddde63f517, type: 2}
+  - {fileID: 2100000, guid: b93eb2b4a47bda84d830257c92290417, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -708,13 +710,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ShapeType: 31
   m_PrimitiveCenter:
-    x: 0.25000107
-    y: 1.0000012
-    z: 0.002500163
+    x: -0.24999946
+    y: 1.0000008
+    z: 0.0024999985
   m_PrimitiveSize:
-    x: 1.0000005
-    y: 2.0000014
-    z: 0.020000057
+    x: 1.0000002
+    y: 2.0000005
+    z: 0.02
   m_PrimitiveOrientation:
     Value:
       x: -0
@@ -722,21 +724,22 @@ MonoBehaviour:
       z: 0
     RotationOrder: 4
   m_Capsule:
-    Height: 0.020000057
-    Radius: 1.0000007
+    Height: 0.02
+    Radius: 1.0000002
     Axis: 2
   m_Cylinder:
-    Height: 0.020000057
-    Radius: 1.0000007
+    Height: 0.02
+    Radius: 1.0000002
     Axis: 2
   m_CylinderSideCount: 20
-  m_SphereRadius: 1.0000007
+  m_SphereRadius: 1.0000002
   m_MinimumSkinnedVertexWeight: 0.1
   m_ConvexHullGenerationParameters:
-    m_SimplificationTolerance: 0.030000018
+    m_SimplificationTolerance: 0.030000007
     m_BevelRadius: 0.05
     m_MinimumAngle: 2.5000002
-  m_CustomMesh: {fileID: 0}
+  m_CustomMesh: {fileID: 1438869915030479287, guid: 9383870e894632242b0e376a59a50cb2,
+    type: 3}
   m_ForceUnique: 0
   m_Material:
     m_SupportsTemplate: 1
@@ -747,7 +750,7 @@ MonoBehaviour:
     m_Friction:
       m_Override: 0
       m_Value:
-        Value: 0.5
+        Value: 0.8
         CombineMode: 0
     m_Restitution:
       m_Override: 0
@@ -855,7 +858,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &5888871673410415951
 Transform:
@@ -864,15 +867,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2158911847549760820}
-  m_LocalRotation: {x: 0.00000017881393, y: -0.0000000053329074, z: -0.00000050042934,
-    w: -1}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: -1, w: 0}
   m_LocalPosition: {x: 5, y: -1.7500085, z: 0.30000076}
-  m_LocalScale: {x: 1, y: -1, z: 1}
+  m_LocalScale: {x: -1, y: -1, z: -1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 485766106909550241}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 180}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -180}
 --- !u!33 &3408110999072499309
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -901,7 +903,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b875c319458e6fe4dad10fddde63f517, type: 2}
+  - {fileID: 2100000, guid: b93eb2b4a47bda84d830257c92290417, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -988,13 +990,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ShapeType: 31
   m_PrimitiveCenter:
-    x: -0.49999714
-    y: 0.7500009
-    z: -0.039999805
+    x: -0.49999863
+    y: 0.7499998
+    z: -0.04
   m_PrimitiveSize:
-    x: 1.4999983
-    y: 1.4999998
-    z: 0.11999996
+    x: 1.4999977
+    y: 1.4999995
+    z: 0.11999999
   m_PrimitiveOrientation:
     Value:
       x: -0
@@ -1002,21 +1004,22 @@ MonoBehaviour:
       z: 0
     RotationOrder: 4
   m_Capsule:
-    Height: 0.11999996
-    Radius: 0.7499999
+    Height: 0.11999999
+    Radius: 0.74999976
     Axis: 2
   m_Cylinder:
-    Height: 0.11999996
-    Radius: 0.7499999
+    Height: 0.11999999
+    Radius: 0.74999976
     Axis: 2
   m_CylinderSideCount: 20
-  m_SphereRadius: 0.7499999
+  m_SphereRadius: 0.74999976
   m_MinimumSkinnedVertexWeight: 0.1
   m_ConvexHullGenerationParameters:
-    m_SimplificationTolerance: 0.022499995
+    m_SimplificationTolerance: 0.022499992
     m_BevelRadius: 0.05
     m_MinimumAngle: 2.5000002
-  m_CustomMesh: {fileID: 0}
+  m_CustomMesh: {fileID: 2174346237713991662, guid: 238a8735dcfec094b96ef84fa28db7cb,
+    type: 3}
   m_ForceUnique: 0
   m_Material:
     m_SupportsTemplate: 1
@@ -1027,7 +1030,7 @@ MonoBehaviour:
     m_Friction:
       m_Override: 0
       m_Value:
-        Value: 0.5
+        Value: 0.8
         CombineMode: 0
     m_Restitution:
       m_Override: 0
@@ -1135,7 +1138,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &5107759363474916767
 Transform:
@@ -1144,13 +1147,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2415739920722269947}
+  serializedVersion: 2
   m_LocalRotation: {x: 0.00000017311211, y: 0.00000008940697, z: 0.70710635, w: -0.7071073}
   m_LocalPosition: {x: -2.7499955, y: -0.000016479491, z: 0.20000057}
   m_LocalScale: {x: 1, y: -1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 485766106909550241}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 90}
 --- !u!33 &2916326336362861280
 MeshFilter:
@@ -1180,7 +1183,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b875c319458e6fe4dad10fddde63f517, type: 2}
+  - {fileID: 2100000, guid: b93eb2b4a47bda84d830257c92290417, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1267,13 +1270,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ShapeType: 31
   m_PrimitiveCenter:
-    x: -0.4999987
-    y: 0.7500009
-    z: -0.04000003
+    x: -0.49999845
+    y: 0.7500003
+    z: -0.039999984
   m_PrimitiveSize:
-    x: 1.4999986
-    y: 1.5000002
-    z: 0.12000008
+    x: 1.4999979
+    y: 1.5
+    z: 0.11999999
   m_PrimitiveOrientation:
     Value:
       x: -0
@@ -1281,21 +1284,22 @@ MonoBehaviour:
       z: 0
     RotationOrder: 4
   m_Capsule:
-    Height: 0.12000008
-    Radius: 0.7500001
+    Height: 0.11999999
+    Radius: 0.75
     Axis: 2
   m_Cylinder:
-    Height: 0.12000008
-    Radius: 0.7500001
+    Height: 0.11999999
+    Radius: 0.75
     Axis: 2
   m_CylinderSideCount: 20
-  m_SphereRadius: 0.7500001
+  m_SphereRadius: 0.75
   m_MinimumSkinnedVertexWeight: 0.1
   m_ConvexHullGenerationParameters:
-    m_SimplificationTolerance: 0.022500003
+    m_SimplificationTolerance: 0.022499999
     m_BevelRadius: 0.05
     m_MinimumAngle: 2.5000002
-  m_CustomMesh: {fileID: 0}
+  m_CustomMesh: {fileID: 2174346237713991662, guid: 238a8735dcfec094b96ef84fa28db7cb,
+    type: 3}
   m_ForceUnique: 0
   m_Material:
     m_SupportsTemplate: 1
@@ -1306,7 +1310,7 @@ MonoBehaviour:
     m_Friction:
       m_Override: 0
       m_Value:
-        Value: 0.5
+        Value: 0.8
         CombineMode: 0
     m_Restitution:
       m_Override: 0
@@ -1414,7 +1418,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &8997977132732387933
 Transform:
@@ -1423,13 +1427,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5031002866693366814}
+  serializedVersion: 2
   m_LocalRotation: {x: 0.000000053902813, y: 0.00000008940697, z: 0.7071072, w: -0.7071065}
   m_LocalPosition: {x: 1.7499999, y: 0, z: 0.2074991}
   m_LocalScale: {x: -1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 485766106909550241}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 90}
 --- !u!33 &7691169525327360533
 MeshFilter:
@@ -1459,7 +1463,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b875c319458e6fe4dad10fddde63f517, type: 2}
+  - {fileID: 2100000, guid: b93eb2b4a47bda84d830257c92290417, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1546,13 +1550,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ShapeType: 31
   m_PrimitiveCenter:
-    x: 0.25000012
-    y: 1.0000012
-    z: 0.002500014
+    x: -0.24999946
+    y: 1.0000006
+    z: 0.0025000134
   m_PrimitiveSize:
-    x: 1.0000005
-    y: 2.0000014
-    z: 0.020000057
+    x: 1.0000002
+    y: 2.0000005
+    z: 0.02
   m_PrimitiveOrientation:
     Value:
       x: -0
@@ -1560,21 +1564,22 @@ MonoBehaviour:
       z: 0
     RotationOrder: 4
   m_Capsule:
-    Height: 0.020000057
-    Radius: 1.0000007
+    Height: 0.02
+    Radius: 1.0000002
     Axis: 2
   m_Cylinder:
-    Height: 0.020000057
-    Radius: 1.0000007
+    Height: 0.02
+    Radius: 1.0000002
     Axis: 2
   m_CylinderSideCount: 20
-  m_SphereRadius: 1.0000007
+  m_SphereRadius: 1.0000002
   m_MinimumSkinnedVertexWeight: 0.1
   m_ConvexHullGenerationParameters:
-    m_SimplificationTolerance: 0.030000018
+    m_SimplificationTolerance: 0.030000007
     m_BevelRadius: 0.05
     m_MinimumAngle: 2.5000002
-  m_CustomMesh: {fileID: 0}
+  m_CustomMesh: {fileID: 1438869915030479287, guid: 9383870e894632242b0e376a59a50cb2,
+    type: 3}
   m_ForceUnique: 0
   m_Material:
     m_SupportsTemplate: 1
@@ -1585,7 +1590,7 @@ MonoBehaviour:
     m_Friction:
       m_Override: 0
       m_Value:
-        Value: 0.5
+        Value: 0.8
         CombineMode: 0
     m_Restitution:
       m_Override: 0
@@ -1693,7 +1698,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &5786046061241955614
 Transform:
@@ -1702,13 +1707,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5598215132027779560}
+  serializedVersion: 2
   m_LocalRotation: {x: -0.000000008063603, y: 0.00000017881393, z: 1, w: -0.000000008063602}
   m_LocalPosition: {x: 0, y: 1.2499914, z: 0.19999954}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 485766106909550241}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!33 &6081965536304856208
 MeshFilter:
@@ -1738,7 +1743,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b875c319458e6fe4dad10fddde63f517, type: 2}
+  - {fileID: 2100000, guid: b93eb2b4a47bda84d830257c92290417, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1825,13 +1830,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ShapeType: 31
   m_PrimitiveCenter:
-    x: -0.00000014901161
-    y: 1.0000004
-    z: 0.010000002
+    x: -0.000000029802322
+    y: 1
+    z: 0.010000015
   m_PrimitiveSize:
-    x: 0.5000001
-    y: 2.0000005
-    z: 0.020000122
+    x: 0.5
+    y: 2
+    z: 0.02
   m_PrimitiveOrientation:
     Value:
       x: -0
@@ -1839,21 +1844,22 @@ MonoBehaviour:
       z: 0
     RotationOrder: 4
   m_Capsule:
-    Height: 0.020000122
-    Radius: 1.0000002
+    Height: 0.02
+    Radius: 1
     Axis: 2
   m_Cylinder:
-    Height: 0.020000122
-    Radius: 1.0000002
+    Height: 0.02
+    Radius: 1
     Axis: 2
   m_CylinderSideCount: 20
-  m_SphereRadius: 1.0000002
+  m_SphereRadius: 1
   m_MinimumSkinnedVertexWeight: 0.1
   m_ConvexHullGenerationParameters:
-    m_SimplificationTolerance: 0.030000007
+    m_SimplificationTolerance: 0.029999997
     m_BevelRadius: 0.05
     m_MinimumAngle: 2.5000002
-  m_CustomMesh: {fileID: 0}
+  m_CustomMesh: {fileID: -6186096284500139366, guid: 9383870e894632242b0e376a59a50cb2,
+    type: 3}
   m_ForceUnique: 0
   m_Material:
     m_SupportsTemplate: 1
@@ -1864,7 +1870,7 @@ MonoBehaviour:
     m_Friction:
       m_Override: 0
       m_Value:
-        Value: 0.5
+        Value: 0.8
         CombineMode: 0
     m_Restitution:
       m_Override: 0
@@ -1972,7 +1978,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &3174200246033193978
 Transform:
@@ -1981,13 +1987,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5675453947590799523}
+  serializedVersion: 2
   m_LocalRotation: {x: -0.000000065306466, y: 0.00000008940696, z: 0.7071071, w: 0.7071065}
-  m_LocalPosition: {x: -3.2499993, y: 2.4999793, z: 0.099999234}
+  m_LocalPosition: {x: -3.2499943, y: 2.4999757, z: 0.09999967}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 485766106909550241}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: -90}
 --- !u!33 &8929906103872787660
 MeshFilter:
@@ -2017,7 +2023,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b875c319458e6fe4dad10fddde63f517, type: 2}
+  - {fileID: 2100000, guid: b93eb2b4a47bda84d830257c92290417, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2104,13 +2110,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ShapeType: 31
   m_PrimitiveCenter:
-    x: -0.24999931
-    y: 0.50000036
-    z: 0.009999873
+    x: -0.24999955
+    y: 0.49999985
+    z: 0.010000007
   m_PrimitiveSize:
-    x: 0.9999997
-    y: 0.99999976
-    z: 0.02000006
+    x: 0.9999996
+    y: 0.9999995
+    z: 0.02
   m_PrimitiveOrientation:
     Value:
       x: -0
@@ -2118,21 +2124,22 @@ MonoBehaviour:
       z: 0
     RotationOrder: 4
   m_Capsule:
-    Height: 0.02000006
-    Radius: 0.49999988
+    Height: 0.02
+    Radius: 0.4999998
     Axis: 2
   m_Cylinder:
-    Height: 0.02000006
-    Radius: 0.49999988
+    Height: 0.02
+    Radius: 0.4999998
     Axis: 2
   m_CylinderSideCount: 20
-  m_SphereRadius: 0.49999988
+  m_SphereRadius: 0.4999998
   m_MinimumSkinnedVertexWeight: 0.1
   m_ConvexHullGenerationParameters:
-    m_SimplificationTolerance: 0.014999995
+    m_SimplificationTolerance: 0.014999993
     m_BevelRadius: 0.05
     m_MinimumAngle: 2.5000002
-  m_CustomMesh: {fileID: 0}
+  m_CustomMesh: {fileID: -8381102145766756240, guid: 9383870e894632242b0e376a59a50cb2,
+    type: 3}
   m_ForceUnique: 0
   m_Material:
     m_SupportsTemplate: 1
@@ -2143,7 +2150,7 @@ MonoBehaviour:
     m_Friction:
       m_Override: 0
       m_Value:
-        Value: 0.5
+        Value: 0.8
         CombineMode: 0
     m_Restitution:
       m_Override: 0
@@ -2247,7 +2254,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &485766106909550241
 Transform:
@@ -2256,6 +2263,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7211803552225425972}
+  serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.7071068, z: -0.7071068, w: 0}
   m_LocalPosition: {x: 0, y: -28.265408, z: 0}
   m_LocalScale: {x: 60, y: 60, z: 60}
@@ -2275,7 +2283,6 @@ Transform:
   - {fileID: 5888871673410415951}
   - {fileID: 5107759363474916767}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: -180}
 --- !u!1 &7319959122656392650
 GameObject:
@@ -2295,7 +2302,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &6682272760109266044
 Transform:
@@ -2304,13 +2311,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7319959122656392650}
+  serializedVersion: 2
   m_LocalRotation: {x: -0.000000008063603, y: 0.00000017881393, z: 1, w: -0.000000008063602}
   m_LocalPosition: {x: -1.7499988, y: -0.0000008900961, z: 0.2080006}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 485766106909550241}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!33 &8535773282880016187
 MeshFilter:
@@ -2340,7 +2347,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b875c319458e6fe4dad10fddde63f517, type: 2}
+  - {fileID: 2100000, guid: b93eb2b4a47bda84d830257c92290417, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2427,13 +2434,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ShapeType: 31
   m_PrimitiveCenter:
-    x: 0.00000011920929
-    y: 0
-    z: 0.027563892
+    x: -1.7500002
+    y: -0.0000006556511
+    z: 0.10221882
   m_PrimitiveSize:
-    x: 3.5000007
-    y: 0.5000002
-    z: 0.2205
+    x: 3.5
+    y: 0.50000036
+    z: 0.22049999
   m_PrimitiveOrientation:
     Value:
       x: -0
@@ -2441,21 +2448,22 @@ MonoBehaviour:
       z: 0
     RotationOrder: 4
   m_Capsule:
-    Height: 0.2205
-    Radius: 1.7500004
+    Height: 0.22049999
+    Radius: 1.75
     Axis: 2
   m_Cylinder:
-    Height: 0.2205
-    Radius: 1.7500004
+    Height: 0.22049999
+    Radius: 1.75
     Axis: 2
   m_CylinderSideCount: 20
-  m_SphereRadius: 1.7500004
+  m_SphereRadius: 1.75
   m_MinimumSkinnedVertexWeight: 0.1
   m_ConvexHullGenerationParameters:
-    m_SimplificationTolerance: 0.05250001
+    m_SimplificationTolerance: 0.0525
     m_BevelRadius: 0.05
     m_MinimumAngle: 2.5000002
-  m_CustomMesh: {fileID: 0}
+  m_CustomMesh: {fileID: 5910521019966168623, guid: 9383870e894632242b0e376a59a50cb2,
+    type: 3}
   m_ForceUnique: 0
   m_Material:
     m_SupportsTemplate: 1
@@ -2466,7 +2474,7 @@ MonoBehaviour:
     m_Friction:
       m_Override: 0
       m_Value:
-        Value: 0.5
+        Value: 0.8
         CombineMode: 0
     m_Restitution:
       m_Override: 0
@@ -2574,7 +2582,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &6943986879620818338
 Transform:
@@ -2583,13 +2591,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7815797654787845254}
+  serializedVersion: 2
   m_LocalRotation: {x: -7.136963e-15, y: 0.00000008225711, z: 0.00000080282666, w: 1}
   m_LocalPosition: {x: -4, y: 1.2499785, z: 0.09999992}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 485766106909550241}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: -89.98, y: 0, z: -180}
 --- !u!33 &7111371342442658690
 MeshFilter:
@@ -2619,7 +2627,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b875c319458e6fe4dad10fddde63f517, type: 2}
+  - {fileID: 2100000, guid: b93eb2b4a47bda84d830257c92290417, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2706,13 +2714,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ShapeType: 31
   m_PrimitiveCenter:
-    x: -0.0000012516975
-    y: 0.24999985
-    z: 0.009999909
+    x: -0.0000007748604
+    y: 0.2499998
+    z: 0.010000007
   m_PrimitiveSize:
-    x: 0.50000083
-    y: 0.5000003
-    z: 0.02000003
+    x: 0.5000007
+    y: 0.50000024
+    z: 0.02
   m_PrimitiveOrientation:
     Value:
       x: -0
@@ -2720,21 +2728,22 @@ MonoBehaviour:
       z: 0
     RotationOrder: 4
   m_Capsule:
-    Height: 0.02000003
-    Radius: 0.25000042
+    Height: 0.02
+    Radius: 0.25000036
     Axis: 2
   m_Cylinder:
-    Height: 0.02000003
-    Radius: 0.25000042
+    Height: 0.02
+    Radius: 0.25000036
     Axis: 2
   m_CylinderSideCount: 20
-  m_SphereRadius: 0.25000042
+  m_SphereRadius: 0.25000036
   m_MinimumSkinnedVertexWeight: 0.1
   m_ConvexHullGenerationParameters:
     m_SimplificationTolerance: 0.01
     m_BevelRadius: 0.05
     m_MinimumAngle: 2.5000002
-  m_CustomMesh: {fileID: 0}
+  m_CustomMesh: {fileID: 8870084073862652595, guid: 9383870e894632242b0e376a59a50cb2,
+    type: 3}
   m_ForceUnique: 0
   m_Material:
     m_SupportsTemplate: 1
@@ -2745,7 +2754,7 @@ MonoBehaviour:
     m_Friction:
       m_Override: 0
       m_Value:
-        Value: 0.5
+        Value: 0.8
         CombineMode: 0
     m_Restitution:
       m_Override: 0
@@ -2853,7 +2862,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &2396548775750651741
 Transform:
@@ -2862,6 +2871,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7861516964962222695}
+  serializedVersion: 2
   m_LocalRotation: {x: 0.00000017881393, y: -0.0000000053329074, z: -0.00000050042934,
     w: -1}
   m_LocalPosition: {x: 5, y: -1.7500088, z: 0.30000013}
@@ -2869,7 +2879,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 485766106909550241}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 180}
 --- !u!33 &8359351912203220747
 MeshFilter:
@@ -2899,7 +2908,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b875c319458e6fe4dad10fddde63f517, type: 2}
+  - {fileID: 2100000, guid: b93eb2b4a47bda84d830257c92290417, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2986,13 +2995,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ShapeType: 31
   m_PrimitiveCenter:
-    x: -0.4999969
-    y: 0.7499991
-    z: -0.039999925
+    x: -0.49999863
+    y: 0.7499998
+    z: -0.04000003
   m_PrimitiveSize:
-    x: 1.4999983
-    y: 1.5
-    z: 0.12000008
+    x: 1.4999977
+    y: 1.4999995
+    z: 0.11999999
   m_PrimitiveOrientation:
     Value:
       x: -0
@@ -3000,21 +3009,22 @@ MonoBehaviour:
       z: 0
     RotationOrder: 4
   m_Capsule:
-    Height: 0.12000008
-    Radius: 0.75
+    Height: 0.11999999
+    Radius: 0.74999976
     Axis: 2
   m_Cylinder:
-    Height: 0.12000008
-    Radius: 0.75
+    Height: 0.11999999
+    Radius: 0.74999976
     Axis: 2
   m_CylinderSideCount: 20
-  m_SphereRadius: 0.75
+  m_SphereRadius: 0.74999976
   m_MinimumSkinnedVertexWeight: 0.1
   m_ConvexHullGenerationParameters:
-    m_SimplificationTolerance: 0.022499999
+    m_SimplificationTolerance: 0.022499992
     m_BevelRadius: 0.05
     m_MinimumAngle: 2.5000002
-  m_CustomMesh: {fileID: 0}
+  m_CustomMesh: {fileID: 2174346237713991662, guid: 238a8735dcfec094b96ef84fa28db7cb,
+    type: 3}
   m_ForceUnique: 0
   m_Material:
     m_SupportsTemplate: 1
@@ -3025,7 +3035,7 @@ MonoBehaviour:
     m_Friction:
       m_Override: 0
       m_Value:
-        Value: 0.5
+        Value: 0.8
         CombineMode: 0
     m_Restitution:
       m_Override: 0
@@ -3133,7 +3143,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1389064601217353758
 Transform:
@@ -3142,13 +3152,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8127066524387071717}
+  serializedVersion: 2
   m_LocalRotation: {x: -0.00000014520084, y: -0, z: -1, w: 0.0000012992924}
   m_LocalPosition: {x: 0, y: -0.7500085, z: 0.2000003}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 485766106909550241}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: -360}
 --- !u!33 &1499189533494273266
 MeshFilter:
@@ -3178,7 +3188,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b875c319458e6fe4dad10fddde63f517, type: 2}
+  - {fileID: 2100000, guid: b93eb2b4a47bda84d830257c92290417, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3265,13 +3275,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ShapeType: 31
   m_PrimitiveCenter:
-    x: -0.7499996
-    y: 0.999999
-    z: 0.010000103
+    x: -0.74999946
+    y: 0.9999978
+    z: 0.01
   m_PrimitiveSize:
-    x: 1.9999994
-    y: 1.9999969
-    z: 0.020000117
+    x: 1.9999987
+    y: 1.9999964
+    z: 0.02
   m_PrimitiveOrientation:
     Value:
       x: -0
@@ -3279,21 +3289,22 @@ MonoBehaviour:
       z: 0
     RotationOrder: 4
   m_Capsule:
-    Height: 0.020000117
-    Radius: 0.9999997
+    Height: 0.02
+    Radius: 0.99999934
     Axis: 2
   m_Cylinder:
-    Height: 0.020000117
-    Radius: 0.9999997
+    Height: 0.02
+    Radius: 0.99999934
     Axis: 2
   m_CylinderSideCount: 20
-  m_SphereRadius: 0.9999997
+  m_SphereRadius: 0.99999934
   m_MinimumSkinnedVertexWeight: 0.1
   m_ConvexHullGenerationParameters:
-    m_SimplificationTolerance: 0.029999988
+    m_SimplificationTolerance: 0.029999979
     m_BevelRadius: 0.05
     m_MinimumAngle: 2.5000002
-  m_CustomMesh: {fileID: 0}
+  m_CustomMesh: {fileID: 1637690271560406681, guid: 9383870e894632242b0e376a59a50cb2,
+    type: 3}
   m_ForceUnique: 0
   m_Material:
     m_SupportsTemplate: 1
@@ -3304,7 +3315,7 @@ MonoBehaviour:
     m_Friction:
       m_Override: 0
       m_Value:
-        Value: 0.5
+        Value: 0.8
         CombineMode: 0
     m_Restitution:
       m_Override: 0
@@ -3412,7 +3423,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &566841357946751817
 Transform:
@@ -3421,13 +3432,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8431483800611022570}
+  serializedVersion: 2
   m_LocalRotation: {x: 0.00000008370516, y: 0.000000029802322, z: 0.70710397, w: -0.7071097}
-  m_LocalPosition: {x: -3.2500014, y: 2.4999793, z: 0.107499234}
+  m_LocalPosition: {x: -3.2499964, y: 2.4999762, z: 0.10999969}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 485766106909550241}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 90}
 --- !u!33 &313227520940416879
 MeshFilter:
@@ -3457,7 +3468,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b875c319458e6fe4dad10fddde63f517, type: 2}
+  - {fileID: 2100000, guid: b93eb2b4a47bda84d830257c92290417, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3544,13 +3555,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ShapeType: 31
   m_PrimitiveCenter:
-    x: -0.2500003
-    y: 0.7499988
-    z: -0.04750017
+    x: -0.25000012
+    y: 0.75000006
+    z: -0.05
   m_PrimitiveSize:
-    x: 1.0000004
-    y: 1.5000005
-    z: 0.12000005
+    x: 1.0000002
+    y: 1.5000001
+    z: 0.12
   m_PrimitiveOrientation:
     Value:
       x: -0
@@ -3558,21 +3569,22 @@ MonoBehaviour:
       z: 0
     RotationOrder: 4
   m_Capsule:
-    Height: 0.12000005
-    Radius: 0.75000024
+    Height: 0.12
+    Radius: 0.75000006
     Axis: 2
   m_Cylinder:
-    Height: 0.12000005
-    Radius: 0.75000024
+    Height: 0.12
+    Radius: 0.75000006
     Axis: 2
   m_CylinderSideCount: 20
-  m_SphereRadius: 0.75000024
+  m_SphereRadius: 0.75000006
   m_MinimumSkinnedVertexWeight: 0.1
   m_ConvexHullGenerationParameters:
-    m_SimplificationTolerance: 0.022500006
+    m_SimplificationTolerance: 0.0225
     m_BevelRadius: 0.05
     m_MinimumAngle: 2.5000002
-  m_CustomMesh: {fileID: 0}
+  m_CustomMesh: {fileID: 3750618943087188411, guid: 238a8735dcfec094b96ef84fa28db7cb,
+    type: 3}
   m_ForceUnique: 0
   m_Material:
     m_SupportsTemplate: 1
@@ -3583,7 +3595,7 @@ MonoBehaviour:
     m_Friction:
       m_Override: 0
       m_Value:
-        Value: 0.5
+        Value: 0.8
         CombineMode: 0
     m_Restitution:
       m_Override: 0

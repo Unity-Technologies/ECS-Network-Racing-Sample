@@ -164,31 +164,4 @@ namespace Unity.Entities.Racing.Common
     {
         public Entity Value;
     }
-
-    public readonly partial struct WheelAspect : IAspect
-    {
-        readonly RefRW<Wheel> m_Wheel;
-        readonly RefRO<ChassisReference> m_ChassisReference;
-        public Wheel Wheel => m_Wheel.ValueRO;
-        public Entity ChassisReference => m_ChassisReference.ValueRO.Value;
-
-        public void SetVisualMesh(Entity value)
-        {
-            m_Wheel.ValueRW.VisualMesh = value;
-        }
-    }
-
-    /// <summary>
-    /// Access all components required for debuging wheels.
-    /// </summary>
-    public readonly partial struct WheelDebugAspect : IAspect
-    {
-        public readonly RefRW<LocalTransform> LocalTransform;
-        readonly RefRO<Wheel> m_Wheel;
-        readonly RefRO<Suspension> m_Suspension;
-        readonly RefRO<WheelHitData> m_WheelHitData;
-        public Wheel Wheel => m_Wheel.ValueRO;
-        public Suspension Suspension => m_Suspension.ValueRO;
-        public WheelHitData WheelHitData => m_WheelHitData.ValueRO;
-    }
 }
