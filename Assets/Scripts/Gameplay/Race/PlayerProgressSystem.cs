@@ -3,6 +3,7 @@ using Unity.Collections;
 using Unity.Entities.Racing.Common;
 using Unity.Jobs;
 using Unity.Mathematics;
+using Unity.NetCode;
 using Unity.Transforms;
 using static Unity.Entities.SystemAPI;
 
@@ -79,6 +80,8 @@ namespace Unity.Entities.Racing.Gameplay
     /// </summary>
     [BurstCompile]
     [WithAll(typeof(Simulate))]
+    [WithAll(typeof(GhostOwner))]
+    [WithAll(typeof(Rank))]
     public partial struct CheckPlayerFinishedJob : IJobEntity
     {
         public int TotalCheckPoints;
@@ -86,28 +89,31 @@ namespace Unity.Entities.Racing.Gameplay
         public float CelebrationIdleTimer;
         public double ElapseTime;
 
-        private void Execute(PlayerAspect player)
+        private void Execute(ref Player player, ref LapProgress lapProgress)
         {
-            if (player.LapProgress.CurrentCheckPoint != TotalCheckPoints || player.Player.State != PlayerState.Race)
+            if (lapProgress.CurrentCheckPoint != TotalCheckPoints || player.State != PlayerState.Race)
             {
                 return;
             }
 
             // Completes the lastlap
-            if (player.LapProgress.CurrentLap < LapsCount) 
+            if (lapProgress.CurrentLap < LapsCount) 
             {
-                player.IncreaseLapCount();
+                lapProgress.CurrentLap++;
             }
 
             // Finish Lap            
-            if (player.LapProgress.CurrentLap < LapsCount)
+            if (lapProgress.CurrentLap < LapsCount)
             {
-                player.ResetCheckpoint();
+                lapProgress.CurrentCheckPoint = 0;
             }
             // Finish the race            
             else
             {
-                player.SetCelebration(CelebrationIdleTimer, ElapseTime);
+                // set celebration
+                player.State = PlayerState.CelebrationIdle;
+                lapProgress.CelebrationIdleDelay = CelebrationIdleTimer;
+                lapProgress.ArrivalTime = ElapseTime;
             }
         }
     }

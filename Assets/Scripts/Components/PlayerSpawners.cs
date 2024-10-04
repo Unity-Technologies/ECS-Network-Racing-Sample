@@ -35,17 +35,4 @@ namespace Unity.Entities.Racing.Common
     /// Tags a player who already spawns an instance.
     /// </summary>
     public struct PlayerSpawned : IComponentData { }
-    
-    /// <summary>
-    /// Access the necessary information to spawn a player.
-    /// </summary>
-    public readonly partial struct SpawnPlayerRequestAspect : IAspect
-    {
-        public readonly Entity Self;
-        readonly RefRO<SpawnPlayerRequest> m_SpawnRequest;
-        readonly RefRO<ReceiveRpcCommandRequest> m_ReceiveRpcRequest;
-        public int Id => m_SpawnRequest.ValueRO.Id;
-        public FixedString64Bytes Name => m_SpawnRequest.ValueRO.Name;
-        public Entity SourceConnection => m_ReceiveRpcRequest.ValueRO.SourceConnection;
-    }
 }

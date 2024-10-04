@@ -1,4 +1,5 @@
 using Unity.Entities.Racing.Common;
+using Unity.Transforms;
 using UnityEngine;
 using static Unity.Entities.SystemAPI;
 
@@ -17,12 +18,13 @@ namespace Unity.Entities.Racing.Gameplay
 
         public void OnUpdate(ref SystemState state)
         {
-            foreach (var wheel in Query<WheelDebugAspect>())
+            foreach (var (wheel, wheelHitData, transform, suspension ) 
+                     in Query<RefRO<Wheel>,RefRO<WheelHitData>, RefRO<LocalTransform>, RefRO<Suspension>>())
             {
                 // Show wheel forces for debugging
-                Debug.DrawRay(wheel.WheelHitData.WheelCenter, wheel.Suspension.SuspensionForce * wheel.LocalTransform.ValueRO.Up(), Color.blue);
-                Debug.DrawRay(wheel.WheelHitData.WheelCenter, wheel.Wheel.DriveForce * wheel.LocalTransform.ValueRO.Forward(), Color.red);
-                Debug.DrawRay(wheel.WheelHitData.WheelCenter, wheel.Wheel.SidewaysForce * wheel.LocalTransform.ValueRO.Right(), Color.green);
+                Debug.DrawRay(wheelHitData.ValueRO.WheelCenter, suspension.ValueRO.SuspensionForce * transform.ValueRO.Up(), Color.blue);
+                Debug.DrawRay(wheelHitData.ValueRO.WheelCenter, wheel.ValueRO.DriveForce * transform.ValueRO.Forward(), Color.red);
+                Debug.DrawRay(wheelHitData.ValueRO.WheelCenter, wheel.ValueRO.SidewaysForce * transform.ValueRO.Right(), Color.green);
             }
         }
     }

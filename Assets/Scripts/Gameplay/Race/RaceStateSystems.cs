@@ -1,5 +1,6 @@
 using Unity.Burst;
 using Unity.Entities.Racing.Common;
+using Unity.NetCode;
 using UnityEngine;
 using static Unity.Entities.SystemAPI;
 
@@ -32,12 +33,16 @@ namespace Unity.Entities.Racing.Gameplay
             // we move the cars to the starting point
             var spawnPointBuffer = GetSingletonBuffer<SpawnPoint>();
             var index = 0;
-            foreach (var player in Query<PlayerAspect>())
+            foreach (var (reset, lapProgress) 
+                     in Query<RefRW<Reset>, RefRW<LapProgress>>()
+                         .WithAll<Player>()
+                         .WithAll<Rank>()
+                         .WithAll<GhostOwner>())
             {
-                player.SetTargetTransform(spawnPointBuffer[index].TrackPosition, spawnPointBuffer[index].TrackRotation);
+                reset.ValueRW.SetTargetTransform(spawnPointBuffer[index].TrackPosition, spawnPointBuffer[index].TrackRotation);
                 index++;
-                player.ResetVehicle();
-                player.ResetLapProgress();
+                reset.ValueRW.ResetVehicle();
+                lapProgress.ValueRW.Reset();
             }
             
             if (race.TimerFinished)
@@ -130,9 +135,11 @@ namespace Unity.Entities.Racing.Gameplay
             }
 
             var playersFinished = 0;
-            foreach (var car in Query<PlayerAspect>())
+            foreach (var player in Query<RefRO<Player>>()
+                         .WithAll<Rank>()
+                         .WithAll<GhostOwner>())
             {
-                if (car.Player.HasFinished)
+                if (player.ValueRO.HasFinished)
                 {
                     playersFinished++;
                 }
@@ -208,15 +215,19 @@ namespace Unity.Entities.Racing.Gameplay
                 return;
             }
 
-            foreach (var player in Query<PlayerAspect>())
+            foreach (var (player, lapProgress) 
+                     in Query<RefRW<Player>, RefRW<LapProgress>>()
+                         .WithAll<Player>()
+                         .WithAll<Rank>()
+                         .WithAll<GhostOwner>())
             {
-                if (player.FinishedCelebration)
+                if (player.ValueRO.IsCelebrating && lapProgress.ValueRO.CelebrationIdleDelay <= 0)
                 {
-                    player.SetFinishedRace();
+                    player.ValueRW.State = PlayerState.Finished;
                 }
-                else if (player.IsCelebrating)
+                else if (player.ValueRO.IsCelebrating && lapProgress.ValueRO.CelebrationIdleDelay > 0)
                 {
-                    player.ReduceCelebrationTimer(state.WorldUnmanaged.Time.DeltaTime);
+                    lapProgress.ValueRW.CelebrationIdleDelay -= state.WorldUnmanaged.Time.DeltaTime;
                 }
             }
         }

@@ -24,11 +24,15 @@ namespace Unity.Entities.Racing.Gameplay
         {
             var id = GetSingleton<NetworkId>();
             var ecb = new EntityCommandBuffer(Allocator.TempJob);
-            foreach (var player in Query<PlayerAspect>().WithNone<LocalUser>())
+            foreach (var (ghostOwner, entity) in 
+                     Query<RefRO<GhostOwner>>()
+                         .WithAll<Player>()
+                         .WithAll<Rank>()
+                         .WithNone<LocalUser>().WithEntityAccess())
             {
-                if (player.NetworkId == id.Value)
+                if (ghostOwner.ValueRO.NetworkId == id.Value)
                 {
-                    ecb.AddComponent<LocalUser>(player.Self);
+                    ecb.AddComponent<LocalUser>(entity);
                 }
             }
 

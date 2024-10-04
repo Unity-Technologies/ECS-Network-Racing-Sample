@@ -1,6 +1,7 @@
 ﻿using Unity.Burst;
 using Unity.Collections;
 using Unity.Entities.Racing.Common;
+using Unity.NetCode;
 using Unity.Transforms;
 using static Unity.Entities.SystemAPI;
 
@@ -37,13 +38,17 @@ namespace Unity.Entities.Racing.Gameplay
             var commandBuffer = new EntityCommandBuffer(Allocator.Temp);
             var skinBuffer = GetSingletonBuffer<SkinElement>(true);
 
-            foreach (var player in Query<PlayerAspect>().WithNone<HasVisual>())
+            foreach (var (skin, entity) in Query<RefRO<Skin>>()
+                         .WithAll<Player>()
+                         .WithAll<Rank>()
+                         .WithAll<GhostOwner>().WithEntityAccess()
+                         .WithNone<HasVisual>())
             {
-                var visual = commandBuffer.Instantiate(skinBuffer[player.Skin.Id].VisualEntity);
-                commandBuffer.AddComponent(visual, new Parent { Value = player.Self });
-                commandBuffer.AddComponent(player.Self,
-                    new Skin { Id = player.Skin.Id, NeedUpdate = true, VisualCar = visual });
-                commandBuffer.AddComponent<HasVisual>(player.Self);
+                var visual = commandBuffer.Instantiate(skinBuffer[skin.ValueRO.Id].VisualEntity);
+                commandBuffer.AddComponent(visual, new Parent { Value = entity });
+                commandBuffer.AddComponent(entity,
+                    new Skin { Id = skin.ValueRO.Id, NeedUpdate = true, VisualCar = visual });
+                commandBuffer.AddComponent<HasVisual>(entity);
             }
 
             commandBuffer.Playback(state.EntityManager);
@@ -72,34 +77,38 @@ namespace Unity.Entities.Racing.Gameplay
             m_VisualWheelsLookup.Update(ref state);
             var commandBuffer = new EntityCommandBuffer(Allocator.Temp);
 
-            foreach (var player in Query<PlayerAspect>())
+            foreach (var (skin, entity) in Query<RefRW<Skin>>()
+                         .WithAll<Player>()
+                         .WithAll<Rank>()
+                         .WithAll<GhostOwner>().WithEntityAccess())
             {
-                if (!player.Skin.NeedUpdate)
+                if (!skin.ValueRO.NeedUpdate)
                 {
                     return;
                 }
 
-                if (m_VisualWheelsLookup.TryGetComponent(player.Skin.VisualCar, out var visual))
+                if (m_VisualWheelsLookup.TryGetComponent(skin.ValueRO.VisualCar, out var visual))
                 {
-                    player.UpdateSkin();
+                    skin.ValueRW.NeedUpdate = false;
 
-                    foreach (var wheel in Query<WheelAspect>())
+                    foreach (var (wheel, chassisRef) 
+                             in Query<RefRW<Wheel>,RefRO<ChassisReference>>())
                     {
-                        if (wheel.ChassisReference == player.Self)
+                        if (chassisRef.ValueRO.Value == entity)
                         {
-                            switch (wheel.Wheel.Placement)
+                            switch (wheel.ValueRO.Placement)
                             {
                                 case WheelPlacement.FrontRight:
-                                    wheel.SetVisualMesh(visual.WheelFR);
+                                    wheel.ValueRW.VisualMesh = visual.WheelFR;
                                     break;
                                 case WheelPlacement.FrontLeft:
-                                    wheel.SetVisualMesh(visual.WheelFL);
+                                    wheel.ValueRW.VisualMesh = visual.WheelFL;
                                     break;
                                 case WheelPlacement.RearRight:
-                                    wheel.SetVisualMesh(visual.WheelRR);
+                                    wheel.ValueRW.VisualMesh = visual.WheelRR;
                                     break;
                                 case WheelPlacement.RearLeft:
-                                    wheel.SetVisualMesh(visual.WheelRL);
+                                    wheel.ValueRW.VisualMesh = visual.WheelRL;
                                     break;
                             }
                         }

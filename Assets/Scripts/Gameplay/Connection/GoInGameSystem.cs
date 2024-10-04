@@ -26,10 +26,11 @@ namespace Unity.Entities.Racing.Gameplay
             FixedString32Bytes worldName = state.World.Name;
 
             // Go in game as soon as we have a connection set up (connection network ID has been set)
-            foreach (var networkId in Query<NetworkIdAspect>().WithNone<NetworkStreamInGame>())
+            foreach (var (networkId, entity) 
+                     in Query<RefRO<NetworkId>>().WithNone<NetworkStreamInGame>().WithEntityAccess())
             {
-                Debug.Log($"[{worldName}] Go in game connection {networkId.Id}");
-                commandBuffer.AddComponent<NetworkStreamInGame>(networkId.Self);
+                Debug.Log($"[{worldName}] Go in game connection {networkId.ValueRO.Value}");
+                commandBuffer.AddComponent<NetworkStreamInGame>(entity);
             }
 
             commandBuffer.Playback(state.EntityManager);

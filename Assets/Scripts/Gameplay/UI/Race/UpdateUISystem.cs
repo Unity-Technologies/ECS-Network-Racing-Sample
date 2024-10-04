@@ -1,5 +1,6 @@
 ﻿using Unity.Entities.Racing.Common;
 using Unity.Burst;
+using Unity.NetCode;
 using static Unity.Entities.SystemAPI;
 
 namespace Unity.Entities.Racing.Gameplay
@@ -141,12 +142,15 @@ namespace Unity.Entities.Racing.Gameplay
             if (!race.IsInProgress)
                 return;
             
-            foreach (var player in Query<PlayerAspect>().WithAll<LocalUser>())
+            foreach (var (player, rank, lapProgress) 
+                     in Query<RefRO<Player>,RefRO<Rank>,RefRO<LapProgress>>()
+                         .WithAll<GhostOwner>()
+                         .WithAll<LocalUser>())
             {
-                HUDController.Instance.SetPosition(player.Rank, race.PlayersInRace);
-                HUDController.Instance.SetLap(player.LapProgress.CurrentLap, player.LapProgress.LapCount);
-                if (player.Player.IsCelebrating)
-                    HUDController.Instance.Finish(true, player.Rank);
+                HUDController.Instance.SetPosition(rank.ValueRO.Value, race.PlayersInRace);
+                HUDController.Instance.SetLap(lapProgress.ValueRO.CurrentLap, lapProgress.ValueRO.LapCount);
+                if (player.ValueRO.IsCelebrating)
+                    HUDController.Instance.Finish(true, rank.ValueRO.Value);
             }
         }
     }

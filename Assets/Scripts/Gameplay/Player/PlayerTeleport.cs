@@ -1,7 +1,9 @@
 using Unity.Burst;
 using Unity.Collections;
 using Unity.Entities.Racing.Common;
+using Unity.Mathematics;
 using Unity.NetCode;
+using Unity.Physics;
 using Unity.Physics.GraphicsIntegration;
 using Unity.Transforms;
 using static Unity.Entities.SystemAPI;
@@ -14,27 +16,40 @@ namespace Unity.Entities.Racing.Gameplay
     [BurstCompile]
     [WithAll(typeof(Simulate))]
     [WithAll(typeof(VehicleChassis))]
+    [WithAll(typeof(GhostOwner))]
+    [WithAll(typeof(Player))]
+    [WithAll(typeof(Rank))]
     public partial struct DisableSmoothingJob : IJobEntity
     {
-        private void Execute(ref PhysicsGraphicalSmoothing physicsGraphicalSmoothing, PlayerAspect playerAspect)
+        private void Execute(ref PhysicsGraphicalSmoothing physicsGraphicalSmoothing, in Reset reset)
         {
-            if (playerAspect.Reset.Transform)
+            if (reset.Transform)
                 physicsGraphicalSmoothing.ApplySmoothing = 0;
         }
     }
 
     [BurstCompile]
     [WithAll(typeof(Simulate))]
+    [WithAll(typeof(GhostOwner))]
+    [WithAll(typeof(Player))]
+    [WithAll(typeof(Rank))]
     public partial struct TeleportPlayersJob : IJobEntity
     {
-        private void Execute(PlayerAspect player)
+        private void Execute(ref LocalTransform localTransform, 
+            ref PhysicsVelocity velocity,
+            ref Reset reset)
         {
-            if (!player.Reset.Transform)
+            if (!reset.Transform)
             {
                 return;
             }
-
-            player.ResetPlayer();
+            
+            localTransform.Position = reset.TargetPosition;
+            localTransform.Rotation = reset.TargetRotation;
+            
+            velocity.Linear = float3.zero;
+            velocity.Angular = float3.zero;
+            reset.Transform = false;
         }
     }
 
@@ -65,17 +80,21 @@ namespace Unity.Entities.Racing.Gameplay
         public void OnUpdate(ref SystemState state)
         {
             // Change state of the players and count players in race
-            foreach (var playerAspect in Query<PlayerAspect>())
+            foreach (var (reset, entity) in Query<RefRW<Reset>>()
+                         .WithEntityAccess()
+                         .WithAll<GhostOwner>()
+                         .WithAll<Player>()
+                         .WithAll<Rank>())
             {
-                if (playerAspect.Reset.Wheels)
+                if (reset.ValueRO.Wheels)
                 {
                     var resetWheelsJob = new ResetWheelsJob
                     {
-                        Target = playerAspect.Self
+                        Target = entity
                     };
 
                     state.Dependency = resetWheelsJob.ScheduleParallel(state.Dependency);
-                    playerAspect.SetPlayerWheelsReady();
+                    reset.ValueRW.Wheels = false;
                 }
             }
         }
@@ -128,11 +147,14 @@ namespace Unity.Entities.Racing.Gameplay
             var requests = m_ResetCarQuery.ToComponentDataArray<ResetCarRPC>(Allocator.Temp);
             foreach (var request in requests)
             {
-                foreach (var car in Query<PlayerAspect>())
+                foreach (var (ghostOwner, reset) in 
+                         Query<RefRO<GhostOwner>,RefRW<Reset>>()
+                             .WithAll<Player>()
+                             .WithAll<Rank>())
                 {
-                    if (car.NetworkId == request.Id)
+                    if (ghostOwner.ValueRO.NetworkId == request.Id)
                     {
-                        car.ResetVehicle();
+                        reset.ValueRW.ResetVehicle();
                     }
                 }
             }

@@ -3,10 +3,10 @@
 ![ECSNetworkRacingHeader](https://user-images.githubusercontent.com/3436237/209012220-f888baf2-568b-4c06-bda2-8146333c76d6.jpg)
 
 * Requires LFS, please clone the repository using LFS, do not download as a ZIP.
-* Requires Unity 2022.3.0f1 or later.
+* Requires Unity 6000.0.21f1 or later.
 
-Current tested version 2022.2.9f1
-https://unity.com/releases/editor/whats-new/2022.3.0
+Current tested version 6000.0.21f1
+https://unity.com/releases/editor/whats-new/6000.0.21
 
 # Unity Hub URL
 unityhub://2022.3.0f1/fb119bb0b476
@@ -38,7 +38,6 @@ Keyboard:
 * Netcode for Entities
 * Baking
 * Idiomatic Foreach
-* Aspects
 * ISystem
 * Unity Physics
 * Jobs

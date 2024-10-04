@@ -25,9 +25,9 @@ namespace Unity.Entities.Racing.Gameplay
             if (!race.IsFinishing)
                 return;
 
-            foreach (var localPlayer in Query<LocalPlayerAspect>())
+            foreach (var localPlayer in Query<RefRO<Player>>().WithAll<LocalUser>())
             {
-                if (localPlayer.Player.InRace || localPlayer.Player.IsCelebrating || localPlayer.Player.HasFinished)
+                if (localPlayer.ValueRO.InRace || localPlayer.ValueRO.IsCelebrating || localPlayer.ValueRO.HasFinished)
                 {
                     var currentTimer = (int)race.CurrentTimer;
                     if (HUDController.Instance != null)

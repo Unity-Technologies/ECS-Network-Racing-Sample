@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Unity.Burst;
 using Unity.Collections;
 using Unity.Entities.Racing.Common;
+using Unity.NetCode;
 using static Unity.Entities.SystemAPI;
 
 namespace Unity.Entities.Racing.Gameplay
@@ -76,51 +77,58 @@ namespace Unity.Entities.Racing.Gameplay
 
             var leaderboard = GetSingletonBuffer<LeaderboardData>();
 
-            foreach (var player in Query<PlayerAspect>())
+            foreach (var (playerName, rank, player, lapProgress, ghostOwner) 
+                     in Query<RefRO<PlayerName>,
+                             RefRO<Rank>,
+                             RefRO<Player>, 
+                             RefRW<LapProgress>,
+                             RefRO<GhostOwner>>())
             {
                 var ping = 0;
 
-                if (player.HasArrived && !player.LapProgress.AddedToLeaderboard)
+                var hasArrived = (player.ValueRO.IsCelebrating || player.ValueRO.HasFinished) && lapProgress.ValueRO.HasArrived;
+                if (hasArrived && !lapProgress.ValueRO.AddedToLeaderboard)
                 {
-                    var time = player.LapProgress.ArrivalTime - race.InitialTime;
-                    foreach (var networkId in Query<NetworkIdAspect>())
+                    var time = lapProgress.ValueRO.ArrivalTime - race.InitialTime;
+                    foreach (var (networkId, networkSnapshotAck) 
+                             in Query<RefRO<NetworkId>, RefRO<NetworkSnapshotAck>>())
                     {
-                        if (player.NetworkId == networkId.Id)
+                        if (ghostOwner.ValueRO.NetworkId == networkId.ValueRO.Value)
                         {
-                            ping = networkId.EstimatedRTT;
+                            ping = (int) networkSnapshotAck.ValueRO.EstimatedRTT;
                         }
                     }
 
                     leaderboard.Add(new LeaderboardData
                     {
-                        Name = player.Name,
-                        Rank = player.Rank,
+                        Name = playerName.ValueRO.Name,
+                        Rank = rank.ValueRO.Value,
                         Time = (float) time,
                         Ping = ping
                     });
 
-                    player.AddedToLeaderboard();
+                    lapProgress.ValueRW.AddedToLeaderboard = true;
                 }
                 
-                if (player.Player.HasFinished && !player.LapProgress.HasArrived && !player.LapProgress.AddedToLeaderboard)
+                if (player.ValueRO.HasFinished && !lapProgress.ValueRO.HasArrived && !lapProgress.ValueRO.AddedToLeaderboard)
                 {
-                    foreach (var networkId in Query<NetworkIdAspect>())
+                    foreach (var (networkId, networkSnapshotAck) in Query<RefRO<NetworkId>, RefRO<NetworkSnapshotAck>>())
                     {
-                        if (player.NetworkId == networkId.Id)
+                        if (ghostOwner.ValueRO.NetworkId == networkId.ValueRO.Value)
                         {
-                            ping = networkId.EstimatedRTT;
+                            ping = (int) networkSnapshotAck.ValueRO.EstimatedRTT;
                         }
                     }
                     
                     leaderboard.Add(new LeaderboardData
                     {
-                        Name = player.Name,
-                        Rank = player.Rank,
+                        Name = playerName.ValueRO.Name,
+                        Rank = rank.ValueRO.Value,
                         Time = 0,
                         Ping = ping
                     });
 
-                    player.AddedToLeaderboard();
+                    lapProgress.ValueRW.AddedToLeaderboard = true;
                 }
             }
 

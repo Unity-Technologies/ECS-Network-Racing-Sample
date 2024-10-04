@@ -1,6 +1,7 @@
 using Unity.Entities.Racing.Common;
 using Unity.Burst;
 using Unity.Mathematics;
+using Unity.Transforms;
 using UnityEngine;
 using static Unity.Entities.SystemAPI;
 
@@ -29,35 +30,40 @@ namespace Unity.Entities.Racing.Gameplay
 
             if (race.HasFinished)
             {
-                foreach (var checkPointLocator in Query<CheckPointLocatorAspect>())
+                foreach (var (transform, checkPointLocator) 
+                         in Query<RefRW<LocalTransform>, RefRO<CheckPointLocator>>())
                 {
-                    checkPointLocator.SetLocalTransform(checkPointLocator.GetResetPosition, quaternion.identity);
+                    transform.ValueRW.Rotation = quaternion.identity;
+                    transform.ValueRW.Position = checkPointLocator.ValueRO.ResetPosition;
                 }
             }
 
             if (!race.IsInProgress)
                 return;
             
-            foreach (var player in Query<LocalPlayerAspect>())
+            foreach (var (player, lapProgress) 
+                     in Query<RefRO<Player>, RefRO<LapProgress>>().WithAll<LocalUser>())
             {
-                if (!player.Player.InRace)
+                if (!player.ValueRO.InRace)
                     return;
 
                 var currentPosition = float3.zero;
                 var currentRotation = quaternion.identity;
-                foreach (var checkPoint in Query<CheckPointAspect>())
+                foreach (var (checkPoint, localTransform) in 
+                         Query<RefRO<CheckPoint>, RefRO<LocalTransform>>())
                 {
-                    if (checkPoint.CheckPointId == player.LapProgress.NextPointId)
+                    if (checkPoint.ValueRO.Id == lapProgress.ValueRO.NextPointId)
                     {
-                        currentPosition = checkPoint.LocalPosition;
-                        currentRotation = checkPoint.LocalRotation;
+                        currentPosition = localTransform.ValueRO.Position;
+                        currentRotation = localTransform.ValueRO.Rotation;
                         break;
                     }
                 }
 
-                foreach (var checkPointLocator in Query<CheckPointLocatorAspect>())
+                foreach (var transform in Query<RefRW<LocalTransform>>().WithAll<CheckPointLocator>())
                 {
-                    checkPointLocator.SetLocalTransform(currentPosition, currentRotation);
+                    transform.ValueRW.Rotation = currentRotation;
+                    transform.ValueRW.Position = currentPosition;
                 }
             }
         }

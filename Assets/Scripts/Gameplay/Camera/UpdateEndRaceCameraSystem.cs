@@ -1,4 +1,5 @@
 using Unity.Entities.Racing.Common;
+using Unity.NetCode;
 using Unity.Transforms;
 using UnityEngine;
 using static Unity.Entities.SystemAPI;
@@ -44,9 +45,9 @@ namespace Unity.Entities.Racing.Gameplay
             }
 
             var playerHasFinished = false;
-            foreach (var player in Query<LocalPlayerAspect>())
+            foreach (var player in Query<RefRO<Player>>().WithAll<LocalUser>())
             {
-                if (player.Player.HasFinished) 
+                if (player.ValueRO.HasFinished) 
                 {
                     playerHasFinished = true;
                 }
@@ -55,11 +56,13 @@ namespace Unity.Entities.Racing.Gameplay
             if (playerHasFinished)
             {
                 // Search the next car in the Rank
-                foreach (var car in Query<PlayerAspect>())
+                foreach (var (rank, entity) in Query<RefRO<Rank>>()
+                             .WithAll<GhostOwner>()
+                             .WithAll<Player>().WithEntityAccess())
                 {
-                    if (car.Rank == race.PlayersFinished + 1)
+                    if (rank.ValueRO.Value == race.PlayersFinished + 1)
                     {
-                        m_CurrentTarget = car.Self;
+                        m_CurrentTarget = entity;
                         break;
                     }
                 }
