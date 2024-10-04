@@ -9,7 +9,7 @@ Current tested version 6000.0.21f1
 https://unity.com/releases/editor/whats-new/6000.0.21
 
 # Unity Hub URL
-unityhub://2022.3.0f1/fb119bb0b476
+unityhub://6000.0.21f1/e2bacb8dee3a
 
 # Running the demo
 
