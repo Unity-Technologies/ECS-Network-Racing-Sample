@@ -42,7 +42,7 @@ namespace Unity.Entities.Racing.Gameplay
             wheelHitData.WheelCenter = localPosition - localUp * suspension.SpringLength;
             wheelHitData.Velocity = PhysicsWorld.GetLinearVelocity(ceIdx, wheelHitData.WheelCenter);
             wheelHitData.HasHit = false;
-            if (math.length(wheelHitData.Velocity) > 50)
+            if (math.length(wheelHitData.Velocity) > wheel.MaxSafeVelocity)
             {
                 wheelHitData.Reset();
                 return;
@@ -102,8 +102,7 @@ namespace Unity.Entities.Racing.Gameplay
             var localUp = math.mul(localTransform.Rotation, new float3(0,1,0));
             var springVelocity = math.dot(localUp, wheelHitData.Velocity);
             springVelocity =
-                math.clamp(10, -10,
-                    springVelocity); // Clamp the spring force TODO: maybe expose that as authoring component
+                math.clamp(springVelocity, -10, 10); // Clamp the spring velocity to reasonable bounds
             suspension.SpringForce = (suspension.RestLength - suspension.SpringLength) * suspension.SpringStiffness;
             suspension.DamperForce = springVelocity * suspension.DamperStiffness;
             var totalForce = suspension.SpringForce - suspension.DamperForce;

@@ -23,6 +23,7 @@ namespace Unity.Entities.Racing.Gameplay
         private bool m_InCarSelection;
         private VisualElement m_CurrentButton;
         private float m_SubmitWidth;
+        private int m_SelectedSkinIndex = -1;
 
         private void Awake()
         {
@@ -45,6 +46,9 @@ namespace Unity.Entities.Racing.Gameplay
             m_StartButton = root.Q<VisualElement>("car-selection-start-button");
             m_StartButton.RegisterCallback<ClickEvent>(OnStartButtonClicked);
             SetSkinButtons(root);
+            
+            // Log that car selection UI is ready
+            RaceLogger.Info("Car Selection UI initialized");
         }
 
         private void OnDisable()
@@ -58,6 +62,13 @@ namespace Unity.Entities.Racing.Gameplay
             {
                 // Focus on the first Car Skin Button
                 SkinButtons[0].Focus();
+                RaceLogger.LogSection("CAR SELECTION");
+                RaceLogger.Gameplay("Car selection screen opened");
+            }
+            else if (m_InCarSelection)
+            {
+                // Only log when we're actually closing the screen, not when initially setting it to false
+                RaceLogger.Gameplay("Car selection screen closed");
             }
 
             m_InCarSelection = value;
@@ -69,22 +80,54 @@ namespace Unity.Entities.Racing.Gameplay
             SkinButtons = new List<Button>();
             for (var i = 1; i <= NUM_OF_SKINS; i++)
             {
+                var skinIndex = i; // Capture the index for use in the lambda
                 var button = root.Q<Button>("skin-" + i);
-                button.clicked += () => { OnSkinSelected(button); };
+                button.clicked += () => { OnSkinSelected(button, skinIndex); };
                 button.clicked += () => { PlayerAudioManager.Instance.PlayClick(); };
                 SkinButtons.Add(button);
             }
         }
 
-        private void OnSkinSelected(VisualElement target)
+        private void OnSkinSelected(VisualElement target, int skinIndex)
         {
             SkinButtons.ForEach(b => b.RemoveFromClassList("button-active"));
             target.AddToClassList("button-active");
+            
+            // Only log if the selection actually changed
+            if (m_SelectedSkinIndex != skinIndex)
+            {
+                string playerName = PlayerInfoController.Instance != null ? 
+                    PlayerInfoController.Instance.LocalPlayerName : 
+                    "Player";
+                
+                RaceLogger.Success($"Player '{playerName}' selected car skin #{skinIndex}");
+                
+                // Log through RaceLoggerManager if available
+                if (RaceLoggerManager.Instance != null)
+                {
+                    RaceLoggerManager.Instance.LogPlayerAction(playerName, $"Selected car skin #{skinIndex}");
+                }
+                
+                m_SelectedSkinIndex = skinIndex;
+            }
         }
 
         private void OnStartButtonClicked(ClickEvent evt)
         {
             PlayerAudioManager.Instance.PlayClick();
+            
+            // Log start button clicked
+            string playerName = PlayerInfoController.Instance != null ? 
+                PlayerInfoController.Instance.LocalPlayerName : 
+                "Player";
+            
+            RaceLogger.Success($"Player '{playerName}' confirmed car selection and started the game");
+            
+            if (RaceLoggerManager.Instance != null)
+            {
+                RaceLoggerManager.Instance.LogPlayerAction(playerName, "Confirmed car selection and started the game");
+            }
+            
             ShowCarSelection(false);
 
 #if AUTH_PACKAGE_PRESENT
@@ -95,9 +138,11 @@ namespace Unity.Entities.Racing.Gameplay
             if (ClientServerBootstrap.RequestedPlayType == ClientServerBootstrap.PlayType.ClientAndServer)
             {
                 ServerConnectionUtils.StartClientServer(PlayerInfoController.Instance.Port);
+                RaceLogger.Network("Starting Client/Server mode");
             }
             else if (ClientServerBootstrap.RequestedPlayType == ClientServerBootstrap.PlayType.Client)
             {
+                RaceLogger.Network($"Connecting to server at {PlayerInfoController.Instance.Ip}:{PlayerInfoController.Instance.Port}");
                 ServerConnectionUtils.ConnectToServer(PlayerInfoController.Instance.Ip,
                     PlayerInfoController.Instance.Port);
             }
@@ -139,7 +184,18 @@ namespace Unity.Entities.Racing.Gameplay
 
             if (m_FocusController.focusedElement is Button button)
             {
-                OnSkinSelected(button);
+                // Find the index of the button
+                int index = -1;
+                for (int i = 0; i < SkinButtons.Count; i++)
+                {
+                    if (SkinButtons[i] == button)
+                    {
+                        index = i + 1; // +1 because our indices start at 1
+                        break;
+                    }
+                }
+                
+                OnSkinSelected(button, index);
                 m_CurrentButton = button;
             }
         }
