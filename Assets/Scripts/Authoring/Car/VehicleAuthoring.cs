@@ -27,6 +27,7 @@ namespace Unity.Entities.Racing.Authoring
 
         [Header("Wheels")] public float WheelsRadius;
         public CollisionCategories WheelsCollisionMask;
+        public float MaxSafeVelocity = 50f; // Maximum safe velocity for wheel raycast
         public WheelAuthoringHelper[] Wheels;
 
         [Header("Engine Sound")] public float MinAudioVolume = 0.4f;
@@ -160,6 +161,7 @@ namespace Unity.Entities.Racing.Authoring
                             GripFactor = wheelAuthoring.GripFactor,
                             Placement = wheelAuthoring.Placement,
                             VisualMesh = visualMesh,
+                            MaxSafeVelocity = vehicleAuthoring.MaxSafeVelocity,
                         };
 
                         var wheelEntity = i switch

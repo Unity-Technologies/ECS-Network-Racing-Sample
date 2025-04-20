@@ -23,6 +23,7 @@ namespace Unity.Entities.Racing.Common
         [GhostField(Quantization = 10000)] public float DriveForce;
         [GhostField(Quantization = 10000)] public float SidewaysForce;
         public BlobAssetReference<AnimationCurveBlob> DriveTorqueCurve;
+        public float MaxSafeVelocity; // Maximum safe velocity for wheel raycast, above which raycast is skipped
 
         public void Reset()
         {

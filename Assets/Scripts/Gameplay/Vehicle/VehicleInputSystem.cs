@@ -62,27 +62,57 @@ namespace Unity.Entities.Racing.Gameplay
                 input.ValueRW.Horizontal = default;
                 input.ValueRW.Vertical = default;
 
-                // TODO: Since DOTS still does not yet support the new Unity input system, we have different axes for the Gamepad
-                var horizontal = Input.GetAxis("Horizontal");
-                horizontal += Input.GetAxis("Steer");
-
-                var vertical = Input.GetAxis("Vertical");
-                vertical += Input.GetAxis("Drive");
-                vertical += Input.GetAxis("DriveTriggers");
-                vertical += Input.GetAxis("LeftStickY");
-                vertical += Input.GetAxis("DPadY");
+                // Instead of adding values, take the maximum absolute value and preserve its sign
+                float maxHorizontal = 0;
+                float maxVertical = 0;
                 
+                // Process keyboard input
+                float horizontal = Input.GetAxis("Horizontal");
+                UpdateMaxAbsoluteValue(ref maxHorizontal, horizontal);
+                
+                // Process steering input
+                float steer = Input.GetAxis("Steer");
+                UpdateMaxAbsoluteValue(ref maxHorizontal, steer);
+
+                // Process vertical movement input
+                float vertical = Input.GetAxis("Vertical");
+                UpdateMaxAbsoluteValue(ref maxVertical, vertical);
+                
+                // Process drive input
+                float drive = Input.GetAxis("Drive");
+                UpdateMaxAbsoluteValue(ref maxVertical, drive);
+                
+                // Process drive triggers input
+                float driveTriggers = Input.GetAxis("DriveTriggers");
+                UpdateMaxAbsoluteValue(ref maxVertical, driveTriggers);
+                
+                // Process left stick Y input
+                float leftStickY = Input.GetAxis("LeftStickY");
+                UpdateMaxAbsoluteValue(ref maxVertical, leftStickY);
+                
+                // Process D-pad Y input
+                float dPadY = Input.GetAxis("DPadY");
+                UpdateMaxAbsoluteValue(ref maxVertical, dPadY);
+                
+                // Process mobile input if available
                 if (UIMobileInput.Instance != null)
                 {
-                    horizontal += UIMobileInput.Instance.Horizontal;
-                    vertical += UIMobileInput.Instance.Vertical;
+                    UpdateMaxAbsoluteValue(ref maxHorizontal, UIMobileInput.Instance.Horizontal);
+                    UpdateMaxAbsoluteValue(ref maxVertical, UIMobileInput.Instance.Vertical);
                 }
 
-                horizontal = math.clamp(horizontal, -1, 1);
-                vertical = math.clamp(vertical, -1, 1);
-
-                input.ValueRW.Horizontal = horizontal;
-                input.ValueRW.Vertical = vertical;
+                // Assign final clamped values
+                input.ValueRW.Horizontal = math.clamp(maxHorizontal, -1, 1);
+                input.ValueRW.Vertical = math.clamp(maxVertical, -1, 1);
+            }
+        }
+        
+        // Helper method to update the maximum absolute value while preserving the sign
+        private static void UpdateMaxAbsoluteValue(ref float currentMax, float newValue)
+        {
+            if (math.abs(newValue) > math.abs(currentMax))
+            {
+                currentMax = newValue;
             }
         }
     }

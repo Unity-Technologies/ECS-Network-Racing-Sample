@@ -22,9 +22,13 @@ namespace Unity.Entities.Racing.Gameplay
         
         void OnDestroy()
         {
-            VivoxService.Instance.ConnectionRecovered -= OnConnectionRecovered;
-            VivoxService.Instance.ConnectionRecovering -= OnConnectionRecovering;
-            VivoxService.Instance.ConnectionFailedToRecover -= OnConnectionFailedToRecover;
+            if (VivoxService.Instance != null)
+            {
+                VivoxService.Instance.LoggedOut -= OnUserLoggedOut;
+                VivoxService.Instance.ConnectionRecovered -= OnConnectionRecovered;
+                VivoxService.Instance.ConnectionRecovering -= OnConnectionRecovering;
+                VivoxService.Instance.ConnectionFailedToRecover -= OnConnectionFailedToRecover;
+            }
         }
 
         private void OnUserLoggedOut()
