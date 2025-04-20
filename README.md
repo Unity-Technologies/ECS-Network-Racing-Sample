@@ -43,3 +43,4 @@ Keyboard:
 * Jobs
 * Burst
 * Vivox
+* Debug Logging System
