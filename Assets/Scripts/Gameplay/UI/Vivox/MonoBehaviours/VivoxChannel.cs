@@ -13,6 +13,7 @@ namespace Unity.Entities.Racing.Gameplay
 
         private Task JoinLobbyChannel()
         {
+            if (VivoxService.Instance == null) return null;
             VivoxService.Instance.LoggedOut += OnUserLoggedOut;
             VivoxService.Instance.ConnectionRecovered += OnConnectionRecovered;
             VivoxService.Instance.ConnectionRecovering += OnConnectionRecovering;
@@ -22,6 +23,7 @@ namespace Unity.Entities.Racing.Gameplay
         
         void OnDestroy()
         {
+            if(VivoxService.Instance == null)  return;
             VivoxService.Instance.ConnectionRecovered -= OnConnectionRecovered;
             VivoxService.Instance.ConnectionRecovering -= OnConnectionRecovering;
             VivoxService.Instance.ConnectionFailedToRecover -= OnConnectionFailedToRecover;
