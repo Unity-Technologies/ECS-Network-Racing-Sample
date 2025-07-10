@@ -3,13 +3,13 @@
 ![ECSNetworkRacingHeader](https://user-images.githubusercontent.com/3436237/209012220-f888baf2-568b-4c06-bda2-8146333c76d6.jpg)
 
 * Requires LFS, please clone the repository using LFS, do not download as a ZIP.
-* Requires Unity 6000.0.21f1 or later.
+* Requires Unity 6000.1.15f1 or later.
 
-Current tested version 6000.0.21f1
-https://unity.com/releases/editor/whats-new/6000.0.21
+Current tested version 6000.1.15f1
+https://unity.com/releases/editor/whats-new/6000.1.5
 
 # Unity Hub URL
-unityhub://6000.0.21f1/e2bacb8dee3a
+unityhub://6000.1.5f1/923722cbbcfc
 
 # Running the demo
 
