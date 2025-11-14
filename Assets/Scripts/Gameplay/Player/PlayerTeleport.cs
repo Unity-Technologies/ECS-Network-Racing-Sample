@@ -53,52 +53,6 @@ namespace Unity.Entities.Racing.Gameplay
         }
     }
 
-    [BurstCompile]
-    [WithAll(typeof(Simulate))]
-    public partial struct ResetWheelsJob : IJobEntity
-    {
-        public Entity Target;
-
-        private void Execute(in ChassisReference chassisReference, ref Wheel wheel, ref Suspension suspension,
-            ref WheelHitData wheelHitData)
-        {
-            if (Target != Entity.Null && chassisReference.Value != Target)
-            {
-                return;
-            }
-
-            wheel.Reset();
-            suspension.Reset();
-            wheelHitData.Reset();
-        }
-    }
-
-    [UpdateAfter(typeof(TeleportCarSystem))]
-    public partial struct ResetWheelsSystem : ISystem
-    {
-        [BurstCompile]
-        public void OnUpdate(ref SystemState state)
-        {
-            // Change state of the players and count players in race
-            foreach (var (reset, entity) in Query<RefRW<Reset>>()
-                         .WithEntityAccess()
-                         .WithAll<GhostOwner>()
-                         .WithAll<Player>()
-                         .WithAll<Rank>())
-            {
-                if (reset.ValueRO.Wheels)
-                {
-                    var resetWheelsJob = new ResetWheelsJob
-                    {
-                        Target = entity
-                    };
-
-                    state.Dependency = resetWheelsJob.ScheduleParallel(state.Dependency);
-                    reset.ValueRW.Wheels = false;
-                }
-            }
-        }
-    }
 
     [UpdateInGroup(typeof(TransformSystemGroup))]
     public partial struct DisableSmoothingSystem : ISystem

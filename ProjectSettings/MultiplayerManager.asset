@@ -17,7 +17,7 @@ MultiplayerManager:
     - UnityEngine.UI:UnityEngine.EventSystems:PointerInputModule
     - UnityEngine.UI:UnityEngine.UI:LayoutGroup
     - Unity.RenderPipelines.Universal.Runtime:UnityEngine.Rendering.Universal:UniversalAdditionalCameraData
-    - UnityEngine.UI:UnityEngine.UI:ToggleGroup
+    - UnityEngine.UIElementsModule:UnityEngine.UIElements:PanelInputConfiguration
     - UnityEngine.UIElementsModule:UnityEngine.UIElements:InputWrapper
     - UnityEngine.UI:UnityEngine.UI:Slider
     - UnityEngine.UI:UnityEngine.UI:Shadow
@@ -26,12 +26,14 @@ MultiplayerManager:
     - UnityEngine.AudioModule:UnityEngine:AudioSource
     - UnityEngine.AudioModule:UnityEngine:AudioHighPassFilter
     - UnityEngine.UI:UnityEngine.UI:HorizontalLayoutGroup
+    - UnityEngine.CoreModule:UnityEngine:LightProbeProxyVolume
     - UnityEngine.UI:UnityEngine.UI:GraphicRaycaster
     - UnityEngine.UI:UnityEngine.UI:Dropdown
     - UnityEngine.UI:UnityEngine.UI:BaseMeshEffect
     - UnityEngine.UI:UnityEngine.UIElements:PanelRaycaster
     - UnityEngine.UIElementsModule:UnityEngine.UIElements:UIDocument
     - UnityEngine.UIElementsModule:UnityEngine.UIElements.InputSystem:InputSystemEventSystem
+    - UnityEngine.UI:UnityEngine.UI:ToggleGroup
     - UnityEngine.ParticleSystemModule:UnityEngine:ParticleSystemRenderer
     - UnityEngine.CoreModule:UnityEngine:MeshRenderer
     - UnityEngine.CoreModule:UnityEngine:Camera
@@ -44,16 +46,19 @@ MultiplayerManager:
     - UnityEngine.UI:UnityEngine.EventSystems:PhysicsRaycaster
     - UnityEngine.UI:UnityEngine.EventSystems:BaseInputModule
     - UnityEngine.UI:UnityEngine.UI:Dropdown/DropdownItem
+    - UnityEngine.CoreModule:UnityEngine:LightProbeGroup
     - UnityEngine.UI:UnityEngine.UI:HorizontalOrVerticalLayoutGroup
     - UnityEngine.UI:UnityEngine.EventSystems:BaseInput
     - UnityEngine.UI:UnityEngine.UI:InputField
     - UnityEngine.UI:UnityEngine.EventSystems:EventSystem
     - UnityEngine.UI:UnityEngine.UI:RawImage
-    - UnityEngine.UI:UnityEngine.EventSystems:StandaloneInputModule
+    - UnityEngine.CoreModule:UnityEngine:ReflectionProbe
     - UnityEngine.UI:UnityEngine.UI:Selectable
     - UnityEngine.UI:UnityEngine.EventSystems:UIBehaviour
+    - UnityEngine.UI:UnityEngine.EventSystems:StandaloneInputModule
     - UnityEngine.UI:UnityEngine.EventSystems:BaseRaycaster
     - UnityEngine.UI:UnityEngine.UI:Image
+    - UnityEngine.UI:UnityEngine.UIElements:WorldDocumentRaycaster
     - UnityEngine.UI:UnityEngine.UI:MaskableGraphic
     - UnityEngine.AudioModule:UnityEngine:AudioBehaviour
     - UnityEngine.UI:UnityEngine.UI:Scrollbar

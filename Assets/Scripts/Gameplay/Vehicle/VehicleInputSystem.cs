@@ -3,43 +3,14 @@ using Unity.Collections;
 using Unity.Entities.Racing.Common;
 using Unity.Mathematics;
 using Unity.NetCode;
-using Unity.Physics.Systems;
+using Unity.Vehicles;
 using UnityEngine;
 using static Unity.Entities.SystemAPI;
 
 namespace Unity.Entities.Racing.Gameplay
 {
-    /// <summary>
-    /// Process user's input to store the result in a component.
-    /// </summary>
-    [BurstCompile]
-    [WithAll(typeof(Simulate))]
-    public partial struct WheelsVehicleInputJob : IJobEntity
-    {
-        [ReadOnly] public ComponentLookup<CarInput> CarInputs;
-        [ReadOnly] public Race Race;
-
-        private void Execute(in ChassisReference chassisReference, ref WheelDriveControls driveControls)
-        {
-            if (!CarInputs.HasComponent(chassisReference.Value))
-            {
-                return;
-            }
-
-            // Ignore input if we are in CountDown
-            if (Race.State is RaceState.CountDown or RaceState.Leaderboard or RaceState.StartingRace)
-            {
-                driveControls.Reset();
-            }
-            else
-            {
-                driveControls.DriveAmount = CarInputs[chassisReference.Value].Vertical;
-                driveControls.SteerAmount = CarInputs[chassisReference.Value].Horizontal;
-            }
-        }
-    }
-
     [UpdateInGroup(typeof(GhostInputSystemGroup))]
+    [BurstCompile(CompileSynchronously = false, DisableDirectCall = true, FloatMode = FloatMode.Default, FloatPrecision = FloatPrecision.Standard, DisableSafetyChecks = false)]
     public partial struct CarInputSystem : ISystem
     {
         public void OnCreate(ref SystemState state)
@@ -52,9 +23,9 @@ namespace Unity.Entities.Racing.Gameplay
         {
             var networkId = GetSingleton<NetworkId>().Value;
 
-            foreach (var (input, owner) in Query<RefRW<CarInput>, RefRO<GhostOwner>>())
+            foreach (var (input, owner, playerInput) in Query<RefRW<CarInput>, RefRO<GhostOwner>, RefRO<PlayerGameInput>>())
             {
-                if (owner.ValueRO.NetworkId != networkId)
+                if (owner.ValueRO.NetworkId != networkId )
                 {
                     continue;
                 }
@@ -62,15 +33,14 @@ namespace Unity.Entities.Racing.Gameplay
                 input.ValueRW.Horizontal = default;
                 input.ValueRW.Vertical = default;
 
-                // TODO: Since DOTS still does not yet support the new Unity input system, we have different axes for the Gamepad
-                var horizontal = Input.GetAxis("Horizontal");
-                horizontal += Input.GetAxis("Steer");
-
-                var vertical = Input.GetAxis("Vertical");
-                vertical += Input.GetAxis("Drive");
-                vertical += Input.GetAxis("DriveTriggers");
-                vertical += Input.GetAxis("LeftStickY");
-                vertical += Input.GetAxis("DPadY");
+                var inputData = playerInput.ValueRO.GetInput();
+                var vehicleBreak = inputData.Break.WasPressedThisFrame() ? 1f  : 0f;
+                var handbreak = inputData.Handbrake.WasPressedThisFrame() ? 1f : 0f;
+                var engineStartStop = inputData.EngineStartStop.WasPressedThisFrame();
+                
+                var move = inputData.Move.ReadValue<Vector2>();
+                var horizontal = move.x;
+                var vertical = move.y;
                 
                 if (UIMobileInput.Instance != null)
                 {
@@ -81,13 +51,25 @@ namespace Unity.Entities.Racing.Gameplay
                 horizontal = math.clamp(horizontal, -1, 1);
                 vertical = math.clamp(vertical, -1, 1);
 
-                input.ValueRW.Horizontal = horizontal;
-                input.ValueRW.Vertical = vertical;
+                input.ValueRW.Vertical          = vertical;
+                input.ValueRW.Horizontal        = horizontal;
+                input.ValueRW.Break             = vehicleBreak;
+                input.ValueRW.Handbreak         = handbreak;
+                input.ValueRW.EngineStartStop   = engineStartStop;
+
+                playerInput.ValueRO.Free();
             }
         }
     }
 
-    [UpdateInGroup(typeof(BeforePhysicsSystemGroup))]
+    /// <summary>
+    /// For more information, see the Vehicle package documentation: 
+    /// https://docs.unity3d.com/Packages/com.unity.vehicles@0.1/manual/networking.html
+    /// </summary>
+    [UpdateInGroup(typeof(PredictedSimulationSystemGroup), OrderFirst = true)]
+    [UpdateBefore(typeof(PredictedFixedStepSimulationSystemGroup))]
+    [UpdateAfter(typeof(CopyCommandBufferToInputSystemGroup))]
+    [UpdateBefore(typeof(VehicleControlPredictionSystem))]
     [BurstCompile]
     public partial struct ProcessVehicleWheelsInputSystem : ISystem
     {
@@ -107,13 +89,28 @@ namespace Unity.Entities.Racing.Gameplay
 
             var race = GetSingleton<Race>();
 
-            var wheelsVehicleInputJob = new WheelsVehicleInputJob
-            {
-                CarInputs = m_CarInputs,
-                Race = race
-            };
+            var vehicleJobs = new PlayerVehicleControlJob { Race = race };
+            state.Dependency = vehicleJobs.ScheduleParallel (state.Dependency);
+        }
+    }
 
-            state.Dependency = wheelsVehicleInputJob.ScheduleParallel(state.Dependency);
+    [BurstCompile]
+    [WithAll(typeof(Simulate))]
+    public partial struct PlayerVehicleControlJob : IJobEntity
+    {
+        [ReadOnly] public Race Race;
+        void Execute(ref CarInput playerInputs, ref VehicleControl vehicleControl)
+        {
+            vehicleControl.RawThrottleInput = default;
+            vehicleControl.RawBrakeInput    = playerInputs.Break;
+            vehicleControl.HandbrakeInput   = playerInputs.Handbreak;
+            vehicleControl.RawSteeringInput = playerInputs.Horizontal;
+            vehicleControl.EngineStartStopInput = playerInputs.EngineStartStop;
+
+            if (playerInputs.Vertical > 0) 
+                vehicleControl.RawThrottleInput = playerInputs.Vertical;
+            else
+                vehicleControl.RawBrakeInput = math.abs(playerInputs.Vertical);
         }
     }
 }

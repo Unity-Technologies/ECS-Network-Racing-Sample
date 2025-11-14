@@ -15,7 +15,9 @@
         "Unity.NetCode.Physics",
         "Unity.Cinemachine",
         "Unity.Mathematics.Extensions",
-        "Unity.Networking.Transport"
+        "Unity.Networking.Transport",
+        "com.unity.vehicles",
+        "Input"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

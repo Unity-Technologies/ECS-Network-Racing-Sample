@@ -43,9 +43,6 @@ namespace Unity.Entities.Racing.Gameplay
                 // Reset Players in Race
                 race.SetRaceState(RaceState.NotStarted);
                 race.ResetRace();
-
-                var resetWheelsJob = new ResetWheelsJob();
-                state.Dependency = resetWheelsJob.ScheduleParallel(state.Dependency);
             }
 
             SetSingleton(race);

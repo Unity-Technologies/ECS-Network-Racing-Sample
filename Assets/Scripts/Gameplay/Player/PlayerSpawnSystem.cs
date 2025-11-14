@@ -103,7 +103,7 @@ namespace Unity.Entities.Racing.Gameplay
                 });
                 commandBuffer.SetComponent(player, new Skin
                 {
-                    Id = request.ValueRO. Id
+                    Id = request.ValueRO.Id
                 });
 
                 // Add the player to the linked entity group on the connection so it is destroyed
