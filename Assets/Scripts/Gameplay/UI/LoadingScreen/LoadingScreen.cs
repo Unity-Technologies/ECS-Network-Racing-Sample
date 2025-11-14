@@ -30,12 +30,10 @@ namespace Unity.Entities.Racing.Gameplay
 
         private void OnEnable()
         {
-#if !UNITY_SERVER
             var root = GetComponent<UIDocument>().rootVisualElement;
             m_Container = root.Q<VisualElement>("loading-screen-container");
             m_LoadingCircle = root.Q<VisualElement>("loading-circle");
             m_TextLabel = m_Container.Q<Label>("loading-label");
-#endif            
             RotateLoading();
         }
 

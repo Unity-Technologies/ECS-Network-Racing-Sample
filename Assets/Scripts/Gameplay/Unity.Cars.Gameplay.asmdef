@@ -21,7 +21,10 @@
         "Unity.Cinemachine",
         "Unity.TextMeshPro",
         "Unity.Services.Vivox",
-        "Unity.Cars.Authoring"
+        "Unity.Cars.Authoring",
+        "com.unity.vehicles",
+        "Input",
+        "Unity.InputSystem"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

@@ -60,6 +60,11 @@ namespace Unity.Entities.Racing.Gameplay
     //[WorldSystemFilter(WorldSystemFilterFlags.ServerSimulation)]
     public partial struct ChasesDownforceSystem : ISystem
     {
+        public void OnCreate(ref SystemState state)
+        {
+            state.Enabled = false;
+        }
+
         [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {

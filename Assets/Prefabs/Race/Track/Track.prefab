@@ -60,6 +60,11 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -81,6 +86,7 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
@@ -148,6 +154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b275e5f92732148048d7b77e264ac30e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_ForceUniqueID: 183521009
   m_ShapeType: 31
   m_PrimitiveCenter:
     x: 0.000000029802322
@@ -178,7 +185,7 @@ MonoBehaviour:
     m_SimplificationTolerance: 0.015000003
     m_BevelRadius: 0.05
     m_MinimumAngle: 2.5000002
-  m_CustomMesh: {fileID: -9138781032840880979, guid: 9383870e894632242b0e376a59a50cb2,
+  m_CustomMesh: {fileID: 197073870140251343, guid: 7ab4fcdb929679c4d83fb6dec58a3a4b,
     type: 3}
   m_ForceUnique: 0
   m_Material:
@@ -187,6 +194,10 @@ MonoBehaviour:
     m_CollisionResponse:
       m_Override: 0
       m_Value: 0
+    m_DetailedStaticMeshCollision:
+      m_Override: 0
+      m_Value:
+        Value: 1
     m_Friction:
       m_Override: 0
       m_Value:
@@ -239,9 +250,9 @@ MonoBehaviour:
         Category01: 1
         Category02: 0
         Category03: 0
-        Category04: 1
+        Category04: 0
         Category05: 0
-        Category06: 0
+        Category06: 1
         Category07: 0
         Category08: 0
         Category09: 0
@@ -279,7 +290,7 @@ MonoBehaviour:
         Tag06: 0
         Tag07: 0
     m_SerializedVersion: 1
-  m_SerializedVersion: 1
+  m_SerializedVersion: 2
 --- !u!1 &1382679181472814666
 GameObject:
   m_ObjectHideFlags: 0
@@ -340,6 +351,11 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -361,6 +377,7 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
@@ -428,6 +445,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b275e5f92732148048d7b77e264ac30e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_ForceUniqueID: 1382389715
   m_ShapeType: 31
   m_PrimitiveCenter:
     x: -0.74999946
@@ -458,7 +476,7 @@ MonoBehaviour:
     m_SimplificationTolerance: 0.029999979
     m_BevelRadius: 0.05
     m_MinimumAngle: 2.5000002
-  m_CustomMesh: {fileID: 3593906724780337643, guid: 238a8735dcfec094b96ef84fa28db7cb,
+  m_CustomMesh: {fileID: -852961046278019963, guid: 28661dc173048db4f9068a2cd05ed03f,
     type: 3}
   m_ForceUnique: 0
   m_Material:
@@ -467,6 +485,10 @@ MonoBehaviour:
     m_CollisionResponse:
       m_Override: 0
       m_Value: 0
+    m_DetailedStaticMeshCollision:
+      m_Override: 0
+      m_Value:
+        Value: 1
     m_Friction:
       m_Override: 0
       m_Value:
@@ -519,9 +541,9 @@ MonoBehaviour:
         Category01: 1
         Category02: 0
         Category03: 0
-        Category04: 1
+        Category04: 0
         Category05: 0
-        Category06: 0
+        Category06: 1
         Category07: 0
         Category08: 0
         Category09: 0
@@ -559,7 +581,7 @@ MonoBehaviour:
         Tag06: 0
         Tag07: 0
     m_SerializedVersion: 1
-  m_SerializedVersion: 1
+  m_SerializedVersion: 2
 --- !u!1 &1861949268972747690
 GameObject:
   m_ObjectHideFlags: 0
@@ -620,6 +642,11 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -641,6 +668,7 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
@@ -708,6 +736,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b275e5f92732148048d7b77e264ac30e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_ForceUniqueID: 361290383
   m_ShapeType: 31
   m_PrimitiveCenter:
     x: -0.24999946
@@ -738,7 +767,7 @@ MonoBehaviour:
     m_SimplificationTolerance: 0.030000007
     m_BevelRadius: 0.05
     m_MinimumAngle: 2.5000002
-  m_CustomMesh: {fileID: 1438869915030479287, guid: 9383870e894632242b0e376a59a50cb2,
+  m_CustomMesh: {fileID: -259325831839032254, guid: 7ab4fcdb929679c4d83fb6dec58a3a4b,
     type: 3}
   m_ForceUnique: 0
   m_Material:
@@ -747,6 +776,10 @@ MonoBehaviour:
     m_CollisionResponse:
       m_Override: 0
       m_Value: 0
+    m_DetailedStaticMeshCollision:
+      m_Override: 0
+      m_Value:
+        Value: 1
     m_Friction:
       m_Override: 0
       m_Value:
@@ -799,9 +832,9 @@ MonoBehaviour:
         Category01: 1
         Category02: 0
         Category03: 0
-        Category04: 1
+        Category04: 0
         Category05: 0
-        Category06: 0
+        Category06: 1
         Category07: 0
         Category08: 0
         Category09: 0
@@ -839,7 +872,7 @@ MonoBehaviour:
         Tag06: 0
         Tag07: 0
     m_SerializedVersion: 1
-  m_SerializedVersion: 1
+  m_SerializedVersion: 2
 --- !u!1 &2158911847549760820
 GameObject:
   m_ObjectHideFlags: 0
@@ -870,7 +903,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: -1, w: 0}
   m_LocalPosition: {x: 5, y: -1.7500085, z: 0.30000076}
-  m_LocalScale: {x: -1, y: -1, z: -1}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 485766106909550241}
@@ -900,6 +933,11 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -921,6 +959,7 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
@@ -988,6 +1027,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b275e5f92732148048d7b77e264ac30e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_ForceUniqueID: 1442985241
   m_ShapeType: 31
   m_PrimitiveCenter:
     x: -0.49999863
@@ -1018,7 +1058,7 @@ MonoBehaviour:
     m_SimplificationTolerance: 0.022499992
     m_BevelRadius: 0.05
     m_MinimumAngle: 2.5000002
-  m_CustomMesh: {fileID: 2174346237713991662, guid: 238a8735dcfec094b96ef84fa28db7cb,
+  m_CustomMesh: {fileID: -518661910922007935, guid: 28661dc173048db4f9068a2cd05ed03f,
     type: 3}
   m_ForceUnique: 0
   m_Material:
@@ -1027,6 +1067,10 @@ MonoBehaviour:
     m_CollisionResponse:
       m_Override: 0
       m_Value: 0
+    m_DetailedStaticMeshCollision:
+      m_Override: 0
+      m_Value:
+        Value: 1
     m_Friction:
       m_Override: 0
       m_Value:
@@ -1079,9 +1123,9 @@ MonoBehaviour:
         Category01: 1
         Category02: 0
         Category03: 0
-        Category04: 1
+        Category04: 0
         Category05: 0
-        Category06: 0
+        Category06: 1
         Category07: 0
         Category08: 0
         Category09: 0
@@ -1119,7 +1163,7 @@ MonoBehaviour:
         Tag06: 0
         Tag07: 0
     m_SerializedVersion: 1
-  m_SerializedVersion: 1
+  m_SerializedVersion: 2
 --- !u!1 &2415739920722269947
 GameObject:
   m_ObjectHideFlags: 0
@@ -1180,6 +1224,11 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1201,6 +1250,7 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
@@ -1268,6 +1318,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b275e5f92732148048d7b77e264ac30e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_ForceUniqueID: 1344358192
   m_ShapeType: 31
   m_PrimitiveCenter:
     x: -0.49999845
@@ -1298,7 +1349,7 @@ MonoBehaviour:
     m_SimplificationTolerance: 0.022499999
     m_BevelRadius: 0.05
     m_MinimumAngle: 2.5000002
-  m_CustomMesh: {fileID: 2174346237713991662, guid: 238a8735dcfec094b96ef84fa28db7cb,
+  m_CustomMesh: {fileID: -518661910922007935, guid: 28661dc173048db4f9068a2cd05ed03f,
     type: 3}
   m_ForceUnique: 0
   m_Material:
@@ -1307,6 +1358,10 @@ MonoBehaviour:
     m_CollisionResponse:
       m_Override: 0
       m_Value: 0
+    m_DetailedStaticMeshCollision:
+      m_Override: 0
+      m_Value:
+        Value: 1
     m_Friction:
       m_Override: 0
       m_Value:
@@ -1359,9 +1414,9 @@ MonoBehaviour:
         Category01: 1
         Category02: 0
         Category03: 0
-        Category04: 1
+        Category04: 0
         Category05: 0
-        Category06: 0
+        Category06: 1
         Category07: 0
         Category08: 0
         Category09: 0
@@ -1399,7 +1454,7 @@ MonoBehaviour:
         Tag06: 0
         Tag07: 0
     m_SerializedVersion: 1
-  m_SerializedVersion: 1
+  m_SerializedVersion: 2
 --- !u!1 &5031002866693366814
 GameObject:
   m_ObjectHideFlags: 0
@@ -1460,6 +1515,11 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1481,6 +1541,7 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
@@ -1548,6 +1609,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b275e5f92732148048d7b77e264ac30e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_ForceUniqueID: 886904889
   m_ShapeType: 31
   m_PrimitiveCenter:
     x: -0.24999946
@@ -1578,7 +1640,7 @@ MonoBehaviour:
     m_SimplificationTolerance: 0.030000007
     m_BevelRadius: 0.05
     m_MinimumAngle: 2.5000002
-  m_CustomMesh: {fileID: 1438869915030479287, guid: 9383870e894632242b0e376a59a50cb2,
+  m_CustomMesh: {fileID: -259325831839032254, guid: 7ab4fcdb929679c4d83fb6dec58a3a4b,
     type: 3}
   m_ForceUnique: 0
   m_Material:
@@ -1587,6 +1649,10 @@ MonoBehaviour:
     m_CollisionResponse:
       m_Override: 0
       m_Value: 0
+    m_DetailedStaticMeshCollision:
+      m_Override: 0
+      m_Value:
+        Value: 1
     m_Friction:
       m_Override: 0
       m_Value:
@@ -1639,9 +1705,9 @@ MonoBehaviour:
         Category01: 1
         Category02: 0
         Category03: 0
-        Category04: 1
+        Category04: 0
         Category05: 0
-        Category06: 0
+        Category06: 1
         Category07: 0
         Category08: 0
         Category09: 0
@@ -1679,7 +1745,7 @@ MonoBehaviour:
         Tag06: 0
         Tag07: 0
     m_SerializedVersion: 1
-  m_SerializedVersion: 1
+  m_SerializedVersion: 2
 --- !u!1 &5598215132027779560
 GameObject:
   m_ObjectHideFlags: 0
@@ -1740,6 +1806,11 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1761,6 +1832,7 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
@@ -1828,6 +1900,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b275e5f92732148048d7b77e264ac30e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_ForceUniqueID: 1735029053
   m_ShapeType: 31
   m_PrimitiveCenter:
     x: -0.000000029802322
@@ -1858,7 +1931,7 @@ MonoBehaviour:
     m_SimplificationTolerance: 0.029999997
     m_BevelRadius: 0.05
     m_MinimumAngle: 2.5000002
-  m_CustomMesh: {fileID: -6186096284500139366, guid: 9383870e894632242b0e376a59a50cb2,
+  m_CustomMesh: {fileID: -3271799415508612831, guid: 7ab4fcdb929679c4d83fb6dec58a3a4b,
     type: 3}
   m_ForceUnique: 0
   m_Material:
@@ -1867,6 +1940,10 @@ MonoBehaviour:
     m_CollisionResponse:
       m_Override: 0
       m_Value: 0
+    m_DetailedStaticMeshCollision:
+      m_Override: 0
+      m_Value:
+        Value: 1
     m_Friction:
       m_Override: 0
       m_Value:
@@ -1919,9 +1996,9 @@ MonoBehaviour:
         Category01: 1
         Category02: 0
         Category03: 0
-        Category04: 1
+        Category04: 0
         Category05: 0
-        Category06: 0
+        Category06: 1
         Category07: 0
         Category08: 0
         Category09: 0
@@ -1959,7 +2036,7 @@ MonoBehaviour:
         Tag06: 0
         Tag07: 0
     m_SerializedVersion: 1
-  m_SerializedVersion: 1
+  m_SerializedVersion: 2
 --- !u!1 &5675453947590799523
 GameObject:
   m_ObjectHideFlags: 0
@@ -2020,6 +2097,11 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -2041,6 +2123,7 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
@@ -2108,6 +2191,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b275e5f92732148048d7b77e264ac30e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_ForceUniqueID: 92779605
   m_ShapeType: 31
   m_PrimitiveCenter:
     x: -0.24999955
@@ -2138,7 +2222,7 @@ MonoBehaviour:
     m_SimplificationTolerance: 0.014999993
     m_BevelRadius: 0.05
     m_MinimumAngle: 2.5000002
-  m_CustomMesh: {fileID: -8381102145766756240, guid: 9383870e894632242b0e376a59a50cb2,
+  m_CustomMesh: {fileID: -4254125544146701228, guid: 7ab4fcdb929679c4d83fb6dec58a3a4b,
     type: 3}
   m_ForceUnique: 0
   m_Material:
@@ -2147,6 +2231,10 @@ MonoBehaviour:
     m_CollisionResponse:
       m_Override: 0
       m_Value: 0
+    m_DetailedStaticMeshCollision:
+      m_Override: 0
+      m_Value:
+        Value: 1
     m_Friction:
       m_Override: 0
       m_Value:
@@ -2199,9 +2287,9 @@ MonoBehaviour:
         Category01: 1
         Category02: 0
         Category03: 0
-        Category04: 1
+        Category04: 0
         Category05: 0
-        Category06: 0
+        Category06: 1
         Category07: 0
         Category08: 0
         Category09: 0
@@ -2239,7 +2327,7 @@ MonoBehaviour:
         Tag06: 0
         Tag07: 0
     m_SerializedVersion: 1
-  m_SerializedVersion: 1
+  m_SerializedVersion: 2
 --- !u!1 &7211803552225425972
 GameObject:
   m_ObjectHideFlags: 0
@@ -2344,6 +2432,11 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -2365,6 +2458,7 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
@@ -2432,6 +2526,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b275e5f92732148048d7b77e264ac30e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_ForceUniqueID: 1855924672
   m_ShapeType: 31
   m_PrimitiveCenter:
     x: -1.7500002
@@ -2462,7 +2557,7 @@ MonoBehaviour:
     m_SimplificationTolerance: 0.0525
     m_BevelRadius: 0.05
     m_MinimumAngle: 2.5000002
-  m_CustomMesh: {fileID: 5910521019966168623, guid: 9383870e894632242b0e376a59a50cb2,
+  m_CustomMesh: {fileID: -1090370175664877168, guid: 7ab4fcdb929679c4d83fb6dec58a3a4b,
     type: 3}
   m_ForceUnique: 0
   m_Material:
@@ -2471,6 +2566,10 @@ MonoBehaviour:
     m_CollisionResponse:
       m_Override: 0
       m_Value: 0
+    m_DetailedStaticMeshCollision:
+      m_Override: 0
+      m_Value:
+        Value: 1
     m_Friction:
       m_Override: 0
       m_Value:
@@ -2523,9 +2622,9 @@ MonoBehaviour:
         Category01: 1
         Category02: 0
         Category03: 0
-        Category04: 1
+        Category04: 0
         Category05: 0
-        Category06: 0
+        Category06: 1
         Category07: 0
         Category08: 0
         Category09: 0
@@ -2563,7 +2662,7 @@ MonoBehaviour:
         Tag06: 0
         Tag07: 0
     m_SerializedVersion: 1
-  m_SerializedVersion: 1
+  m_SerializedVersion: 2
 --- !u!1 &7815797654787845254
 GameObject:
   m_ObjectHideFlags: 0
@@ -2624,6 +2723,11 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -2645,6 +2749,7 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
@@ -2712,6 +2817,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b275e5f92732148048d7b77e264ac30e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_ForceUniqueID: 38656444
   m_ShapeType: 31
   m_PrimitiveCenter:
     x: -0.0000007748604
@@ -2742,7 +2848,7 @@ MonoBehaviour:
     m_SimplificationTolerance: 0.01
     m_BevelRadius: 0.05
     m_MinimumAngle: 2.5000002
-  m_CustomMesh: {fileID: 8870084073862652595, guid: 9383870e894632242b0e376a59a50cb2,
+  m_CustomMesh: {fileID: 609871865625464099, guid: 7ab4fcdb929679c4d83fb6dec58a3a4b,
     type: 3}
   m_ForceUnique: 0
   m_Material:
@@ -2751,6 +2857,10 @@ MonoBehaviour:
     m_CollisionResponse:
       m_Override: 0
       m_Value: 0
+    m_DetailedStaticMeshCollision:
+      m_Override: 0
+      m_Value:
+        Value: 1
     m_Friction:
       m_Override: 0
       m_Value:
@@ -2803,9 +2913,9 @@ MonoBehaviour:
         Category01: 1
         Category02: 0
         Category03: 0
-        Category04: 1
+        Category04: 0
         Category05: 0
-        Category06: 0
+        Category06: 1
         Category07: 0
         Category08: 0
         Category09: 0
@@ -2843,7 +2953,7 @@ MonoBehaviour:
         Tag06: 0
         Tag07: 0
     m_SerializedVersion: 1
-  m_SerializedVersion: 1
+  m_SerializedVersion: 2
 --- !u!1 &7861516964962222695
 GameObject:
   m_ObjectHideFlags: 0
@@ -2905,6 +3015,11 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -2926,6 +3041,7 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
@@ -2993,6 +3109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b275e5f92732148048d7b77e264ac30e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_ForceUniqueID: 185003132
   m_ShapeType: 31
   m_PrimitiveCenter:
     x: -0.49999863
@@ -3023,7 +3140,7 @@ MonoBehaviour:
     m_SimplificationTolerance: 0.022499992
     m_BevelRadius: 0.05
     m_MinimumAngle: 2.5000002
-  m_CustomMesh: {fileID: 2174346237713991662, guid: 238a8735dcfec094b96ef84fa28db7cb,
+  m_CustomMesh: {fileID: -518661910922007935, guid: 28661dc173048db4f9068a2cd05ed03f,
     type: 3}
   m_ForceUnique: 0
   m_Material:
@@ -3032,6 +3149,10 @@ MonoBehaviour:
     m_CollisionResponse:
       m_Override: 0
       m_Value: 0
+    m_DetailedStaticMeshCollision:
+      m_Override: 0
+      m_Value:
+        Value: 1
     m_Friction:
       m_Override: 0
       m_Value:
@@ -3084,9 +3205,9 @@ MonoBehaviour:
         Category01: 1
         Category02: 0
         Category03: 0
-        Category04: 1
+        Category04: 0
         Category05: 0
-        Category06: 0
+        Category06: 1
         Category07: 0
         Category08: 0
         Category09: 0
@@ -3124,7 +3245,7 @@ MonoBehaviour:
         Tag06: 0
         Tag07: 0
     m_SerializedVersion: 1
-  m_SerializedVersion: 1
+  m_SerializedVersion: 2
 --- !u!1 &8127066524387071717
 GameObject:
   m_ObjectHideFlags: 0
@@ -3185,6 +3306,11 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -3206,6 +3332,7 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
@@ -3273,6 +3400,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b275e5f92732148048d7b77e264ac30e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_ForceUniqueID: 1577940713
   m_ShapeType: 31
   m_PrimitiveCenter:
     x: -0.74999946
@@ -3303,7 +3431,7 @@ MonoBehaviour:
     m_SimplificationTolerance: 0.029999979
     m_BevelRadius: 0.05
     m_MinimumAngle: 2.5000002
-  m_CustomMesh: {fileID: 1637690271560406681, guid: 9383870e894632242b0e376a59a50cb2,
+  m_CustomMesh: {fileID: 3506542031084528035, guid: 7ab4fcdb929679c4d83fb6dec58a3a4b,
     type: 3}
   m_ForceUnique: 0
   m_Material:
@@ -3312,6 +3440,10 @@ MonoBehaviour:
     m_CollisionResponse:
       m_Override: 0
       m_Value: 0
+    m_DetailedStaticMeshCollision:
+      m_Override: 0
+      m_Value:
+        Value: 1
     m_Friction:
       m_Override: 0
       m_Value:
@@ -3364,9 +3496,9 @@ MonoBehaviour:
         Category01: 1
         Category02: 0
         Category03: 0
-        Category04: 1
+        Category04: 0
         Category05: 0
-        Category06: 0
+        Category06: 1
         Category07: 0
         Category08: 0
         Category09: 0
@@ -3404,7 +3536,7 @@ MonoBehaviour:
         Tag06: 0
         Tag07: 0
     m_SerializedVersion: 1
-  m_SerializedVersion: 1
+  m_SerializedVersion: 2
 --- !u!1 &8431483800611022570
 GameObject:
   m_ObjectHideFlags: 0
@@ -3465,6 +3597,11 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -3486,6 +3623,7 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
@@ -3553,6 +3691,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b275e5f92732148048d7b77e264ac30e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_ForceUniqueID: 934356061
   m_ShapeType: 31
   m_PrimitiveCenter:
     x: -0.25000012
@@ -3583,7 +3722,7 @@ MonoBehaviour:
     m_SimplificationTolerance: 0.0225
     m_BevelRadius: 0.05
     m_MinimumAngle: 2.5000002
-  m_CustomMesh: {fileID: 3750618943087188411, guid: 238a8735dcfec094b96ef84fa28db7cb,
+  m_CustomMesh: {fileID: 4358896191231822173, guid: 28661dc173048db4f9068a2cd05ed03f,
     type: 3}
   m_ForceUnique: 0
   m_Material:
@@ -3592,6 +3731,10 @@ MonoBehaviour:
     m_CollisionResponse:
       m_Override: 0
       m_Value: 0
+    m_DetailedStaticMeshCollision:
+      m_Override: 0
+      m_Value:
+        Value: 1
     m_Friction:
       m_Override: 0
       m_Value:
@@ -3644,9 +3787,9 @@ MonoBehaviour:
         Category01: 1
         Category02: 0
         Category03: 0
-        Category04: 1
+        Category04: 0
         Category05: 0
-        Category06: 0
+        Category06: 1
         Category07: 0
         Category08: 0
         Category09: 0
@@ -3684,4 +3827,4 @@ MonoBehaviour:
         Tag06: 0
         Tag07: 0
     m_SerializedVersion: 1
-  m_SerializedVersion: 1
+  m_SerializedVersion: 2
